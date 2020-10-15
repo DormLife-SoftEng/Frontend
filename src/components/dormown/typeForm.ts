@@ -40,7 +40,3 @@ export interface propsDormForm {
     AllowedPet? : string,
     AllowedCook? : string,
 }
-export interface termService {
-    show : boolean, 
-    handleClose : ()=>void
-}
