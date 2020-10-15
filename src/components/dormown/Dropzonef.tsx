@@ -15,6 +15,8 @@ const Dropzonef = (props : DropzoneProps) => {
     return (
         <DropzoneArea
             onChange={handleChange}
+            acceptedFiles ={['image/jpeg', 'image/png', 'image/bmp','doc/pdf']}
+            dropzoneText = "Drop or click here"
         />
     )
 }

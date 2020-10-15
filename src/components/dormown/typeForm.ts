@@ -42,3 +42,7 @@ export interface propsDormForm {
     DormImage : any,
     acceptTerm : boolean,
 }
+export interface termService {
+    show : boolean, 
+    handleClose : ()=>void
+}
