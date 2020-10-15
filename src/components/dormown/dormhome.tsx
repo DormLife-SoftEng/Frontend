@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Button, Form, FormControl, InputGroup, Nav, Navbar } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory , useParams } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -14,6 +14,7 @@ function DormHome() {
         document.body.style.backgroundColor = "#F55E61"
     }, [])
     const [searchname,SetSearch]=useState<string>("")
+    const {id} : {id:string} = useParams()
     return (
         <div>
             <Navbar style={{ padding: "1% 4%" }} bg="">
@@ -75,7 +76,7 @@ function DormHome() {
                             <Col style={{ width: "100px" }}>
                             </Col>
                             <Col>
-                                <Button variant="warning" style={{ textAlign: "right", color: "white" }} onClick={() => history.push("/dormown/ContactSupport")}>
+                                <Button variant="warning" style={{ textAlign: "right", color: "white" }} onClick={() => history.push(`/dormowner/${id}/ContactSupport`)}>
                                     Contact Support
                             </Button>
                             </Col>

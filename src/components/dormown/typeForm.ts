@@ -8,7 +8,7 @@ export interface propsDormForm {
     email : string,
     LineID : string,
     Website : string,
-    DormDoc : File,
+    DormDoc : any,
     AccomType: string,
     AllowSex: string,
     HaveCon: boolean,
@@ -37,6 +37,8 @@ export interface propsDormForm {
     CommonDescript: string,
     HaveInternet: boolean,
     InternetDescript: string,
+    AllowedPet? : string,
+    AllowedCook? : string,
 }
 export interface termService {
     show : boolean, 

@@ -19,7 +19,9 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { Input } from '@material-ui/core';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Label } from "@material-ui/icons";
+import Dropzonef from "./Dropzonef"
 
+const galleryImageList = [""];
 const styles = createStyles({
   black: {
     color: "black",
@@ -54,6 +56,7 @@ function DormOwner(props: any) {
     document.body.style.backgroundColor = "white";
   }, []);
   const history = useHistory();
+  const [DormDoc,setFiles] = useState<any[]>([])
   const [show, setShow] = useState<boolean>(false);
   const handleClose = () => {
     setShow(false);
@@ -79,7 +82,11 @@ function DormOwner(props: any) {
           <h1 className={classes.navCenter}>Add Dorm</h1>
         </Nav>
       </Navbar>
-      <form style={{ margin: "3% 20%" }} onSubmit={handleSubmit}>
+      <form style={{ margin: "3% 20%" }} onSubmit={(e : React.ChangeEvent<HTMLFormElement>) =>{
+        console.log(DormDoc)
+        e.preventDefault()
+        handleSubmit()
+      } }>
         <Row className={classes.row} noGutters={true}>
           <Col>
             <FormControl component="fieldset">
@@ -293,20 +300,7 @@ function DormOwner(props: any) {
                 >
                   ใบ
               </FormLabel>
-                <TextField
-                  id="DormDoc"
-                  placeholder="Upload your Doccument"
-                  type="file"
-                  className={classes.textField}
-                  value={values.DormDoc}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  helperText={touched.DormDoc ? errors.DormDoc : null}
-                  error={touched.DormDoc && Boolean(errors.DormDoc)}
-                  margin="dense"
-                  variant="outlined"
-                />
-
+              <Dropzonef files={DormDoc} setFiles={setFiles} />
               </FormControl>
             </div>
             <Row>
@@ -322,21 +316,21 @@ function DormOwner(props: any) {
                   <FormControl component="fieldset">
                     <FormLabel className={classes.formLabel}>Allowed Sex</FormLabel>
                     <RadioGroup
-                      aria-label="gender"
-                      name="gender"
-                      value={values.gender}
+                      aria-label="AllowSex"
+                      name="AllowSex"
+                      value={values.AllowSex}
                       onChange={handleChange}
                     >
-                      <FormControlLabel
-                        value="female"
-                        control={<Radio color="secondary" />}
-                        label="Female"
-                      />{" "}
                       <FormControlLabel
                         value="male"
                         control={<Radio color="secondary" />}
                         label="Male"
-                      />{" "}
+                      />
+                      <FormControlLabel
+                        value="female"
+                        control={<Radio color="secondary" />}
+                        label="Female"
+                      />
                       <FormControlLabel
                         value="any"
                         control={<Radio color="secondary" />}
@@ -368,12 +362,12 @@ function DormOwner(props: any) {
                     value="dorm"
                     control={<Radio color="secondary" />}
                     label="Dorm"
-                  />{" "}
+                  />
                   <FormControlLabel
                     value="condo"
                     control={<Radio color="secondary" />}
                     label="Condo"
-                  />{" "}
+                  />
                   <FormControlLabel
                     value="apartment"
                     control={<Radio color="secondary" />}
@@ -634,7 +628,7 @@ function DormOwner(props: any) {
               <FormControl component="fieldset" className={classes.formControl}>
                 <FormGroup>
                   <FormControlLabel
-                    control={<Checkbox checked={values.HaveLaun} onChange={handleChange} name="HaveFitness" />}
+                    control={<Checkbox checked={values.HaveFitness} onChange={handleChange} name="HaveFitness" />}
                     label="Fitness"
                     labelPlacement="end"
                     onClick={() => {
@@ -679,33 +673,33 @@ function DormOwner(props: any) {
               <FormControl component="fieldset" className={classes.formControl}>
                 <FormGroup>
                   <FormControlLabel
-                    control={<Checkbox checked={values.HaveParkLot} onChange={handleChange} name="HaveParkLot" />}
-                    label="Parking Lot"
+                    control={<Checkbox checked={values.HavePool} onChange={handleChange} name="HavePool" />}
+                    label="Swimming Pool"
                     labelPlacement="end"
                     onClick={() => {
                       setShow(true);
                     }}
                   />
-                  <TextField disabled={!values.HaveParkLot}
-                    id="ParklotDistance"
+                  <TextField disabled={!values.HavePool}
+                    id="PoolDistance"
                     placeholder="Enter Distance"
                     className={classes.textField}
-                    value={values.ParkLotDistance}
+                    value={values.PoolDistance}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    helperText={touched.ParkLotDistance ? errors.ParkLotDistance : null}
-                    error={touched.ParkLotDistance && Boolean(errors.ParkLotDistance)}
+                    helperText={touched.PoolDistance ? errors.PoolDistance : null}
+                    error={touched.PoolDistance && Boolean(errors.PoolDistance)}
                     margin="dense"
                     variant="outlined"></TextField>
-                  <TextField disabled={!values.HaveParkLot}
-                    id="ParklotDescript"
+                  <TextField disabled={!values.HavePool}
+                    id="PoolDescript"
                     placeholder="Description"
                     className={classes.textField}
-                    value={values.ParklotDescript}
+                    value={values.PoolDescript}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    helperText={touched.ParklotDescript ? errors.ParklotDescript : null}
-                    error={touched.ParklotDescript && Boolean(errors.ParklotDescript)}
+                    helperText={touched.PoolDescript ? errors.PoolDescript : null}
+                    error={touched.PoolDescript && Boolean(errors.PoolDescript)}
                     margin="dense"
                     variant="outlined"></TextField>
                 </FormGroup>
@@ -722,36 +716,166 @@ function DormOwner(props: any) {
               <FormControl component="fieldset" className={classes.formControl}>
                 <FormGroup>
                   <FormControlLabel
-                    control={<Checkbox checked={values.HaveRestaurant} onChange={handleChange} name="HaveRest" />}
-                    label="Restaurant"
+                    control={<Checkbox checked={values.HaveCommon} onChange={handleChange} name="HaveCommon" />}
+                    label="Common Room"
                     labelPlacement="end"
                     onClick={() => {
                       setShow(true);
                     }}
                   />
-                  <TextField disabled={!values.HaveRestaurant}
-                    id="RestDistance"
+                  <TextField disabled={!values.HaveCommon}
+                    id="CommonDistance"
                     placeholder="Enter Distance"
                     className={classes.textField}
                     value={values.RestaurantDistance}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    helperText={touched.RestaurantDistance ? errors.RestaurantDistance : null}
-                    error={touched.RestaurantDistance && Boolean(errors.RestaurantDistance)}
+                    helperText={touched.CommonDistance ? errors.CommonDistance : null}
+                    error={touched.CommonDistance && Boolean(errors.CommonDistance)}
                     margin="dense"
                     variant="outlined"></TextField>
-                  <TextField disabled={!values.HaveRestaurant}
+                  <TextField disabled={!values.HaveCommon}
                     id="LaunDescript"
                     placeholder="Description"
                     className={classes.textField}
-                    value={values.RestaurantDescript}
+                    value={values.CommonDescript}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    helperText={touched.RestaurantDescript ? errors.RestaurantDescript : null}
-                    error={touched.RestaurantDescript && Boolean(errors.RestaurantDescript)}
+                    helperText={touched.CommonDescript ? errors.CommonDescript : null}
+                    error={touched.CommonDescript && Boolean(errors.CommonDescript)}
                     margin="dense"
                     variant="outlined"></TextField>
                 </FormGroup>
+              </FormControl>
+            </div>
+          </Col>
+        </Row>
+        <Row className={classes.row} noGutters={true}>
+          <Col>
+            <div
+              style={{
+                textAlign: "left",
+                display: "inline-block",
+              }}
+            >
+              <FormControl component="fieldset" className={classes.formControl}>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox checked={values.HaveInternet} onChange={handleChange} name="HaveInternet" />}
+                    label="Internet"
+                    labelPlacement="end"
+                    onClick={() => {
+                      setShow(true);
+                    }}
+                  />
+                  <TextField disabled={!values.HaveInternet}
+                    id="InternetDescript"
+                    placeholder="Description"
+                    className={classes.textField}
+                    value={values.InternetDescript}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    helperText={touched.InternetDescript ? errors.InternetDescript : null}
+                    error={touched.InternetDescript && Boolean(errors.InternetDescript)}
+                    margin="dense"
+                    variant="outlined"></TextField>
+                </FormGroup>
+              </FormControl>
+            </div>
+          </Col>
+          <Col>
+            <div
+              style={{
+                textAlign: "left",
+                display: "inline-block",
+              }}
+            >
+              <FormControl component="fieldset" className={classes.formControl}>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox checked={values.HaveRest} onChange={handleChange} name="HaveRest" />}
+                    label="Restroom"
+                    labelPlacement="end"
+                    onClick={() => {
+                      setShow(true);
+                    }}
+                  />
+                  <TextField disabled={!values.HaveRest}
+                    id="RestDescript"
+                    placeholder="Description"
+                    className={classes.textField}
+                    value={values.RestDescript}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    helperText={touched.RestDescript ? errors.RestDescript : null}
+                    error={touched.Restescript && Boolean(errors.RestDescript)}
+                    margin="dense"
+                    variant="outlined"></TextField>
+                </FormGroup>
+              </FormControl>
+            </div>
+          </Col>
+        </Row>
+        <Row className={classes.row} noGutters={true}>
+          <Col>
+            <div
+              style={{
+                marginTop: "1.5cm",
+                textAlign: "left",
+                display: "inline-block",
+                width: "350px",
+              }}
+            >
+              <FormControl component="fieldset">
+                <FormLabel className={classes.formLabel}>Allowed Pet</FormLabel>
+                <RadioGroup
+                  aria-label="AllowedPet"
+                  name="AllowedPet"
+                  value={values.AllowedPet}
+                  onChange={handleChange}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio color="secondary" />}
+                    label="Yes"
+                  />{" "}
+                  <FormControlLabel
+                    value="no"
+                    control={<Radio color="secondary" />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
+          </Col>
+          <Col>
+            <div
+              style={{
+                marginTop: "1.5cm",
+                textAlign: "left",
+                display: "inline-block",
+                width: "350px",
+              }}
+            >
+              <FormControl component="fieldset">
+                <FormLabel className={classes.formLabel}>Allowed Cooking</FormLabel>
+                <RadioGroup
+                  aria-label="AllowedCook"
+                  name="AllowedCook"
+                  value={values.AllowedCook}
+                  onChange={handleChange}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio color="secondary" />}
+                    label="Yes"
+                  />{" "}
+                  <FormControlLabel
+                    value="no"
+                    control={<Radio color="secondary" />}
+                    label="No"
+                  />
+                </RadioGroup>
               </FormControl>
             </div>
           </Col>
@@ -804,8 +928,32 @@ const DormOwnerForm = withFormik({
     AccomType,
     HaveCon,
     ConDistance,
+    ConDescript,
     HaveLaun,
     LaunDistance,
+    LaunDescript,
+    HaveParkLot,
+    ParkLotDistance,
+    ParkLotDescript,
+    HaveRestuarant,
+    RestuarantDistance,
+    RestuarantDescript,
+    HaveSmoke,
+    SmokeDistance,
+    SmokeDescript,
+    HaveFitness,
+    FitnessDistance,
+    FitnessDescript,
+    HavePool,
+    PoolDistance,
+    PoolDescript,
+    HaveCommon,
+    CommonDistance,
+    CommonDescript,
+    HaveInternet,
+    InternetDescript,
+    AllowedPet,
+    AllowedCook,
   }: propsDormForm) => {
     return {
       DormName: DormName || "",
@@ -821,20 +969,70 @@ const DormOwnerForm = withFormik({
       AccomType: AccomType || "",
       HaveCon: HaveCon || false,
       ConDistance: ConDistance || "",
+      ConDescript: ConDescript || "",
       HaveLaun: HaveLaun || false,
-      LaunDistance: LaunDistance || ""
+      LaunDistance: LaunDistance || "",
+      LaunDescript: LaunDescript || "",
+      HaveParkLot: HaveParkLot || false,
+      ParkLotDistance: ParkLotDistance || "",
+      ParkLotDescript: ParkLotDescript || "",
+      HaveRestuarant: HaveRestuarant || false,
+      RestuarantDistance: RestuarantDistance || "",
+      RestuarantDescript: RestuarantDescript || "",
+      HaveSmoke: HaveSmoke || false,
+      SmokeDistance: SmokeDistance || "",
+      SmokeDescript: SmokeDescript || "",
+      HaveFitness: HaveFitness || false,
+      FitnessDistance: FitnessDistance || "",
+      FitnessDescript: FitnessDescript || "",
+      HavePool: HavePool || false,
+      PoolDistance: PoolDistance || "",
+      PoolDescript: PoolDescript || "",
+      HaveCommon: HaveCommon || false,
+      CommonDistance: CommonDistance || "",
+      CommonDescript: CommonDescript || "",
+      HaveInternet: HaveInternet || false,
+      InternetDescript: InternetDescript || "",
+      AllowedPet: AllowedPet || "",
+      AllowedCook: AllowedCook || "",
     };
   },
   validationSchema: Yup.object().shape({
     DormName: Yup.string().required("Required"),
-    lastName: Yup.string().required("Required"),
     email: Yup.string()
       .email("Enter a valid email")
       .required("Email is required"),
   }),
 
   handleSubmit: (values, { resetForm }) => {
-    const { DormName, DormAddress, email, DormLatitude, DormLongitude, phone, LineID, Website, DormDoc, AllowSex, AccomType, HaveCon, ConDistance, HaveLaun, LaunDistance, } = values;
+    const { DormName, DormAddress, email, DormLatitude, DormLongitude, phone, LineID, Website, DormDoc, AllowSex, AccomType, HaveCon,
+      ConDistance,
+      ConDescript,
+      HaveLaun,
+      LaunDistance,
+      LaunDescript,
+      HaveParkLot,
+      ParkLotDistance,
+      ParkLotDescript,
+      HaveRestuarant,
+      RestuarantDistance,
+      RestuarantDescript,
+      HaveSmoke,
+      SmokeDistance,
+      SmokeDescript,
+      HaveFitness,
+      FitnessDistance,
+      FitnessDescript,
+      HavePool,
+      PoolDistance,
+      PoolDescript,
+      HaveCommon,
+      CommonDistance,
+      CommonDescript,
+      HaveInternet,
+      InternetDescript,
+      AllowedPet,
+      AllowedCook, } = values;
     const form = {
       DormName,
       DormAddress,
@@ -849,15 +1047,40 @@ const DormOwnerForm = withFormik({
       AccomType,
       HaveCon,
       ConDistance,
+      ConDescript,
       HaveLaun,
       LaunDistance,
+      LaunDescript,
+      HaveParkLot,
+      ParkLotDistance,
+      ParkLotDescript,
+      HaveRestuarant,
+      RestuarantDistance,
+      RestuarantDescript,
+      HaveSmoke,
+      SmokeDistance,
+      SmokeDescript,
+      HaveFitness,
+      FitnessDistance,
+      FitnessDescript,
+      HavePool,
+      PoolDistance,
+      PoolDescript,
+      HaveCommon,
+      CommonDistance,
+      CommonDescript,
+      HaveInternet,
+      InternetDescript,
+      AllowedPet,
+      AllowedCook,
     };
     setTimeout(() => {
+      console.log("kuy")
       alert(JSON.stringify(form));
     }, 1000);
     resetForm();
   },
-
+    
 })(DormOwner);
 
 export default withStyles(styles)(DormOwnerForm);
