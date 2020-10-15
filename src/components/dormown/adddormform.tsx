@@ -20,6 +20,7 @@ import { Input } from '@material-ui/core';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Label } from "@material-ui/icons";
 import Dropzonef from "./Dropzonef"
+import Termservice from "./Termservice";
 
 const galleryImageList = [""];
 const styles = createStyles({
@@ -56,7 +57,8 @@ function DormOwner(props: any) {
     document.body.style.backgroundColor = "white";
   }, []);
   const history = useHistory();
-  const [DormDoc,setFiles] = useState<any[]>([])
+  const [DormDoc, setFiles] = useState<any[]>([])
+  const [DormImage, setFiles2] = useState<any[]>([])
   const [show, setShow] = useState<boolean>(false);
   const handleClose = () => {
     setShow(false);
@@ -82,11 +84,11 @@ function DormOwner(props: any) {
           <h1 className={classes.navCenter}>Add Dorm</h1>
         </Nav>
       </Navbar>
-      <form style={{ margin: "3% 20%" }} onSubmit={(e : React.ChangeEvent<HTMLFormElement>) =>{
+      <form style={{ margin: "3% 20%" }} onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
         console.log(DormDoc)
         e.preventDefault()
         handleSubmit()
-      } }>
+      }}>
         <Row className={classes.row} noGutters={true}>
           <Col>
             <FormControl component="fieldset">
@@ -300,7 +302,7 @@ function DormOwner(props: any) {
                 >
                   ใบ
               </FormLabel>
-              <Dropzonef files={DormDoc} setFiles={setFiles} />
+                <Dropzonef files={DormDoc} setFiles={(files: any) => { values.DormDoc = files; setFiles(files); }} />
               </FormControl>
             </div>
             <Row>
@@ -889,6 +891,63 @@ function DormOwner(props: any) {
                 width: "350px",
               }}
             >
+              <FormControl component="fieldset">
+                <FormLabel
+                  error={touched.DormImage && Boolean(errors.DormImage)}
+                  className={classes.formLabel}
+                >
+                  Dorm Image
+              </FormLabel>
+                <Dropzonef files={DormImage} setFiles={(files: any) => { values.DormImage = files; setFiles2(files); }} />
+              </FormControl>
+            </div>
+          </Col>
+          <Col></Col>
+        </Row>
+        <Row className={classes.row} noGutters={true}>
+          <Col>
+            <div
+              style={{
+                textAlign: "left",
+                display: "inline-block",
+                width: "350px",
+              }}
+            >
+            <Checkbox
+              style={{paddingLeft:"0"}}
+              checked={values.acceptTerm}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="acceptTerm"
+              color="secondary"
+            />
+            <FormLabel style={{fontSize:"0.7rem"}} className={classes.black}>
+              I have to read and agree to 
+            </FormLabel>{" "}
+            <a style={{fontSize:"0.7rem",textDecoration:"underline",color:"#0066cc"}}
+              onClick={() => {
+                setShow(true);
+              }}
+            >
+              Term service and policy
+            </a>
+            <Termservice show={show} handleClose={handleClose} />
+            <FormHelperText error={true}>
+              {touched.acceptTerm ? errors.acceptTerm : ""}
+            </FormHelperText>
+            </div>
+          </Col>
+          <Col></Col>
+        </Row>
+        <Row className={classes.row} noGutters={true}>
+          <Col>
+            <div
+              style={{
+                textAlign: "left",
+                display: "inline-block",
+                width: "350px",
+              }}
+            >
 
               <Button
                 className={classes.button}
@@ -907,8 +966,10 @@ function DormOwner(props: any) {
               </Button>
             </div>
           </Col>
-          <Col></Col>
+          <Col>
+          </Col>
         </Row>
+
       </form>
     </div>
   );
@@ -954,6 +1015,8 @@ const DormOwnerForm = withFormik({
     InternetDescript,
     AllowedPet,
     AllowedCook,
+    DormImage,
+    acceptTerm,
   }: propsDormForm) => {
     return {
       DormName: DormName || "",
@@ -995,6 +1058,8 @@ const DormOwnerForm = withFormik({
       InternetDescript: InternetDescript || "",
       AllowedPet: AllowedPet || "",
       AllowedCook: AllowedCook || "",
+      DormImage: DormImage || "",
+      acceptTerm : acceptTerm || "",
     };
   },
   validationSchema: Yup.object().shape({
@@ -1032,7 +1097,9 @@ const DormOwnerForm = withFormik({
       HaveInternet,
       InternetDescript,
       AllowedPet,
-      AllowedCook, } = values;
+      AllowedCook,
+      DormImage,
+      acceptTerm, } = values;
     const form = {
       DormName,
       DormAddress,
@@ -1073,14 +1140,17 @@ const DormOwnerForm = withFormik({
       InternetDescript,
       AllowedPet,
       AllowedCook,
+      DormImage,
+      acceptTerm,
     };
-    setTimeout(() => {
+    console.log(form)
+    /*setTimeout(() => {
       console.log("kuy")
       alert(JSON.stringify(form));
-    }, 1000);
+    }, 1000);*/
     resetForm();
   },
-    
+
 })(DormOwner);
 
 export default withStyles(styles)(DormOwnerForm);

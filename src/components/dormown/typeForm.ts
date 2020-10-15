@@ -39,4 +39,6 @@ export interface propsDormForm {
     InternetDescript: string,
     AllowedPet? : string,
     AllowedCook? : string,
+    DormImage : any,
+    acceptTerm : boolean,
 }
