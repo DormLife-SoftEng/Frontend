@@ -12,29 +12,20 @@ const onLoad = (marker: any) => {
 
 
 function Googlemap(props: any) {
-    const { lat, lng } = props
-    const center = {
-        lat: {lat},
-        lng: {lng}
-    };
-
-    const position = {
-        lat: {lat},
-        lng: {lng}
-    }
+    const {coordinate} = props
     return (
         <LoadScript
             googleMapsApiKey="AIzaSyD6Wut16Gy_rkfQPL7q4CCacKzkCijIeXs"
         >
             <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={center}
+                center={coordinate}
                 zoom={17}
             >
             { /* Child components, such as markers, info windows, etc. */}
             <Marker
                 onLoad={onLoad}
-                position={position}
+                position={coordinate}
             />
                
             </GoogleMap>
