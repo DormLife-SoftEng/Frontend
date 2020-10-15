@@ -1,22 +1,22 @@
 import React from "react";
-import { Modal, Button } from "react-bootstrap";
-import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Select from "@material-ui/core/Select";
-import Checkbox from "@material-ui/core/Checkbox";
+import { FormikProps, withFormik } from "formik";
+import * as Yup from "yup";
+import { Modal, Button} from "react-bootstrap";
 import {
   withStyles,
   createStyles,
   FormLabel,
+  InputLabel,
+  TextField,
   FormGroup,
+  MenuItem,
+  FormHelperText,
+  FormControl,
+  FormControlLabel,
+  Select,
+  Checkbox
 } from "@material-ui/core";
-import { withFormik } from "formik";
-import * as Yup from "yup";
-import { propsSearch } from "./type";
+
 const styles = createStyles({
   formControl: {
     minWidth: 120,
@@ -28,7 +28,60 @@ const styles = createStyles({
   },
 });
 
-function SearchList(props: any) {
+interface FormValue {
+  dormName? : string,
+  price? : number,
+  distance? : number,
+  maxPerson? : number,
+  rating? : number,
+  roomSize? : number,
+  roomType : string,
+  gender : string,
+  convenienceStore? : boolean,
+  kitchen? : boolean,
+  laundry? : boolean,
+  parking? : boolean,
+  pet? : boolean,
+  internet? : boolean,
+  smoking? : boolean,
+  fitness? : boolean,
+  pool? : boolean,
+  cooking? : boolean,
+  restRoom? : boolean,
+}
+interface MyFormProps {
+  dormName? : string,
+  price? : number,
+  distance? : number,
+  maxPerson? : number,
+  rating? : number,
+  roomSize? : number,
+  roomType? : string,
+  gender? : string,
+  convenienceStore? : boolean,
+  kitchen? : boolean,
+  laundry? : boolean,
+  parking? : boolean,
+  pet? : boolean,
+  internet? : boolean,
+  smoking? : boolean,
+  fitness? : boolean,
+  pool? : boolean,
+  cooking? : boolean,
+  restRoom? : boolean,
+  show : boolean,
+  handleClose : () => void
+  sendBack : (data : string) => void
+}
+interface Style {
+  classes? : any
+}
+interface Control {
+  show? : boolean,
+  handleClose : () => void
+}
+
+function SearchList(props: FormikProps<FormValue> & Style & Control) {
   const { show, handleClose } = props;
   const {
     classes,
@@ -272,7 +325,11 @@ function SearchList(props: any) {
           <Button variant="outline-danger" onClick={handleReset}>
             Clear
           </Button>
-          <Button disabled={isSubmitting} type="submit" variant="outline-primary">
+          <Button
+            disabled={isSubmitting}
+            type="submit"
+            variant="outline-primary"
+          >
             Search
           </Button>
         </Modal.Footer>
@@ -280,53 +337,28 @@ function SearchList(props: any) {
     </Modal>
   );
 }
-const SearchFilter = withFormik({
-  mapPropsToValues: ({
-    dormName,
-    price,
-    distance,
-    maxperson,
-    rating,
-    roomSize,
-    roomType,
-    gender,
-    convenienceStore,
-    kitchen,
-    laundry,
-    parking,
-    pet,
-    internet,
-    smoking,
-    fitness,
-    pool,
-    cooking,
-    restRoom,
-    show,
-    handleClose,
-    sendBack
-  }: propsSearch) => {
+const SearchFilter = withFormik<MyFormProps,FormValue>({
+  mapPropsToValues: props => {
     return {
-      dormName: dormName || "",
-      price: price,
-      distance: distance,
-      maxperson: maxperson,
-      rating: rating,
-      gender: gender || "",
-      roomSize: roomSize,
-      roomType: roomType || "",
-      convenienceStore: convenienceStore || false,
-      kitchen: kitchen || false,
-      laundry: laundry || false,
-      parking: parking || false,
-      pet: pet || false,
-      internet: internet || false,
-      smoking: smoking || false,
-      fitness: fitness || false,
-      pool: pool || false,
-      cooking: cooking || false,
-      restRoom: restRoom || false,
-      handleClose: handleClose,
-      sendBack : sendBack
+      dormName: props.dormName || "",
+      price: props.price,
+      distance: props.distance,
+      maxPerson: props.maxPerson,
+      rating: props.rating,
+      gender: props.gender || "",
+      roomSize: props.roomSize,
+      roomType: props.roomType || "",
+      convenienceStore: props.convenienceStore || false,
+      kitchen: props.kitchen || false,
+      laundry: props.laundry || false,
+      parking: props.parking || false,
+      pet: props.pet || false,
+      internet: props.internet || false,
+      smoking: props.smoking || false,
+      fitness: props.fitness || false,
+      pool: props.pool || false,
+      cooking: props.cooking || false,
+      restRoom: props.restRoom || false,
     };
   },
   validationSchema: Yup.object().shape({
@@ -335,10 +367,11 @@ const SearchFilter = withFormik({
     // pet : Yup.boolean().oneOf([true],"Hello")
   }),
 
-  handleSubmit: (values, { resetForm }) => {
-    values.sendBack(JSON.stringify(values))
+  handleSubmit: (values, { resetForm , props }) => {
+    props.sendBack(JSON.stringify(values));
     alert(JSON.stringify(values));
-    values.handleClose();
+    props.handleClose();
+    
     resetForm();
   },
 })(SearchList);
