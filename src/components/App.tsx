@@ -10,7 +10,7 @@ import Dorm from "./dorm/Dorm"
 function App() {
     
     return (
-        <div style={{textAlign:"center"}}>
+        <div>
             <Route exact path="/" component={Home} />
             <Route  exact path="/signin" component={Signin} />
             <Route  exact path="/signup" component={Signup} />
