@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch  } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Signup from "./signup/Signup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DormFinder from "./signup/DormFinder";
@@ -12,6 +12,7 @@ import Repassword from "./signin/Repassword";
 import MainLobby from "./lobby/mainLobbyPage/MainLobby";
 import CreatePage from "./lobby/CreateLobbyPage/CreatePage";
 import Lobby from "./lobby/LobbyPage/Lobby";
+import PageNotFound from "./pagenotfound/PageNotFound";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 const Theme = createMuiTheme({
   palette: {
@@ -42,6 +43,14 @@ function App() {
           <Route exact path="/lobby" component={MainLobby} />
           <Route exact path="/lobby/create" component={CreatePage} />
           <Route exact path="/lobby/:lobbyID" component={Lobby} />
+          <Route
+            component={() => (
+              <>
+                <Home />
+                <PageNotFound />
+              </>
+            )}
+          />
         </Switch>
       </div>
     </MuiThemeProvider>
