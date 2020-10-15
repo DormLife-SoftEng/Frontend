@@ -10,7 +10,7 @@ import Dorm from "./dorm/Dorm"
 import DormHome from "./dormown/dormhome";
 import ContactSupport from "./dormown/ContactSupport";
 import AddDromFrom from "./dormown/adddormform";
-import MyComponent from "./google/test";
+import MyComponent from "./google/goole";
 function App() {
     
     return (
