@@ -1,6 +1,4 @@
 import React from "react";
-import SuggestItem from "./SuggestItem";
-import { DormInform } from "./type";
 
 function DormDetail() {
   return (

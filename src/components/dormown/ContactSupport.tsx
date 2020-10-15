@@ -9,6 +9,7 @@ import { Grid } from "@material-ui/core";
 //import { View, StyleSheet, Text } from 'react-native';
 
 function Contactsupport() {
+  const history = useHistory();
   useEffect(() => {
     document.body.style.backgroundColor = "#FFBDBD";
   }, []);
@@ -17,7 +18,7 @@ function Contactsupport() {
       <div>
         <Navbar style={{ padding: "1%" }} bg="white">
           <Nav className="text-right">
-            <Button variant="">
+            <Button variant="" onClick={() => history.goBack()}>
               <ArrowBackIosIcon htmlColor="red" fontSize="large" />
             </Button>
             <h1

@@ -1,18 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Button, FormControl, InputGroup, Nav, Navbar } from "react-bootstrap";
-import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { Button, Form, FormControl, InputGroup, Nav, Navbar } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { useHistory , useParams } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import DormList from './DormList';
 import DormDetail from './DormDetail';
-
+import SearchMDorm from './SearchMDorm';
 function DormHome() {
     const history = useHistory();
     useEffect(() => {
         document.body.style.backgroundColor = "#F55E61"
     }, [])
+    const [searchname,SetSearch]=useState<string>("")
+    const {id} : {id:string} = useParams()
     return (
         <div>
             <Navbar style={{ padding: "1% 4%" }} bg="">
@@ -36,21 +38,13 @@ function DormHome() {
             </Navbar>
             <div style={{ padding: "1% 4%" }}>
                 <Row noGutters={true}>
-                    <Col>
-                        <Row noGutters={true}>
-                            <InputGroup className="mb-3">
-                                <FormControl
-                                    placeholder="Search..."
-                                    aria-label="Recipient's username"
-                                    aria-describedby="basic-addon2"
-                                />
-                                <InputGroup.Append>
-
-                                </InputGroup.Append>
-                            </InputGroup>
+                    <Col xs={5}>
+                        <Row noGutters={true} className="mb-3">
+                            <SearchMDorm search={SetSearch}/>
                         </Row>
-                        <Row noGutters={true}>
-                            <DormList />
+                        
+                        <Row noGutters={true} >
+                            <DormList search={searchname} />
                         </Row>
                         <Row noGutters={true}>
                             <div
@@ -61,15 +55,15 @@ function DormHome() {
                                     padding: "2% 0% "
                                 }}
                             >
-                                <Button variant="light" size="lg" block style={{ color: "red" ,width:"150px" }}>
+                                <Button variant="light" size="lg" block style={{ color: "red", width: "150px" }} onClick={() => history.push("/adddorm/example")}>
                                     Add Dorm
-                        </Button>
+                                </Button>
                             </div>
                         </Row>
                     </Col>
-                    <Col style={{ maxWidth: "20px" }}>
+                    <Col xs={1} >
                     </Col>
-                    <Col className="bg-white">
+                    <Col className="bg-white" xs={6}>
                         <Row noGutters={true} style={{ height: "550px" }}>
                             <DormDetail />
                         </Row>
@@ -82,8 +76,8 @@ function DormHome() {
                             <Col style={{ width: "100px" }}>
                             </Col>
                             <Col>
-                                <Button variant="warning" style={{ textAlign: "right", color: "white" }}>
-                                    Generate Review Code
+                                <Button variant="warning" style={{ textAlign: "right", color: "white" }} onClick={() => history.push(`/dormowner/${id}/ContactSupport`)}>
+                                    Contact Support
                             </Button>
                             </Col>
                         </Row>
