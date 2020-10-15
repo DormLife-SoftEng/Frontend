@@ -7,7 +7,7 @@ function DormDetail() {
         className="overflow-auto"
         style={{ width: "700px", maxHeight: "460px" ,}}
       >
-       SPACE
+       
       </div>
     </div>
   );

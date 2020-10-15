@@ -10,7 +10,7 @@ import Dorm from "./dorm/Dorm"
 import DormHome from "./dormown/dormhome";
 import ContactSupport from "./dormown/ContactSupport";
 import AddDromFrom from "./dormown/adddormform";
-
+import MyComponent from "./google/test";
 function App() {
     
     return (
@@ -24,7 +24,6 @@ function App() {
             <Route exact path="/dormowner/:id" component={DormHome} />
             <Route exact path="/dormown/ContactSupport" component={ContactSupport} />
             <Route exact path="/adddorm/:id" component={AddDromFrom} />
-
         </div>
     )
 }
