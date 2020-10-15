@@ -25,19 +25,10 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: "#FFFFFF",
     },
     expandIcon: { padding: 0 },
-    grid: { paddingBottom: 0 },
     textPopup: { color: "#F55E61" },
-    buttonPopup: {
-      margin: "1vh",
-      outline: "none",
-      "&:hover": {
-        outline: "none",
-        backgroundColor: "#FFF",
-      },
-    },
   })
 );
-export default function EmailPopup() {
+export default function Error404Popup() {
   const classes = useStyles();
   const [open, setOpen] = useState<boolean>(true);
   return (
