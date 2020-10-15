@@ -235,7 +235,9 @@ function DormFinder(props: FormikProps<FormValue> & Style) {
           <Col>
             <FormControl component="fieldset">
               <FormLabel
-                error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                error={
+                  touched.confirmPassword && Boolean(errors.confirmPassword)
+                }
                 className={classes.formLabel}
               >
                 Confirm Password
@@ -248,8 +250,12 @@ function DormFinder(props: FormikProps<FormValue> & Style) {
                 value={values.confirmPassword}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                helperText={touched.confirmPassword ? errors.confirmPassword : ""}
-                error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                helperText={
+                  touched.confirmPassword ? errors.confirmPassword : ""
+                }
+                error={
+                  touched.confirmPassword && Boolean(errors.confirmPassword)
+                }
                 margin="dense"
                 variant="outlined"
               />

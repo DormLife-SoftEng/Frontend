@@ -30,7 +30,7 @@ const Theme = createMuiTheme({
 function App() {
   return (
     <MuiThemeProvider theme={Theme}>
-      <div style={{ textAlign: "center" }}>
+      <div>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/signin" component={Signin} />
