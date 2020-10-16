@@ -898,7 +898,7 @@ function DormOwner(props: any) {
                 >
                   Dorm Image
               </FormLabel>
-                <Dropzonef files={DormImage} setFiles={(files: any) => { values.DormImage = files; setFiles2(files); }} />
+                <Dropzonef  files={DormImage} setFiles={(files: any) => { values.DormImage = files; setFiles2(files); }} />
               </FormControl>
             </div>
           </Col>

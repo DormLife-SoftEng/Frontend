@@ -10,7 +10,6 @@ import Dorm from "./dorm/Dorm"
 import DormHome from "./dormown/dormhome";
 import ContactSupport from "./dormown/ContactSupport";
 import AddDromFrom from "./dormown/adddormform";
-import MyComponent from "./google/goole";
 import Forgetpassword from "./signin/Forgetpassword";
 import Repassword from "./signin/Repassword";
 import MainLobby from "./lobby/mainLobbyPage/MainLobby";
@@ -18,6 +17,7 @@ import CreatePage from "./lobby/CreateLobbyPage/CreatePage";
 import Lobby from "./lobby/LobbyPage/Lobby";
 import PageNotFound from "./pagenotfound/PageNotFound";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import MyComponent from "./google/goole";
 const Theme = createMuiTheme({
     palette: {
         primary: {
