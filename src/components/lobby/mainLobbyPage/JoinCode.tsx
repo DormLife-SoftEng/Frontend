@@ -1,9 +1,8 @@
 import React, { useState }  from "react";
+import { JoinCodeProps } from "../../type";
 import JoinCodeModal from "./JoinCodeModal";
 
-interface JoinCodeProps {
-    handleRouting : (s : string) => void
-}
+
 
 const JoinCode =  (props : JoinCodeProps) => {
     const {handleRouting} = props

@@ -1,12 +1,10 @@
 import React  from "react";
 import LobbyRow from "./LobbyRow";
-import { Lobby } from "./type";
+import { LobbyListProps } from "../../type";
 
-interface propsLobby {
-    lobbylist : Lobby[]
-}
 
-const LobbyList = (props : propsLobby) => {
+
+const LobbyList = (props : LobbyListProps) => {
     const {lobbylist} = props
     return (
         <>
@@ -17,7 +15,7 @@ const LobbyList = (props : propsLobby) => {
             >
             </div>
             {lobbylist.map((lobby,index) => {
-                return <LobbyRow {...lobby} key={index} />
+                return <LobbyRow roomType={lobby.roomType} _id={lobby._id} dormName={lobby.dormName}  key={index} />
             })}
         </div>
         </>

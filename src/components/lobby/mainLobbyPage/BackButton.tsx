@@ -1,10 +1,8 @@
 import React from "react";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import {backButtonProps } from "../../type"
 
-interface BackProps {
-    handleGoBack : () => void
-}
-const BackButton = (props : BackProps) => {
+const BackButton = (props : backButtonProps) => {
     const {handleGoBack} = props
     return (
         <>

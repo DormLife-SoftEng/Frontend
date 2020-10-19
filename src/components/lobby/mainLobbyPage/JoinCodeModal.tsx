@@ -1,13 +1,10 @@
 import React, { useState }  from "react";
 import { Modal } from "react-bootstrap";
+import { ModalMainPageProps } from "../../type";
 
-interface modalProps {
-    show : boolean,
-    handleClose : ()=> void,
-    handleRouting : (s : string) => void
-}
 
-const JoinCodeModal =  (props : modalProps) => {
+
+const JoinCodeModal =  (props : ModalMainPageProps) => {
     const {show , handleClose , handleRouting} = props
     const [lobbyID,setLobbyID] = useState<string>("")
     const handleChange =  (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -34,4 +31,5 @@ const JoinCodeModal =  (props : modalProps) => {
         </Modal>
     )
 }
+
 export default JoinCodeModal

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import { FormikProps, withFormik, Form } from "formik";
+import { FormikProps, withFormik } from "formik";
 import * as Yup from "yup";
 import { withStyles, createStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
@@ -16,8 +16,7 @@ import { phoneRegExp } from "./constant";
 import { useHistory } from "react-router-dom";
 import { Navbar, Nav, Row, Col, Button } from "react-bootstrap";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import authService from "../../services/auth.service";
-import EmailPopup from "./EmailPopup";
+// import authService from "../../services/auth.service";
 
 const styles = createStyles({
   black: {
@@ -78,7 +77,6 @@ function DormFinder(props: FormikProps<FormValue> & Style) {
   }, []);
   const history = useHistory();
   const [show, setShow] = useState<boolean>(false);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
   const handleClose = () => {
     setShow(false);
   };
@@ -103,25 +101,14 @@ function DormFinder(props: FormikProps<FormValue> & Style) {
           <h1 className={classes.navCenter}>Sign up for Dorm Finder</h1>
         </Nav>
       </Navbar>
-      <Form
-        style={{ margin: "5% 20%" }}
-        onSubmit={() => {
-          handleSubmit();
-          props.values.name &&
-            props.values.lastName &&
-            props.values.email &&
-            props.values.password &&
-            props.values.confirmPassword &&
-            props.values.gender &&
-            props.values.acceptTerm &&
-            phoneRegExp.test(props.values.phone) &&
-            setShowPopup(true);
-        }}
-      >
+      <form style={{ margin: "5% 20%" }} onSubmit={handleSubmit}>
         <Row className={classes.row} noGutters={true}>
           <Col>
             <FormControl component="fieldset">
-              <FormLabel error={touched.name && Boolean(errors.name)} className={classes.formLabel}>
+              <FormLabel
+                error={touched.name && Boolean(errors.name)}
+                className={classes.formLabel}
+              >
                 Name
               </FormLabel>
               <TextField
@@ -281,10 +268,14 @@ function DormFinder(props: FormikProps<FormValue> & Style) {
                 >
                   <FormControlLabel
                     value="female"
-                    control={<Radio color="primary" />}
+                    control={<Radio color="secondary" />}
                     label="Female"
                   />{" "}
-                  <FormControlLabel value="male" control={<Radio color="primary" />} label="Male" />
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio color="secondary" />}
+                    label="Male"
+                  />
                 </RadioGroup>
               </FormControl>
             </div>
@@ -306,13 +297,20 @@ function DormFinder(props: FormikProps<FormValue> & Style) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="acceptTerm"
-                color="primary"
+                color="secondary"
               />
-              <FormLabel style={{ fontSize: "0.7rem" }} className={classes.black}>
+              <FormLabel
+                style={{ fontSize: "0.7rem" }}
+                className={classes.black}
+              >
                 I have to read and agree to
               </FormLabel>{" "}
               <a
-                style={{ fontSize: "0.7rem", textDecoration: "underline", color: "#0066cc" }}
+                style={{
+                  fontSize: "0.7rem",
+                  textDecoration: "underline",
+                  color: "#0066cc",
+                }}
                 onClick={() => {
                   setShow(true);
                 }}
@@ -336,7 +334,6 @@ function DormFinder(props: FormikProps<FormValue> & Style) {
                 width: "350px",
               }}
             >
-              <EmailPopup open={showPopup} setOpen={setShowPopup} />
               <Button
                 className={classes.button}
                 variant="secondary"
@@ -345,15 +342,49 @@ function DormFinder(props: FormikProps<FormValue> & Style) {
               >
                 SUBMIT
               </Button>
-
-              <Button className={classes.button} variant="danger" onClick={handleReset}>
+              <Button
+                className={classes.button}
+                variant="danger"
+                onClick={handleReset}
+              >
                 CLEAR
               </Button>
             </div>
           </Col>
-          <Col></Col>
+          <Col>
+              {/* {upImage ? <h1>{values.imageFile}</h1> : 
+              <>
+                <TextField
+                  id="imageFile"
+                  type="file"
+                  className={classes.textField}
+                  value={values.imageFile}
+                  onChange={(e : React.ChangeEvent<any>) => {
+                    handleChange(e)
+                    setUpImage(true)
+                  }}
+                  onBlur={handleBlur}
+                  helperText={touched.imageFile ? errors.imageFile : ""}
+                  error={touched.imageFile && Boolean(errors.imageFile)}
+                  margin="dense"
+                  variant="outlined"
+                  style={{display:"none"}}
+                />
+                <label htmlFor="imageFile">
+                <Button1
+                  variant="contained"
+                  component="span"
+                  size="large"
+                  color="primary"
+                >
+                  Upload Image
+                </Button1>
+              </label>
+              </>
+              } */}
+          </Col>
         </Row>
-      </Form>
+      </form>
     </div>
   );
 }
@@ -374,7 +405,9 @@ const DormFinderForm = withFormik<MyFormProps, FormValue>({
   validationSchema: Yup.object().shape({
     name: Yup.string().required("Required"),
     lastName: Yup.string().required("Required"),
-    email: Yup.string().email("Enter a valid email").required("Email is required"),
+    email: Yup.string()
+      .email("Enter a valid email")
+      .required("Email is required"),
     password: Yup.string()
       .min(8, "Password must contain at least 8 characters")
       .required("Enter your password"),
@@ -389,7 +422,7 @@ const DormFinderForm = withFormik<MyFormProps, FormValue>({
   }),
 
   handleSubmit: (values, { resetForm }) => {
-    const { name, lastName, email, password, phone, gender } = values;
+    const { name, lastName, email, password, phone, gender  } = values;
     const form = {
       name,
       lastName,
@@ -399,7 +432,7 @@ const DormFinderForm = withFormik<MyFormProps, FormValue>({
       gender,
     };
     console.log(form);
-    console.log(authService.RegisterDormFinder(form));
+    // console.log(authService.RegisterDormFinder(form));
     resetForm();
   },
 })(DormFinder);
