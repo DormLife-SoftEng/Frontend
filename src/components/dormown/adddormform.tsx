@@ -1054,7 +1054,6 @@ const DormOwnerForm = withFormik({
     AllowedPet,
     AllowedCook,
     DormImage,
-    acceptTerm,
   }: propsDormForm) => {
     return {
       DormName: DormName || "",
@@ -1099,7 +1098,6 @@ const DormOwnerForm = withFormik({
       AllowedPet: AllowedPet || "no",
       AllowedCook: AllowedCook || "no",
       DormImage: DormImage || "",
-      acceptTerm : acceptTerm || "",
     };
   },
   validationSchema: Yup.object().shape({
@@ -1149,8 +1147,7 @@ const DormOwnerForm = withFormik({
       InternetDescript,
       AllowedPet,
       AllowedCook,
-      DormImage,
-      acceptTerm, } = values;
+      DormImage, } = values;
     const form = {
       DormName,
       DormAddress,
@@ -1192,7 +1189,6 @@ const DormOwnerForm = withFormik({
       AllowedPet,
       AllowedCook,
       DormImage,
-      acceptTerm,
     };
     console.log(form)
     setTimeout(() => {
