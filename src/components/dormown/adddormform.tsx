@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
-import { withFormik } from "formik";
+import { withFormik, yupToFormErrors } from "formik";
 import * as Yup from "yup";
 import { withStyles, createStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
@@ -14,6 +14,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import { propsDormForm } from "./typeForm";
 import { useHistory } from "react-router-dom";
+import {phoneRegExp } from "./constant";
 import { Navbar, Nav, Row, Col, Button } from "react-bootstrap";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { Input } from '@material-ui/core';
@@ -60,8 +61,19 @@ function DormOwner(props: any) {
   const [DormDoc, setFiles] = useState<any[]>([])
   const [DormImage, setFiles2] = useState<any[]>([])
   const [show, setShow] = useState<boolean>(false);
+  const [HaveConString, setHaveCon] = useState<string>("");
+  const [HaveLaunString, setHaveLaun] = useState<string>("");
+  const [HaveParkLotString, setHaveParkLot] = useState<string>("");
+  const [HaveRestaurantString, setHaveRestaurant] = useState<string>("");
+  const [HaveSmokingAreaString, setHaveSmokingArea] = useState<string>("");
+  const [HaveFitnessString, setHaveFitness] = useState<string>("");
+  const [HavePoolString, setHavePool] = useState<string>("");
+  const [HaveCommonString, setHaveCommon] = useState<string>("");
+  const [HaveInternetString, setHaveInternet] = useState<string>("");
+  const [HaveRestString, setHaveRest] = useState<string>("");
+  const [show2, setShow2] = useState<boolean>(false);
   const handleClose = () => {
-    setShow(false);
+    setShow2(false);
   };
   const {
     classes,
@@ -96,7 +108,7 @@ function DormOwner(props: any) {
                 error={touched.DormName && Boolean(errors.DormName)}
                 className={classes.formLabel}
               >
-                Dorm Name
+                Dorm Name*
               </FormLabel>
               <TextField
                 id="DormName"
@@ -118,7 +130,7 @@ function DormOwner(props: any) {
                 error={touched.DormAddress && Boolean(errors.DormAddress)}
                 className={classes.formLabel}
               >
-                Dorm Address
+                Dorm Address*
               </FormLabel>
               <TextField
                 id="DormAddress"
@@ -142,7 +154,7 @@ function DormOwner(props: any) {
                 error={touched.DormLongitude && Boolean(errors.DormLongitude)}
                 className={classes.formLabel}
               >
-                Dorm Longitude
+                Dorm Longitude*
               </FormLabel>
               <TextField
                 id="DormLongitude"
@@ -164,7 +176,7 @@ function DormOwner(props: any) {
                 error={touched.DormLatitude && Boolean(errors.DormLatitude)}
                 className={classes.formLabel}
               >
-                Dorm Latitude
+                Dorm Latitude*
               </FormLabel>
               <TextField
                 id="DormLatitude"
@@ -188,7 +200,7 @@ function DormOwner(props: any) {
                 error={touched.phone && Boolean(errors.phone)}
                 className={classes.formLabel}
               >
-                Dorm Phone Number
+                Dorm Phone Number*
               </FormLabel>
               <TextField
                 id="phone"
@@ -300,7 +312,7 @@ function DormOwner(props: any) {
                   error={touched.DormDoc && Boolean(errors.DormDoc)}
                   className={classes.formLabel}
                 >
-                  ใบ
+                  ใบอนุญาตประกอบกิจการหอพักเอกชน
               </FormLabel>
                 <Dropzonef files={DormDoc} setFiles={(files: any) => { values.DormDoc = files; setFiles(files); }} />
               </FormControl>
@@ -316,7 +328,7 @@ function DormOwner(props: any) {
                   }}
                 >
                   <FormControl component="fieldset">
-                    <FormLabel className={classes.formLabel}>Allowed Sex</FormLabel>
+                    <FormLabel className={classes.formLabel}>Allowed Sex*</FormLabel>
                     <RadioGroup
                       aria-label="AllowSex"
                       name="AllowSex"
@@ -353,7 +365,7 @@ function DormOwner(props: any) {
               }}
             >
               <FormControl component="fieldset">
-                <FormLabel className={classes.formLabel}>Accomodation Type</FormLabel>
+                <FormLabel className={classes.formLabel}>Accomodation Type*</FormLabel>
                 <RadioGroup
                   aria-label="Accomtype"
                   name="AccomType"
@@ -376,9 +388,9 @@ function DormOwner(props: any) {
                     label="Aparment"
                   />
                   <FormControlLabel
-                    value="Flat"
+                    value="flat"
                     control={<Radio color="secondary" />}
-                    label="flat"
+                    label="Flat"
                   />
                   <FormControlLabel
                     value="hostel"
@@ -415,7 +427,8 @@ function DormOwner(props: any) {
                     label="Convenience Store"
                     labelPlacement="end"
                     onClick={() => {
-                      setShow(true);
+                      values.HaveConString = "convenienceStore";
+                      setHaveCon("convenienceStore");
                     }}
                   />
                   <TextField disabled={!values.HaveCon}
@@ -430,7 +443,7 @@ function DormOwner(props: any) {
                     margin="dense"
                     variant="outlined"></TextField>
                   <TextField disabled={!values.HaveCon}
-                    id="ConDistance"
+                    id="ConDescript"
                     placeholder="Description"
                     className={classes.textField}
                     value={values.ConDescript}
@@ -458,7 +471,8 @@ function DormOwner(props: any) {
                     label="Laundry/Washing Machine"
                     labelPlacement="end"
                     onClick={() => {
-                      setShow(true);
+                      values.HaveLaunString = "Laundry";
+                      setHaveLaun("Laundry");
                     }}
                   />
                   <TextField disabled={!values.HaveLaun}
@@ -473,10 +487,10 @@ function DormOwner(props: any) {
                     margin="dense"
                     variant="outlined"></TextField>
                   <TextField disabled={!values.HaveLaun}
-                    id="LaunDistance"
+                    id="LaunDescript"
                     placeholder="Description"
                     className={classes.textField}
-                    value={values.ConDescript}
+                    value={values.LaunDescript}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     helperText={touched.ConDescript ? errors.ConDescript : null}
@@ -503,7 +517,8 @@ function DormOwner(props: any) {
                     label="Parking Lot"
                     labelPlacement="end"
                     onClick={() => {
-                      setShow(true);
+                      values.HaveParkLotString = "parkLot";
+                      setHaveParkLot("parkLot");
                     }}
                   />
                   <TextField disabled={!values.HaveParkLot}
@@ -542,11 +557,12 @@ function DormOwner(props: any) {
               <FormControl component="fieldset" className={classes.formControl}>
                 <FormGroup>
                   <FormControlLabel
-                    control={<Checkbox checked={values.HaveRestaurant} onChange={handleChange} name="HaveRest" />}
+                    control={<Checkbox checked={values.HaveRestaurant} onChange={handleChange} name="HaveRestaurant" />}
                     label="Restaurant"
                     labelPlacement="end"
                     onClick={() => {
-                      setShow(true);
+                      values.HaveRestaurantString = "Restaurant";
+                      setHaveRestaurant("Restaurant");
                     }}
                   />
                   <TextField disabled={!values.HaveRestaurant}
@@ -561,7 +577,7 @@ function DormOwner(props: any) {
                     margin="dense"
                     variant="outlined"></TextField>
                   <TextField disabled={!values.HaveRestaurant}
-                    id="LaunDescript"
+                    id="RestDescript"
                     placeholder="Description"
                     className={classes.textField}
                     value={values.RestaurantDescript}
@@ -591,7 +607,8 @@ function DormOwner(props: any) {
                     label="Smoking Area"
                     labelPlacement="end"
                     onClick={() => {
-                      setShow(true);
+                      values.HaveSmokeAreaString = "smokeArea";
+                      setHaveSmokingArea("smokeArea");
                     }}
                   />
                   <TextField disabled={!values.HaveSmoke}
@@ -634,7 +651,8 @@ function DormOwner(props: any) {
                     label="Fitness"
                     labelPlacement="end"
                     onClick={() => {
-                      setShow(true);
+                      values.HaveFitnessString = "Fitness";
+                      setHaveFitness("Fitness");
                     }}
                   />
                   <TextField disabled={!values.HaveFitness}
@@ -679,7 +697,8 @@ function DormOwner(props: any) {
                     label="Swimming Pool"
                     labelPlacement="end"
                     onClick={() => {
-                      setShow(true);
+                      values.HavePoolString = "Pool";
+                      setHavePool("Pool");
                     }}
                   />
                   <TextField disabled={!values.HavePool}
@@ -722,14 +741,15 @@ function DormOwner(props: any) {
                     label="Common Room"
                     labelPlacement="end"
                     onClick={() => {
-                      setShow(true);
+                      values.HaveCommonString = "commonRoom";
+                      setHaveCommon("commonRoom");
                     }}
                   />
                   <TextField disabled={!values.HaveCommon}
                     id="CommonDistance"
                     placeholder="Enter Distance"
                     className={classes.textField}
-                    value={values.RestaurantDistance}
+                    value={values.CommonDistance}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     helperText={touched.CommonDistance ? errors.CommonDistance : null}
@@ -737,7 +757,7 @@ function DormOwner(props: any) {
                     margin="dense"
                     variant="outlined"></TextField>
                   <TextField disabled={!values.HaveCommon}
-                    id="LaunDescript"
+                    id="CommonDescript"
                     placeholder="Description"
                     className={classes.textField}
                     value={values.CommonDescript}
@@ -767,7 +787,8 @@ function DormOwner(props: any) {
                     label="Internet"
                     labelPlacement="end"
                     onClick={() => {
-                      setShow(true);
+                      values.HaveInternetString = "Internet";
+                      setHaveInternet("Internet");
                     }}
                   />
                   <TextField disabled={!values.HaveInternet}
@@ -799,11 +820,12 @@ function DormOwner(props: any) {
                     label="Restroom"
                     labelPlacement="end"
                     onClick={() => {
-                      setShow(true);
+                      values.HaveRestString = "RestRoom";
+                      setHaveRest("RestRoom");
                     }}
                   />
                   <TextField disabled={!values.HaveRest}
-                    id="RestDescript"
+                    id="RestRoomDescript"
                     placeholder="Description"
                     className={classes.textField}
                     value={values.RestDescript}
@@ -829,7 +851,7 @@ function DormOwner(props: any) {
               }}
             >
               <FormControl component="fieldset">
-                <FormLabel className={classes.formLabel}>Allowed Pet</FormLabel>
+                <FormLabel className={classes.formLabel}>Allowed Pet*</FormLabel>
                 <RadioGroup
                   aria-label="AllowedPet"
                   name="AllowedPet"
@@ -860,7 +882,7 @@ function DormOwner(props: any) {
               }}
             >
               <FormControl component="fieldset">
-                <FormLabel className={classes.formLabel}>Allowed Cooking</FormLabel>
+                <FormLabel className={classes.formLabel}>Allowed Cooking*</FormLabel>
                 <RadioGroup
                   aria-label="AllowedCook"
                   name="AllowedCook"
@@ -896,7 +918,7 @@ function DormOwner(props: any) {
                   error={touched.DormImage && Boolean(errors.DormImage)}
                   className={classes.formLabel}
                 >
-                  Dorm Image
+                  Dorm Image*
               </FormLabel>
                 <Dropzonef  files={DormImage} setFiles={(files: any) => { values.DormImage = files; setFiles2(files); }} />
               </FormControl>
@@ -906,7 +928,7 @@ function DormOwner(props: any) {
         </Row>
         <Row className={classes.row} noGutters={true}>
           <Col>
-            <div
+          <div
               style={{
                 textAlign: "left",
                 display: "inline-block",
@@ -926,15 +948,29 @@ function DormOwner(props: any) {
             </FormLabel>{" "}
             <a style={{fontSize:"0.7rem",textDecoration:"underline",color:"#0066cc"}}
               onClick={() => {
-                setShow(true);
+                setShow2(true);
               }}
             >
               Term service and policy
             </a>
-            <Termservice show={show} handleClose={handleClose} />
+            <Termservice show={show2} handleClose={handleClose} />
             <FormHelperText error={true}>
               {touched.acceptTerm ? errors.acceptTerm : ""}
             </FormHelperText>
+            </div>
+          </Col>
+          <Col></Col>
+        </Row>
+        <Row className={classes.row} noGutters={true}>
+          <Col>
+          <div
+              style={{
+                textAlign: "left",
+                display: "inline-block",
+                width: "350px",
+              }}
+            >
+                *Field is required
             </div>
           </Col>
           <Col></Col>
@@ -987,32 +1023,34 @@ const DormOwnerForm = withFormik({
     DormDoc,
     AllowSex,
     AccomType,
-    HaveCon,
+    HaveConString,
     ConDistance,
     ConDescript,
-    HaveLaun,
+    HaveLaunString,
     LaunDistance,
     LaunDescript,
-    HaveParkLot,
+    HaveParkLotString,
     ParkLotDistance,
     ParkLotDescript,
-    HaveRestuarant,
+    HaveRestaurantString,
     RestuarantDistance,
     RestuarantDescript,
-    HaveSmoke,
+    HaveSmokeAreaString,
     SmokeDistance,
     SmokeDescript,
-    HaveFitness,
+    HaveFitnessString,
     FitnessDistance,
     FitnessDescript,
-    HavePool,
+    HavePoolString,
     PoolDistance,
     PoolDescript,
-    HaveCommon,
+    HaveCommonString,
     CommonDistance,
     CommonDescript,
-    HaveInternet,
+    HaveInternetString,
     InternetDescript,
+    HaveRestString,
+    RestDescript,
     AllowedPet,
     AllowedCook,
     DormImage,
@@ -1029,72 +1067,85 @@ const DormOwnerForm = withFormik({
       Website: Website || "",
       DormDoc: DormDoc || "",
       AllowSex: AllowSex || "any",
-      AccomType: AccomType || "",
-      HaveCon: HaveCon || false,
+      AccomType: AccomType || "dorm",
       ConDistance: ConDistance || "",
       ConDescript: ConDescript || "",
-      HaveLaun: HaveLaun || false,
+      HaveConString : HaveConString || "",
+      HaveLaunString: HaveLaunString || "",
       LaunDistance: LaunDistance || "",
       LaunDescript: LaunDescript || "",
-      HaveParkLot: HaveParkLot || false,
+      HaveParkLotString: HaveParkLotString || "",
       ParkLotDistance: ParkLotDistance || "",
       ParkLotDescript: ParkLotDescript || "",
-      HaveRestuarant: HaveRestuarant || false,
+      HaveRestaurantString: HaveRestaurantString || "",
       RestuarantDistance: RestuarantDistance || "",
       RestuarantDescript: RestuarantDescript || "",
-      HaveSmoke: HaveSmoke || false,
+      HaveSmokeAreaString: HaveSmokeAreaString || "",
       SmokeDistance: SmokeDistance || "",
       SmokeDescript: SmokeDescript || "",
-      HaveFitness: HaveFitness || false,
+      HaveFitnessString: HaveFitnessString || "",
       FitnessDistance: FitnessDistance || "",
       FitnessDescript: FitnessDescript || "",
-      HavePool: HavePool || false,
+      HavePoolString: HavePoolString || "",
       PoolDistance: PoolDistance || "",
       PoolDescript: PoolDescript || "",
-      HaveCommon: HaveCommon || false,
+      HaveCommonString: HaveCommonString || "",
       CommonDistance: CommonDistance || "",
       CommonDescript: CommonDescript || "",
-      HaveInternet: HaveInternet || false,
+      HaveInternetString: HaveInternetString|| "",
       InternetDescript: InternetDescript || "",
-      AllowedPet: AllowedPet || "",
-      AllowedCook: AllowedCook || "",
+      HaveRestString : HaveRestString || "",
+      RestDescript : RestDescript || "",
+      AllowedPet: AllowedPet || "no",
+      AllowedCook: AllowedCook || "no",
       DormImage: DormImage || "",
       acceptTerm : acceptTerm || "",
     };
   },
   validationSchema: Yup.object().shape({
     DormName: Yup.string().required("Required"),
+    DormAddress: Yup.string().required("Required"), 
+    DormLongitude: Yup.string().required("Required"),
+    DormLatitude: Yup.string().required("Required"),
+    phone : Yup.string().required("Required").matches(phoneRegExp, "Invalid phone number"),
     email: Yup.string()
-      .email("Enter a valid email")
-      .required("Email is required"),
+      .email("Enter a valid email"),
+    acceptTerm: Yup.boolean()
+      .required("Required")
+      .oneOf([true], "You must accept the terms and conditions."),
+   /* AllowSex : Yup.string().required("Required"),
+    AccomType : Yup.string().required("Required"),
+    AllowPet : Yup.string().required("Required"),
+    AllowedCook : Yup.string().required("Required"),*/
   }),
 
   handleSubmit: (values, { resetForm }) => {
-    const { DormName, DormAddress, email, DormLatitude, DormLongitude, phone, LineID, Website, DormDoc, AllowSex, AccomType, HaveCon,
+    const { DormName, DormAddress, email, DormLatitude, DormLongitude, phone, LineID, Website, DormDoc, AllowSex, AccomType,
       ConDistance,
       ConDescript,
-      HaveLaun,
+      HaveConString,
+      HaveLaunString,
       LaunDistance,
       LaunDescript,
-      HaveParkLot,
+      HaveParkLotString,
       ParkLotDistance,
       ParkLotDescript,
-      HaveRestuarant,
+      HaveRestaurantString,
       RestuarantDistance,
       RestuarantDescript,
-      HaveSmoke,
+      HaveSmokeAreaString,
       SmokeDistance,
       SmokeDescript,
-      HaveFitness,
+      HaveFitnessString,
       FitnessDistance,
       FitnessDescript,
-      HavePool,
+      HavePoolString,
       PoolDistance,
       PoolDescript,
-      HaveCommon,
+      HaveCommonString,
       CommonDistance,
       CommonDescript,
-      HaveInternet,
+      HaveInternetString,
       InternetDescript,
       AllowedPet,
       AllowedCook,
@@ -1112,31 +1163,31 @@ const DormOwnerForm = withFormik({
       DormDoc,
       AllowSex,
       AccomType,
-      HaveCon,
+      HaveConString,
       ConDistance,
       ConDescript,
-      HaveLaun,
+      HaveLaunString,
       LaunDistance,
       LaunDescript,
-      HaveParkLot,
+      HaveParkLotString,
       ParkLotDistance,
       ParkLotDescript,
-      HaveRestuarant,
+      HaveRestaurantString,
       RestuarantDistance,
       RestuarantDescript,
-      HaveSmoke,
+      HaveSmokeAreaString,
       SmokeDistance,
       SmokeDescript,
-      HaveFitness,
+      HaveFitnessString,
       FitnessDistance,
       FitnessDescript,
-      HavePool,
+      HavePoolString,
       PoolDistance,
       PoolDescript,
-      HaveCommon,
+      HaveCommonString,
       CommonDistance,
       CommonDescript,
-      HaveInternet,
+      HaveInternetString,
       InternetDescript,
       AllowedPet,
       AllowedCook,
@@ -1144,10 +1195,10 @@ const DormOwnerForm = withFormik({
       acceptTerm,
     };
     console.log(form)
-    /*setTimeout(() => {
+    setTimeout(() => {
       console.log("kuy")
       alert(JSON.stringify(form));
-    }, 1000);*/
+    }, 1000);
     resetForm();
   },
 
