@@ -9,7 +9,10 @@ const containerStyle = {
 const onLoad = (marker: any) => {
     console.log('marker: ', marker)
 }
-
+// const center = {
+//     lat: 13.845754,
+//     lng: 100.569766
+// };
 
 function Googlemap(props: any) {
     const {coordinate} = props

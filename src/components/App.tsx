@@ -17,7 +17,6 @@ import CreatePage from "./lobby/CreateLobbyPage/CreatePage";
 import Lobby from "./lobby/LobbyPage/Lobby";
 import PageNotFound from "./pagenotfound/PageNotFound";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import MyComponent from "./google/goole";
 const Theme = createMuiTheme({
     palette: {
         primary: {
