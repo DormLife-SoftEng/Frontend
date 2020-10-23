@@ -1,13 +1,17 @@
 import React from "react";
 import Googlemap from "../google/goole";
-function DormDetail() {
+
+function DormDetail(props:any) {
+
+  
   return (
     <div >
       <div
         className="overflow-auto"
         style={{ width: "700px", maxHeight: "460px" ,}}
       >
-       <Googlemap coordinate={{lat:123,lng:121}}/>
+       <br/>
+       <Googlemap coordinate={{lat:13.846234, lng:100.568526}}/>
       </div>
     </div>
   );
