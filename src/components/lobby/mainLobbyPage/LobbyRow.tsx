@@ -10,7 +10,7 @@ const LobbyRow = (props: LobbyRowProps) => {
     const history = useHistory()
     return (
         <Row noGutters={true} className="mb-2">
-            <Button variant="" size="lg" style={{backgroundColor:"white",color:"#F55E61", height:"70px",width:"700px" }}>
+            <Button variant="" size="lg" style={{backgroundColor:"white",color:"#F55E61", height:"70px",width:"700px" ,textAlign:"left"}}>
                 <a onClick={async () => {
                     const param = {
                         id: _id,
