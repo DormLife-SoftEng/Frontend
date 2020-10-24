@@ -12,8 +12,8 @@ const SearchBar = (props : SearchLobbyProps) => {
         setSearch(value)
     }
     return (
-        <div>
-        <InputGroup>
+        
+        <InputGroup >
             <FormControl
             onChange={handleChange}
             value={search}
@@ -25,7 +25,7 @@ const SearchBar = (props : SearchLobbyProps) => {
             }} >Search</button>
             </InputGroup.Append>
         </InputGroup>
-        </div>
+    
     );
 };
 export default SearchBar
