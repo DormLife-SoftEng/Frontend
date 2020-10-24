@@ -1,16 +1,23 @@
-import React from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React  from "react";
+import { useHistory } from "react-router-dom";
+import lobbyService from "../../../services/lobby.service";
+import { LobbyRowProps } from "../../type"
+import { token2 } from "../../test"
 
-interface lobbyProps {
-    dormName : string,
-    roomType : string,
-    link : string,
-}
-
-const LobbyRow = (props : lobbyProps) => {
-    const {dormName,roomType,link} = props
+const LobbyRow = (props : LobbyRowProps) => {
+    const {dormName,roomType,_id} = props
+    const history = useHistory()
     return (
-        <div>
-            <a href={`/lobby/${link}`}><p>{dormName}, {roomType}</p></a>
+        <div style={{width : "300px" , height : "50px" , border:"10px solid #555"}}>
+            <a onClick={async ()=> {
+                const param = {
+                    id : _id,
+                    token : token2 
+                }
+                await lobbyService.joinLobby(param)
+                history.push(`/lobby/${_id}`)
+            }}><p>{dormName}, {roomType}</p></a>
         </div>
     )
 }

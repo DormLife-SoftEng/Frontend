@@ -1,8 +1,5 @@
 import React  from "react";
-
-interface CreateLobbyProps {
-    handleRouting : (s : string) => void
-}
+import {CreateLobbyProps }  from "../../type"
 
 const CreateLobby =  (props : CreateLobbyProps) => {
     const {handleRouting} = props

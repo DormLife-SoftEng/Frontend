@@ -1,116 +1,110 @@
 import React, { useEffect, useState } from "react";
 import HomeButton from "./HomeButton";
 import { useHistory ,useParams } from "react-router-dom";
+import CloseLobby from "./CloseLobby";
+import DeleteLobby from "./DeleteLobby";
+import LeaveLobby from "./LeaveLobby";
+import Ready from "./Ready"
+import ImageList from "./ImageList";
+import ChatRoom from "./ChatRoom";
+import { Lobby } from "../../type";
+import lobbyService from "../../../services/lobby.service";
+import {token1 , token2} from "../../test"
 
-interface user {
-    userID : string,
-    name : {
-        firstName : string,
-        lastName : string
-    }
-}
 
-interface LobbyInfo {
-    lobbyID : string,
-    owner : user,
-    member : user[],
-    maxMember : number,
-    expireOn : string,
-    dormName : string,
-    roomType : string
-}
-
-const Lobby = () => {
+const LobbyPage = () => {
     const history = useHistory();
-    const mockup : LobbyInfo = {
-        lobbyID : "1",
+    const initialstate : Lobby = {
         owner : {
-            userID : "1",
+            userID : "",
             name : {
-                firstName : "Hee",
-                lastName : "Kuy"
-            }
+                firstName : "",
+                lastName : ""
+            },
+            profilepic : 0,
+            ready : false
         },
-        member : [
-            {
-            userID : "0",
-            name : {
-                firstName : "Hee",
-                lastName : "Kuy"
-            }
-            },
-            {
-                userID : "1",
-                name : {
-                    firstName : "Kuy",
-                    lastName : "KuyKuy"
-                }
-            },
-            {
-                userID : "2",
-                name : {
-                    firstName : "KuyKuy",
-                    lastName : "KuyKuyKuy"
-                }
-            }
-        ],
-        expireOn : new Date().toISOString(),
-        dormName : "KuyKuy",
-        maxMember : 4,
-        roomType : "Normal"
+        member : [],
+        dormName : "",
+        maxMember : 0,
+        roomType : "",
+        chat : []
     }
-    const [lobbyInfo,setLobbyInfo] =  useState<LobbyInfo>()
-    const [name,setName] = useState<string>("")
-    const [total,setTotal] = useState<number>(0)
-    const {lobbyID} : {lobbyID:string} = useParams();
 
+    const [lobbyInfo,setLobbyInfo] =  useState<Lobby>(initialstate)
+    const {lobbyID,userID} : {lobbyID:string,userID:string} = useParams(); 
+    var token = {
+        userID : "",
+        name : {
+            firstName : "",
+            lastName : ""
+        },
+        profilepic : 0
+    }
+    if (userID === "1") {
+        token = token1
+    } else {
+        token = token2     
+    }
     const handleGoHome = () => {
         history.push("/")
     }
-    
-    const getNameAndTotalUser = () => {
-
-        var name = ""
-        var total = 0
-        if(lobbyInfo !== undefined) {
-            lobbyInfo.member.forEach((member) => {
-                name = name  + member.name.firstName + " , "
-                total += 1;
-            })
-            name = name.slice(0,name.length - 2)
-        }
-        setName(name)
-        setTotal(total)
-
+    const handleReady = async () => {
+        await setLobbyReadyInfo()
     }
+    const getLobbyInfo = async () => {
+        const lobby = await lobbyService.getSpecificLobby(lobbyID)
+        console.log(lobby)
+        setLobbyInfo(lobby)
+    }
+    const setLobbyReadyInfo = async () => {
+        const lobby = await lobbyService.setReady(lobbyID,token.userID)
+        setLobbyInfo(lobby)
+    }
+    const handleGoChatPage = () => {
+        history.push(`/lobby/${lobbyID}/chat/${token.userID}`)
+    }
+    const handleKick = async (userID : string) => {
+        await lobbyService.kickMember(lobbyID,userID)
+    }
+    const handleLeave = async () => {
+        await lobbyService.leaveLobby(lobbyID,userID)
+        history.push("/")
+    }
+    const handleDelete = async () => {
+        await lobbyService.deleteLobby(lobbyID)
+    }
+    const handleCloseLobby = async () => {
+        await lobbyService.closeLobby(lobbyID)
+    }
+
     useEffect(() => {
-
-        console.log(mockup)
-        setLobbyInfo(mockup)
-        //getRequest with lobbyID
-        //result form get request axios
-        //setLobbyInfo(result)
-
+        getLobbyInfo()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
-    useEffect(()=> {
-        getNameAndTotalUser();
-    },[lobbyInfo])
+
     return (
         <>
-
             <HomeButton handleGoHome={handleGoHome} />
-            <h1>{lobbyInfo?.dormName} {lobbyInfo?.roomType}</h1>
-            <p>Lobby ID {lobbyInfo?.lobbyID}</p>
-            <p>Expire on {lobbyInfo?.expireOn}</p>
-            <img style={{width:"300px",height:"300px"}} src="https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg" />
-            <img style={{width:"300px",height:"300px"}} src="https://i.pinimg.com/originals/7a/f6/0b/7af60b2b6fa202db54f0aa275fee6e17.png" />
-            <br />
-            <img style={{width:"300px",height:"300px"}} src="https://static.pokemonpets.com/images/monsters-images-800-800/7-Squirtle.png" />
-            <img style={{width:"300px",height:"300px"}} src="https://vignette.wikia.nocookie.net/pokemon-talk6406/images/4/43/Bulbasaur.png/revision/latest?cb=20170506185349" />
-            <br />
+            <h1>{lobbyInfo.dormName} {lobbyInfo.roomType}</h1>
+            <p>Lobby ID {lobbyID}</p>
 
+            {(lobbyInfo.owner.userID === token.userID) ? 
+            <>
+                <ImageList handleKick={handleKick} isOwner={true} maxMember={lobbyInfo.maxMember} member={lobbyInfo.member}  />
+                <CloseLobby disable={lobbyInfo.member.some(mem => mem.ready === false)} handleCloseLobby={handleCloseLobby} />
+                <DeleteLobby handleDelete={handleDelete} />
+            </> 
+            : 
+            <>
+                <ImageList handleKick={handleKick} isOwner={false} maxMember={lobbyInfo.maxMember} member={lobbyInfo.member}  />
+                {lobbyInfo.member.find((mem => mem.userID === token.userID))?.ready ? <Ready text="Unready" handleReady={handleReady} /> : <Ready text="Ready" handleReady={handleReady} /> }
+                <LeaveLobby handleLeave={handleLeave} />
+            </> 
+            }
+            <ChatRoom  handleGoChatPage={handleGoChatPage}/>
         </>
     )
 }
 
-export default Lobby;
+export default LobbyPage;

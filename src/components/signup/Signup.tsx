@@ -21,7 +21,6 @@ function Signup() {
                 <Col>
                 <h1 style={{fontSize:"4rem",fontWeight:"bold"}}>Dorm Finder</h1>
                 <Button className="mt-5 btn-lg" onClick={()=> {
-                    console.log(history)
                     history.push("/signup/dormfinder")
                 }} variant="outline-light">Signup</Button>
                 </Col>

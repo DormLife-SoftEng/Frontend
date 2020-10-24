@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { createStyles } from "@material-ui/core";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -12,6 +11,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,8 +28,9 @@ const useStyles = makeStyles((theme: Theme) =>
     textPopup: { color: "#F55E61" },
   })
 );
-export default function Error404Popup() {
+function Error404Popup() {
   const classes = useStyles();
+  const history = useHistory();
   const [open, setOpen] = useState<boolean>(true);
   return (
     <Modal
@@ -61,9 +62,9 @@ export default function Error404Popup() {
                   <IconButton
                     aria-label="show more"
                     style={{ padding: 0, outline: "none", color: "#F55E61" }}
-                    onClick={() => setOpen(false)}
+                    onClick={() => history.push("/")}
                   >
-                    <CloseIcon style={{ color: "#F55E61" }} />
+                    <CloseIcon  style={{ color: "#F55E61" }} />
                   </IconButton>
                 </CardActions>
               </Grid>
@@ -79,3 +80,5 @@ export default function Error404Popup() {
     </Modal>
   );
 }
+
+export default Error404Popup;

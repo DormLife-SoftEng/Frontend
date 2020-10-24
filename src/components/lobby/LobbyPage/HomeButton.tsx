@@ -1,10 +1,7 @@
 import React from "react";
+import { HomeButtonProps } from "../../type";
 
-interface Homeprops {
-    handleGoHome: () => void;
-}
-
-const HomeButton = (props: Homeprops) => {
+const HomeButton = (props: HomeButtonProps) => {
     const { handleGoHome } = props;
     return (
         <div>
