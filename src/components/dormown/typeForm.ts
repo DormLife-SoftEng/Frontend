@@ -48,3 +48,8 @@ export interface termService {
     show : boolean, 
     handleClose : ()=>void
 }
+
+export interface propsAddRoomForm{
+    RT_name : string,
+    RT_capacity: number,
+}
