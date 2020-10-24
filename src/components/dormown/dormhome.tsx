@@ -10,9 +10,15 @@ import DormDetail from './DormDetail';
 import SearchMDorm from './SearchMDorm';
 function DormHome() {
     const history = useHistory();
+    const [formVisible,setFormVisible]=useState<boolean>(false);
     useEffect(() => {
         document.body.style.backgroundColor = "#F55E61"
     }, [])
+
+    const toggleFormVisible=()=>{
+        
+        setFormVisible(!formVisible);
+    };
     const [searchname,SetSearch]=useState<string>("")
     const {id} : {id:string} = useParams()
     return (
@@ -63,6 +69,7 @@ function DormHome() {
                     </Col>
                     <Col xs={1} >
                     </Col>
+                    { formVisible &&
                     <Col className="bg-white" xs={6}>
                         <Row noGutters={true} style={{ height: "550px" }}>
                             <DormDetail />
@@ -82,6 +89,7 @@ function DormHome() {
                             </Col>
                         </Row>
                     </Col>
+                    }
                 </Row>
             </div>
         </div >
