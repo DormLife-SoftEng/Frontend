@@ -22,8 +22,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Label } from "@material-ui/icons";
 import Dropzonef from "./Dropzonef"
 import Termservice from "./Termservice";
+import AddRoomPopUp from "./AddRoomPopUp"
 
-const galleryImageList = [""];
 const styles = createStyles({
   black: {
     color: "black",
@@ -58,8 +58,8 @@ function DormOwner(props: any) {
     document.body.style.backgroundColor = "white";
   }, []);
   const history = useHistory();
-  const [DormDoc, setFiles] = useState<any[]>([])
-  const [DormImage, setFiles2] = useState<any[]>([])
+  const [DormDoc, setFiles] = useState<any[]>([]);
+  const [DormImage, setFiles2] = useState<any[]>([]);
   const [show, setShow] = useState<boolean>(false);
   const [HaveConString, setHaveCon] = useState<string>("");
   const [HaveLaunString, setHaveLaun] = useState<string>("");
@@ -72,6 +72,8 @@ function DormOwner(props: any) {
   const [HaveInternetString, setHaveInternet] = useState<string>("");
   const [HaveRestString, setHaveRest] = useState<string>("");
   const [show2, setShow2] = useState<boolean>(false);
+  const [RoomList , setRoomList] = useState<any[]>([]);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
   const handleClose = () => {
     setShow2(false);
   };
@@ -926,6 +928,29 @@ function DormOwner(props: any) {
           </Col>
           <Col></Col>
         </Row>
+        <Row className={classes.row} noGutters={true}>
+          <Col>
+          <div
+              style={{
+                textAlign: "left",
+                display: "inline-block",
+                width: "350px",
+              }}
+            >
+              <Button
+                className={classes.button}
+                variant="danger"
+                onClick={()=>{
+                  setShowPopup(true);
+                }}
+              >
+                Add Room Type
+              </Button>
+            </div>
+          </Col>
+          <Col></Col>
+        </Row>
+        <AddRoomPopUp open={showPopup} setOpen={setShowPopup} RoomList={RoomList} setRoomList = {setRoomList}/>
         <Row className={classes.row} noGutters={true}>
           <Col>
           <div
