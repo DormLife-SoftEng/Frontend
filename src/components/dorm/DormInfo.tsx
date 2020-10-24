@@ -6,16 +6,16 @@ function DormInfo(props: any) {
   const { dorms } = props;
   return (
     <div>
-      <p><strong>Type:</strong> Dorm</p>
-      <p><strong>Allowed Sex:</strong> Dorm</p>
-      <p><strong>Address:</strong> Dorm</p>
-      <p><strong>Phone Number:</strong> Dorm</p>
-      <p><strong>Website:</strong> Dorm</p>
-      <p><strong>Map:</strong> Dorm</p>
-      <p><strong>Facilities:</strong> Dorm</p>
-      <p><strong>Allowed Pet:</strong> Dorm</p>
-      <p><strong>Allowed Cooking:</strong> Dorm</p>
-      <p><strong>Room Type:</strong> Dorm</p>
+      <p>Type: Dorm</p>
+      <p>Allowed Sex: Dorm</p>
+      <p>Address: Dorm</p>
+      <p>Phone Number: Dorm</p>
+      <p>Website: Dorm</p>
+      <p>Map: Dorm</p>
+      <p>Facilities: Dorm</p>
+      <p>Allowed Pet: Dorm</p>
+      <p>Allowed Cooking: Dorm</p>
+      <p>Room Type: Dorm</p>
     </div>
   );
 }
