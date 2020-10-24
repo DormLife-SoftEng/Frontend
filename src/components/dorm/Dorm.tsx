@@ -3,6 +3,7 @@
 import DormCarousel from "./DormCarousel"
 import DormInfo from "./DormInfo"
 import DormNav from "./DormNav"
+import FindRoomateBTN from "./FindRoomateBTN"
 import {Row, Col} from "react-bootstrap";
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom";
@@ -33,7 +34,8 @@ function Dorm() {
             </Col>
             <Col>
                 <DormInfo dorms={dorm}/>
-                BTN
+                <h5>Find Roomate</h5>
+                <FindRoomateBTN dorms={dorm}/>
             </Col>
         </Row>
     </div>
