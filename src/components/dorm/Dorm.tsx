@@ -2,12 +2,13 @@
 
 import DormCarousel from "./DormCarousel"
 import DormInfo from "./DormInfo"
-import {Row, Col, Nav, Navbar, Button, Badge} from "react-bootstrap";
+import DormNav from "./DormNav"
+import {Row, Col} from "react-bootstrap";
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom";
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {useParams } from "react-router-dom"
 import { propsDorm } from "../home/type"
+import ReviewList from "./ReviewList";
 
 function Dorm() {
     const {id} : {id:string} = useParams()
@@ -19,25 +20,16 @@ function Dorm() {
     console.log(id)
     const history = useHistory();
 
-    const test : propsDorm[] = [{id:"0",src:"https://cf.bstatic.com/images/hotel/max1024x768/221/221905924.jpg"},{id:"1",src:"https://udo.oop.cmu.ac.th/network%20dorm/pic_dorm/pnd.jpg"}]
+    const test : propsDorm[] = [{id:"0",src:"https://cdn.royalgrandpalace.th/stocks/gallery/o0x0/tn/d0/eykotnd0o0/1.jpg"},{id:"1",src:"https://cdn.royalgrandpalace.th/stocks/gallery/o0x0/uf/pi/eykoufpimg/2.jpg"}]
     const [dorm,setDorm] = useState<propsDorm[]>(test)
 
     return (
     <div>
-        <Navbar bg="light">
-            <Navbar.Brand href="#">
-                <Button onClick={()=> history.goBack()} variant="" ><ArrowBackIosIcon fontSize="large" /></Button>
-            </Navbar.Brand>
-            <Navbar.Collapse className="justify-content-center">
-                <Navbar.Text>
-                    FUCKING DORM
-                </Navbar.Text>
-            </Navbar.Collapse>
-        </Navbar>
+        <DormNav title="ROYAL GRAND PALACE (พระบรมหาราชวัง) (วังหลวง)"/>
         <Row className="pt-4">
             <Col>
                 <DormCarousel dorms={dorm}/>
-                REV
+                <ReviewList dorms={dorm}/>
             </Col>
             <Col>
                 <DormInfo dorms={dorm}/>
