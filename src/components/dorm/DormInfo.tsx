@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Googlemap from "../google/google";
+import RoomModal from "./RoomModal";
 import {dormRoom, dormUtil} from './type';
 
 function DormInfo(props: any) {
@@ -22,8 +23,14 @@ function DormInfo(props: any) {
       </p>
       <p>Facilities: {
         dorm.utility.map((util: dormUtil, index: number)=>{
-          if(util.type == 'Cooking')allowedCooking = true;
-          if(util.type == 'Pet')allowedPet = true;
+          if(util.type == 'Cooking'){
+            allowedCooking = true;
+            return;
+          }
+          if(util.type == 'Pet'){
+            allowedPet = true;
+            return;
+          }
           return (
             <span>
               {index != 0 && (<span>{', '}</span>)}
@@ -47,10 +54,10 @@ function DormInfo(props: any) {
       <p>Room Type: {
         dorm.room.map((rt: dormRoom, index: number)=>{
           return (
-            <a href={'#'}>
-              {index != 0 && (<span>{', '}</span>)}
-              {rt.name}
-            </a>
+            <>
+            {index != 0 && (<span>{', '}</span>)}
+            <RoomModal room={rt}/>
+            </>
           )
         })
       }</p>

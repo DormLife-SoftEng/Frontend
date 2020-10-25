@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React , { useEffect } from "react";
+import React from "react";
 
 import {Image, Row, Col} from "react-bootstrap";
 
@@ -8,20 +8,16 @@ import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 
 function AReview(props: any) {
   const { review } = props;
-  useEffect(()=> {
-    console.log(`Fetch from database with ${review.user}`)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
   return (
     <div className="p-3">
         
       <hr/>
       <Row>
         <Col xs={1}>
-        <Image style={{ height: "30px", objectFit: "cover"}} src="https://cdn-images-1.medium.com/fit/c/200/200/0*rXb4oZGJO__0Eijv." rounded />
+        <Image style={{ height: "30px", objectFit: "cover"}} src={review.user.profilePic} rounded />
         </Col>
         <Col>
-        <h6 style={{marginBottom:'-5px'}}>P***** L*****</h6>
+        <h6 style={{marginBottom:'-5px'}}>{review.user.name.firstName} {review.user.name.lastName}</h6>
         <p style={{color:'gold'}}>
           {review.star >= 1 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
           {review.star >= 2 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}

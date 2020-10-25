@@ -4,19 +4,34 @@ import AReview from "./AReview";
 import StarIcon from '@material-ui/icons/Star';
 import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 import { propsReview } from "./type"
+import dorminfoService from "../../services/dorminfo.service";
 
 function ReviewList(props: any) {
-  const { dorm } = props;
+  const { dorm, avgStar } = props;
+  const getDormInfo = async () => {
+    const reviews = await dorminfoService.getDormReviews(dorm)
+    console.log(reviews)
+    setReviews(reviews)
+  }
   useEffect(()=> {
-    console.log(`Fetch from database with ${dorm._id}`)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      console.log(`Fetch DormReview from database with ${dorm}`)
+      getDormInfo()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
-  const intStar:number = Math.round(dorm.avgStar);
+
+  let intStar:number = Math.round(avgStar);
 
   const test : propsReview[] = [{
       "dorm": "RRRR",
-      "user": "PPPP",
-      "star": 5,
+      "user": {
+        "userId": "AAA",
+        "name": {
+          "firstName": "Rama",
+          "lastName": "Mara"
+        },
+        "profilePic": "https://cdn-images-1.medium.com/fit/c/200/200/0*rXb4oZGJO__0Eijv."
+      },
+      "star": 4,
       "comment": "มมม มะ.. ไม่ได้ดั่งใจเลย ต้องกระชับ",
       "image": [
           "https://cdn.royalgrandpalace.th/stocks/gallery/o0x0/tn/d0/eykotnd0o0/1.jpg",
@@ -29,7 +44,7 @@ function ReviewList(props: any) {
       "createdOn": new Date()
     }
   ]
-  const [reviews,setDorm] = useState<propsReview[]>(test)
+  const [reviews,setReviews] = useState<propsReview[]>(test)
 
   return (
     <div className="p-3 overflow-auto" style={{maxHeight: "300px"}}>

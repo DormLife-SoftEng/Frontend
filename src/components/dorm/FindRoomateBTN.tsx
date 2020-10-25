@@ -10,7 +10,7 @@ function FindRoomateBTN(props: any) {
     const history = useHistory();
 
     return (
-    <div className="text-center">
+    <div className="text-center mt-5">
         <>
         <style type="text/css">
             {`
@@ -28,9 +28,11 @@ function FindRoomateBTN(props: any) {
             `}
         </style>
         </>
-        <Button onClick={() => history.push("/lobby")} className="mt-5 btn-xxl" variant="pink">
-        Find Roommate
-        </Button>
+        <a className="btn-xxl btn-pink" onClick={() => {
+          history.push("/lobby");
+        }}>
+        CLICK HERE
+        </a>
     </div>
   );
 }
