@@ -1,10 +1,10 @@
 import React from 'react'
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { Marker } from '@react-google-maps/api';
-const containerStyle = {
-    width: '400px',
-    height: '400px'
-};
+// const containerStyle = {
+//     width: '400px',
+//     height: '400px'
+// };
 
 const onLoad = (marker: any) => {
     console.log('marker: ', marker)
@@ -15,7 +15,15 @@ const center = {
 };
 
 function Googlemap(props: any) {
-    const {coordinate} = props
+    let {coordinate, containerStyle, zoom} = props
+    if(containerStyle == null){
+        containerStyle = {
+            width: '400px',
+            height: '400px'
+        };
+    }
+    if(zoom == null)zoom = 17;
+    console.log(props)
     return (
         <LoadScript
             googleMapsApiKey="AIzaSyD6Wut16Gy_rkfQPL7q4CCacKzkCijIeXs"
@@ -23,7 +31,7 @@ function Googlemap(props: any) {
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={coordinate}
-                zoom={17}
+                zoom={zoom}
             >
             { /* Child components, such as markers, info windows, etc. */}
             <Marker
