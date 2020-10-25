@@ -5,7 +5,6 @@ import {Navbar, Button} from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
-
 function FindRoomateBTN(props: any) {
     const { title } = props;
     const history = useHistory();

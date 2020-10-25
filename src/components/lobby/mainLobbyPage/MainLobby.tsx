@@ -1,38 +1,81 @@
-import React , {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import BackButton from "./BackButton";
 import CreateLobby from "./CreateLobby";
 import JoinCode from "./JoinCode";
 import LobbyList from "./LobbyList";
 import SearchBar from "./SearchBar"
-import { Lobby } from "./type"
+import { Lobby } from "../../type"
+import lobbyService from "../../../services/lobby.service"
+import { Nav, Navbar, Row, Col } from "react-bootstrap";
 function MainLobby() {
   const history = useHistory();
-  const [lobbylist,setLobbyList] = useState<Lobby[]>([])
-  const mockup : Lobby[] = [{dormName:"Hee" ,roomType:"Kuy" , link : "lobbyID1"},{dormName:"Kuy" ,roomType:"Hee" , link : "lobbyID2"}]
-  const handleRouting = (s : string) => {
+  const [lobbylist, setLobbyList] = useState<Lobby[]>([])
+
+  const handleRouting = (s: string) => {
     history.push(s);
   }
   const handleGoBack = () => {
     history.goBack();
   }
-  const handleSubmit = (s : string) => {
+  const handleSubmit = (s: string) => {
     // search by parameter & set new State 
     alert(s)
     setLobbyList([])
   }
-  useEffect(()=> {
-    // fetch start lobbylist
-    setLobbyList(mockup)
-  },[])
+
+  const getAllLobbys = async () => {
+    const allLobbys = await lobbyService.getLobbys();
+    setLobbyList(allLobbys)
+  }
+
+  useEffect(() => {
+    getAllLobbys()
+    document.body.style.backgroundColor = "#F55E61"
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <div>
-      <BackButton handleGoBack={handleGoBack} />
-      <h1>Main Lobby</h1>
+    <div style={{textAlign:"center"}}>
+      <Navbar style={{ padding: "1% 4%" }} bg="">
+        <Nav className="text-center">
+          <BackButton handleGoBack={handleGoBack} />
+          <h1 style={{
+            position: "absolute",
+            width: "100%",
+            textAlign: "center",
+            overflow: "visible",
+            height: "0",
+            left: "0%",
+            color: "white",
+            fontStyle: "normal",
+            fontWeight: 600,
+            fontSize: "45px",
+          }}>Main Lobby</h1>
+        </Nav>
+      </Navbar>
+      <Row noGutters={true} style={{padding:"1%"}}>
+      <Col xs="4"></Col>
+      <Col xs="4">
       <SearchBar handleSubmit={handleSubmit} />
-      <LobbyList lobbylist={lobbylist}/>
-      <JoinCode handleRouting={handleRouting} />
-      <CreateLobby handleRouting={handleRouting} />
+      </Col>
+      <Col xs="4"></Col>
+      </Row>
+      <Row noGutters={true}>
+      <Col xs="2"></Col>
+      <Col xs="8">
+      <LobbyList lobbylist={lobbylist} />
+      </Col>
+      <Col xs="2"></Col>
+      </Row>
+      <Row style={{paddingTop:"2%"}} noGutters={true} xs="12">
+        <Col>
+        <JoinCode handleRouting={handleRouting} />
+        </Col>
+        <Col>
+        <CreateLobby handleRouting={handleRouting} />
+        </Col>
+      </Row>
     </div>
   );
 }

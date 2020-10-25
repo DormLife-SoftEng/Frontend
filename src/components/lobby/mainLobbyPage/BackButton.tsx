@@ -1,19 +1,17 @@
 import React from "react";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-
-interface BackProps {
-    handleGoBack : () => void
-}
-const BackButton = (props : BackProps) => {
-    const {handleGoBack} = props
+import { backButtonProps } from "../../type"
+import { Button} from "react-bootstrap";
+const BackButton = (props: backButtonProps) => {
+    const { handleGoBack } = props
     return (
-        <>
-        <button onClick={()=> {
+
+        <Button variant="" onClick={() => {
             handleGoBack();
         }}>
-            <ArrowBackIosIcon htmlColor="" fontSize="large" />
-        </button>
-        </>
+            <ArrowBackIosIcon htmlColor="white" fontSize="large" />
+        </Button>
+
     );
 };
 

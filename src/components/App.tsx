@@ -1,19 +1,31 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import Signup from "./signup/Signup";
 import "bootstrap/dist/css/bootstrap.min.css";
-import DormFinder from "./signup/DormFinder";
+import React, { useState } from "react";
+import { Route, Switch } from "react-router-dom"
 import Home from "./home/Home";
-import DormOwner from "./signup/DormOwner";
-import Signin from "./signin/Signin";
-import Dorm from "./dorm/Dorm";
 import Forgetpassword from "./signin/Forgetpassword";
 import Repassword from "./signin/Repassword";
+import DormOwner from "./signup/DormOwner";
+import DormFinder from "./signup/DormFinder";
+import Dorm from "./dorm/Dorm"
+import DormHome from  "./dormown/DormHome"
+import ContactSupport from "./dormown/ContactSupport";
+import AddDromFrom from "./dormown/adddormform";
+import Lobby from "./lobby/LobbyPage/Lobby";
 import MainLobby from "./lobby/mainLobbyPage/MainLobby";
 import CreatePage from "./lobby/CreateLobbyPage/CreatePage";
-import Lobby from "./lobby/LobbyPage/Lobby";
+import Chatpage from "./lobby/Chatpage/Chatpage";
 import PageNotFound from "./pagenotfound/PageNotFound";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { AuthContext } from "../contexts/auth.context";
+import authService from "../services/auth.service";
+import AuthRoute from "./routes/AuthRoute";
+import Signin from "./signin/Signin";
+import Signup from "./signup/Signup";
+import { tokenDto } from "./type";
+import DormOwnerRoute from "./routes/DormOwnerRoute";
+import DormFinderRoute from "./routes/DormFinderRoute";
+import Review from "./review/Review"
+
 const Theme = createMuiTheme({
   palette: {
     primary: {
@@ -28,32 +40,36 @@ const Theme = createMuiTheme({
   },
 });
 function App() {
+
+  const token = authService.getToken();
+  const [authToken , setAuthToken] = useState<tokenDto | null>(token)
+
   return (
-    <MuiThemeProvider theme={Theme}>
-      <div>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/signin" component={Signin} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/signup/dormfinder" component={DormFinder} />
-          <Route exact path="/signup/dormowner" component={DormOwner} />
-          <Route exact path="/dorm/:id" component={Dorm} />
-          <Route exact path="/signin/forgetpassword" component={Forgetpassword} />
-          <Route exact path="/signin/repassword/:id" component={Repassword} />
-          <Route exact path="/lobby" component={MainLobby} />
-          <Route exact path="/lobby/create" component={CreatePage} />
-          <Route exact path="/lobby/:lobbyID" component={Lobby} />
-          <Route
-            component={() => (
-              <>
-                <Home />
-                <PageNotFound />
-              </>
-            )}
-          />
-        </Switch>
-      </div>
-    </MuiThemeProvider>
-  );
+    <AuthContext.Provider value={{authToken ,setAuthToken}}>
+      <MuiThemeProvider theme={Theme}>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/dorm/:dormID" component={Dorm} />
+        <AuthRoute path="/signup/dormowner" Component={DormOwner} />
+        <AuthRoute path="/signup/dormfinder" Component={DormFinder} />
+        <AuthRoute path="/signup" Component={Signup} />
+        <AuthRoute  path="/signin/repassword" Component={Repassword} />
+        <AuthRoute  path="/signin/forgetpassword" Component={Forgetpassword} />
+        <AuthRoute  path="/signin" Component={Signin} />
+        <DormOwnerRoute path="/dormowner/adddorm" Component={AddDromFrom}  />
+        <DormOwnerRoute path="/dormowner/contactSupport" Component={ContactSupport} />
+        <DormOwnerRoute path="/dormowner/" Component={DormHome} />
+        <DormFinderRoute path="/lobby/create" Component={CreatePage} />
+        <DormFinderRoute path="/lobby/:lobbyID/chat" Component={Chatpage} />
+        <DormFinderRoute path="/lobby/:lobbyID" Component={Lobby} />    
+        <DormFinderRoute path="/lobby" Component={MainLobby} />
+        <DormFinderRoute path="/review" Component={Review} />       
+        <Route component={PageNotFound} />
+      </Switch>
+
+      </MuiThemeProvider>
+    </AuthContext.Provider>
+    
+    )
 }
 export default App;

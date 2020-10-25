@@ -42,9 +42,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 export default function EmailPopup(props: EmailPopupProps) {
-  const handleClickOpen = () => {
-    props.setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   props.setOpen(true);
+  // };
   const classes = useStyles();
   const handleClose = () => {
     props.setOpen(false);
