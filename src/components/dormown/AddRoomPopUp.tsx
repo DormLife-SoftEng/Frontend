@@ -26,42 +26,49 @@ import { FormikProps, withFormik } from "formik";
 import { phoneRegExp } from "./constant";
 import { propsAddRoomForm } from "./typeForm";
 import * as Yup from "yup";
+import Dropzonef from "./Dropzonef";
 interface AddRoomPopupProps {
   open: boolean;
   setOpen: any;
-  RoomList: any[];
+  RoomList: any;
   setRoomList: any;
 }
 
-interface Roomtype{
-    name : string;
-    setName: any;
-    capacity: number;
+interface Roomtype {
+  name: string;
+  setName: any;
+  capacity: number;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     button: {
-        marginRight: "10px",
-      },
+      marginRight: "10px",
+    },
     textField: {
-        width: "350px",
-      },
+      width: "400px",
+    },
+    SmalltextField: {
+      width: "250px",
+    },
+    DestextField: {
+      width: "800px",
+    },
     formLabel: {
-        textAlign: "left",
-        fontSize: "1.5rem",
-        color: "black",
-      },
+      textAlign: "left",
+      fontSize: "1.5rem",
+      color: "black",
+    },
     row: {
-        marginBottom: "3%",
-      },
+      marginBottom: "3%",
+    },
     modal: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
     },
     cardPopup: {
-      minWidth: 500,
+      minWidth: 600,
       backgroundColor: "#F55E61",
     },
     expandIcon: { padding: 0 },
@@ -78,9 +85,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function AddRoomPopup(props: AddRoomPopupProps, RT: Roomtype) {
-    const [roomname,setroomname] = useState<string>("");
-    const handleClickOpen = () => {
+export default function AddRoomPopup(props: AddRoomPopupProps) {
+  const [roomname, setroomname] = useState<string>("");
+  //const { name, capacity, bathroom, kitchen, bedroom, pricing } = props.RoomList
+  const handleClickOpen = () => {
     props.setOpen(true);
   };
   const classes = useStyles();
@@ -109,11 +117,11 @@ export default function AddRoomPopup(props: AddRoomPopupProps, RT: Roomtype) {
             style={{ outline: "none", borderRadius: "15px" }}
           >
             <CardContent style={{ outline: "none", paddingBottom: 0, marginBottom: "24px" }}>
-                <Row className={classes.row} noGutters={true}>
-                    <Col></Col>
-                    <Col>
-                        <div style={{
-                    marginLeft: "6cm",
+              <Row className={classes.row} noGutters={true}>
+                <Col></Col>
+                <Col>
+                  <div style={{
+                    marginLeft: "95%",
                   }}>
                     <IconButton
                       aria-label="show more"
@@ -122,33 +130,231 @@ export default function AddRoomPopup(props: AddRoomPopupProps, RT: Roomtype) {
                     >
                       <CloseIcon style={{ color: "#FFFFFF" }} />
                     </IconButton>
-                        </div>
-                    </Col>
-                    </Row>
-                <Row className={classes.row} noGutters={true}>
-                    <Col>
-                        <TextField 
-                        className={classes.textField} 
-                        label="Room Type Name" 
-                        onChange={(event) => {
-                            //console.log(event.target.value)
-                            const roomname = event.target.value
-                            setroomname(roomname)
-                        }}
-                        />
-                    </Col>
-                    <Col>
-                    </Col>
-                </Row>
-                <Row className={classes.row} noGutters={true}>
-                    <Button 
-                        className={classes.button}
-                        onClick ={()=>{
-                            console.log(roomname)
-                        }}>
-                        Submit
+                  </div>
+                </Col>
+              </Row>
+              <Row className={classes.row} noGutters={true}>
+                <Col>
+                  <FormControl component="fieldset">
+                    <FormLabel
+                      className={classes.formLabel}
+                    >
+                      Room Type Name*
+              </FormLabel>
+                    <TextField
+                      id="RoomTypeName"
+                      placeholder="Enter room type name"
+                      value={props.RoomList.Name}
+                      className={classes.textField}
+                      onChange={(event) => {
+                        props.RoomList.Name = event.target.value
+                      }}
+                      margin="dense"
+                      variant="outlined"
+                    />
+                  </FormControl>
+                </Col>
+                <Col>
+                  <FormControl component="fieldset">
+                    <FormLabel
+                      className={classes.formLabel}
+                    >
+                      Room Capacity*
+              </FormLabel>
+                    <TextField
+                      id="RoomCapacity"
+                      placeholder="Enter room capacity"
+                      value={props.RoomList.capacity}
+                      className={classes.textField}
+                      onChange={(event) => {
+                        props.RoomList.capacity = event.target.value
+                      }}
+                      margin="dense"
+                      variant="outlined"
+                    />
+                  </FormControl>
+                </Col>
+              </Row>
+              <Row className={classes.row} noGutters={true}>
+                <Col>
+                  <FormControl component="fieldset">
+                    <FormLabel
+                      className={classes.formLabel}
+                    >
+                      No. of bathroom*
+              </FormLabel>
+                    <TextField
+                      id="bathroom"
+                      placeholder="Enter number of bathroom"
+                      value={props.RoomList.bathroom}
+                      className={classes.SmalltextField}
+                      onChange={(event) => {
+                        props.RoomList.bathroom = event.target.value
+                      }}
+                      margin="dense"
+                      variant="outlined"
+                    />
+                  </FormControl>
+                </Col>
+                <Col>
+                  <FormControl component="fieldset">
+                    <FormLabel
+                      className={classes.formLabel}
+                    >
+                      No. of kitchen*
+              </FormLabel>
+                    <TextField
+                      id="kitchen"
+                      placeholder="Enter number of kitchen"
+                      value={props.RoomList.kitchen}
+                      className={classes.SmalltextField}
+                      onChange={(event) => {
+                        props.RoomList.kitchen = event.target.value
+                      }}
+                      margin="dense"
+                      variant="outlined"
+                    />
+                  </FormControl>
+                </Col>
+                <Col>
+                  <FormControl component="fieldset">
+                    <FormLabel
+                      className={classes.formLabel}
+                    >
+                      No. of bedroom*
+              </FormLabel>
+                    <TextField
+                      id="bedroom"
+                      placeholder="Enter number of bedroom"
+                      value={props.RoomList.bedroom}
+                      className={classes.SmalltextField}
+                      onChange={(event) => {
+                        props.RoomList.bedroom = event.target.value
+                      }}
+                      margin="dense"
+                      variant="outlined"
+                    />
+                  </FormControl>
+                </Col>
+                <Col>
+                  <FormControl component="fieldset">
+                    <FormLabel
+                      className={classes.formLabel}
+                    >
+                      Pricing (1 month)*
+              </FormLabel>
+                    <TextField
+                      id="pricing"
+                      placeholder="Enter 1 month pricing"
+                      value={props.RoomList.pricing}
+                      className={classes.SmalltextField}
+                      onChange={(event) => {
+                        props.RoomList.pricing = event.target.value
+                      }}
+                      margin="dense"
+                      variant="outlined"
+                    />
+                  </FormControl>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <FormControl component="fieldset">
+                    <FormLabel className={classes.formLabel}>Allowed Sex*</FormLabel>
+                    <RadioGroup
+                      aria-label="AllowSex"
+                      name="AllowSex"
+                      value={props.RoomList.AllowSex}
+                      onChange={(event) => {
+                        //console.log(event.target.value)
+                        props.RoomList.AllowSex = event.target.value
+                      }}
+                    >
+                      <FormControlLabel
+                        value="male"
+                        control={<Radio color="secondary" />}
+                        label="Male"
+                      />
+                      <FormControlLabel
+                        value="female"
+                        control={<Radio color="secondary" />}
+                        label="Female"
+                      />
+                      <FormControlLabel
+                        value="any"
+                        control={<Radio color="secondary" />}
+                        label="Any"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </Col>
+                <Col>
+                  <FormControl component="fieldset">
+                    <FormLabel className={classes.formLabel}>Air Conditioner*</FormLabel>
+                    <RadioGroup
+                      aria-label="AirCon"
+                      name="AirCon"
+                      value={props.RoomList.AllowSex}
+                      onChange={(event) => {
+                        //console.log(event.target.value)
+                        props.RoomList.AirCon = event.target.value
+                      }}
+                    >
+                      <FormControlLabel
+                        value="yes"
+                        control={<Radio color="secondary" />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="No"
+                        control={<Radio color="secondary" />}
+                        label="no"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </Col>
+                <Col>
+                  <FormControl component="fieldset">
+                    <FormLabel
+                      className={classes.formLabel}
+                    >
+                      Room image
+              </FormLabel>
+                    <Dropzonef files={props.RoomList.RoomImage} setFiles={(files: any) => { props.RoomList.RoomImage = files; }} />
+                  </FormControl>
+                </Col>
+                <Col>
+                </Col>
+              </Row>
+              <Row className={classes.row} noGutters={true}>
+                <FormControl component="fieldset">
+                  <FormLabel
+                    className={classes.formLabel}
+                  >
+                    Description
+              </FormLabel>
+                  <TextField
+                    id="des"
+                    placeholder="Enter description"
+                    value={props.RoomList.des}
+                    className={classes.DestextField}
+                    onChange={(event) => {
+                      props.RoomList.des = event.target.value
+                    }}
+                    margin="dense"
+                    variant="outlined"
+                  />
+                </FormControl>
+              </Row>
+              <Row className={classes.row} noGutters={true}>
+                <Button
+                  className={classes.button}
+                  onClick={() => {
+                    console.log(props.RoomList)
+                  }}>
+                  Confirm
                     </Button>
-                </Row>
+              </Row>
             </CardContent>
           </Card>
         </Fade>
