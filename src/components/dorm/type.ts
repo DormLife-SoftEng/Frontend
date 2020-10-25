@@ -1,35 +1,63 @@
-export interface propsSuggestItem  {
-    src : string,
-    link : string
+export interface dormUtil {
+    type: string,
+    distance: number|null,
+    description: string
 }
-export interface propsSearch {
-    dormName? : string,
-    price? : number,
-    distance? : number,
-    maxperson? : number,
-    rating? : number,
-    roomSize? : number,
-    roomType? : string,
-    gender? : string,
-    convenienceStore? : boolean,
-    kitchen? : boolean,
-    laundry? : boolean,
-    parking? : boolean,
-    pet? : boolean,
-    internet? : boolean,
-    smoking? : boolean,
-    fitness? : boolean,
-    pool? : boolean,
-    cooking? : boolean,
-    restRoom? : boolean,
-    show : boolean,
-    handleClose : () => void
-    sendBack : (data : string) => void
+
+export interface dormRoom {
+    name: string,
+    capacity: number,
+    image: string[],
+    bathroom: number,
+    aircond: number,
+    kitchen: number,
+    bedroom: number,
+    description: string,
+    price: {
+        amount: number,
+        pricePer: string
+    },
+    allowedSex: string
 }
+
 export interface propsDorm {
-    src : string,
-    id : string
+    _id: string,
+    name: string,
+    code: string|null,
+    owner: string,
+    contact: {
+        telephone: string,
+        email: string|null,
+        lineID: string|null,
+        website: string|null
+    },
+    location: {
+        address: string,
+        coordinate: { type: string, coordinates: [ number, number ] }
+    },
+    utility: dormUtil[],
+    type: string,
+    description: string,
+    room: dormRoom[],
+    allowedSex: string,
+    avgStar: number,
+    license: string[],
+    image: string[],
+    createdOn: any,
+    modifiedOn: any,
+    approved: string,
+    approvedOn: any
 }
+
 export interface propsCarousel {
-    dorms : propsDorm[]
+    images : string[]
+}
+
+export interface propsReview {
+    dorm: string,
+    user: string,
+    star: number,
+    comment: string|null,
+    image: string[],
+    createdOn: any
 }
