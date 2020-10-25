@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Button } from "react-bootstrap";
+import { Button , Row ,Col } from "react-bootstrap";
 import React from "react";
 import FormLabel from "@material-ui/core/FormLabel";
 import TextField from "@material-ui/core/TextField";
@@ -7,16 +7,21 @@ import FormControl from "@material-ui/core/FormControl";
 import { LoginForm , LoginFormProps } from "../type";
 import { FormikProps, withFormik } from "formik";
 import * as Yup from "yup";
+import { useHistory } from "react-router-dom";
 
 function InnerForm(props: FormikProps<LoginForm>) {
 
   const {values,touched,errors,isSubmitting,handleChange,handleBlur,handleSubmit,handleReset} = props;
+  const history = useHistory();
 
   return (
     <>
+      <br />
+      <h1 style={{fontSize:"4rem",textAlign:"left"}}>Sign in</h1>
+      <br />
       <form onSubmit={handleSubmit}>
-        <FormControl>
-          <FormLabel error={touched.username && Boolean(errors.username)}>
+        <FormControl style={{backgroundColor:""}}>
+          <FormLabel style={{margin:"5% 0",color:"white",fontSize:"2rem"}} error={touched.username && Boolean(errors.username)}>
             Email
           </FormLabel>
           <TextField
@@ -29,11 +34,14 @@ function InnerForm(props: FormikProps<LoginForm>) {
             onChange={handleChange}
             onBlur={handleBlur}
             helperText={touched.username ? errors.username : ""}
+            FormHelperTextProps={{style:{margin:"0",backgroundColor:"#F55E61",color:"white"}}}
             error={touched.username && Boolean(errors.username)}
+            style={{backgroundColor:"white",width:"450px"}}
           />
         </FormControl>
-        <FormControl>
-          <FormLabel error={touched.password && Boolean(errors.password)}>
+
+        <FormControl style={{backgroundColor:""}}>
+          <FormLabel style={{margin:"5% 0",color:"white",fontSize:"2rem"}} error={touched.password && Boolean(errors.password)}>
             Password
           </FormLabel>
           <TextField
@@ -47,10 +55,24 @@ function InnerForm(props: FormikProps<LoginForm>) {
             onBlur={handleBlur}
             helperText={touched.password ? errors.password : ""}
             error={touched.password && Boolean(errors.password)}
+            style={{backgroundColor:"white",width:"450px"}}
+            FormHelperTextProps={{style:{margin:"0",backgroundColor:"#F55E61",color:"white"}}}
+            
           />
         </FormControl>
-        <Button type="submit" >Sign in</Button>
+        <Row style={{margin:"5% 0"}} noGutters={true} >
+        <Button style={{fontSize:"2rem"}} className="btn-lg"variant="outline-light" type="submit" >Sign in</Button>
+        </Row>
+
       </form>
+      <a
+        onClick={() => {
+          history.push("/signin/forgetpassword");
+        }}
+        style={{ fontSize:"1.5rem",textDecoration: "underline" }}
+      >
+        forget your password?
+      </a>
     </>
   )
 }

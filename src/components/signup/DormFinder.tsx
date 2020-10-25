@@ -354,7 +354,7 @@ const DormFinderFormik = withFormik<DormFinderMyFormProps, DormFinderFormValue>(
       telephone : telephone,
       sex : sex,
       email_verified : "true",
-      userType : "finder"
+      userType : "general"
     } 
     const result  = await props.handleSubmit(form)
     if(result === true) {

@@ -1,18 +1,20 @@
 import React , {useState} from "react";
 import { Modal, Button ,Row , Col } from "react-bootstrap";
 import dog from "../pic/finder_silver_2.jpg"
+import { user1 } from "../type";
 import EditProfile from "./EditProfile";
 import "./style.css"
 
 interface UserModalProps {
     show : boolean,
     handleClose : () => void,
+    user : user1
 }
 
 
 
 function UserModal(props : UserModalProps) {
-  const {show,handleClose} = props 
+  const {show,handleClose,user} = props 
   const [edit,setEdit] = useState<boolean>(false)
   return (
     <Modal animation={false} onHide={()=> {
@@ -28,11 +30,11 @@ function UserModal(props : UserModalProps) {
                 <img src={dog} style={{width:"250px" , height:"250px"}} />
             </Col>
             <Col style={{margin:"5% 0"}} >
-                <h4>Name : Test </h4>
-                <h4>LastName : Test</h4>
-                <h4>Sex : Male</h4>
-                <h4>Email : Test@Test.com</h4>
-                <h4>Phone number : 0111111111</h4>
+                <h4>Name : {user.name.firstName} </h4>
+                <h4>LastName : {user.name.lastName} </h4>
+                <h4>Sex : {user.sex}</h4>
+                <h4>Email : {user.email}</h4>
+                <h4>Phone number : {user.telephone}</h4>
             </Col>
         </Row>
         <Row className="Row" noGutters={true}>

@@ -14,7 +14,7 @@ function SearchMdorm(props: any) {
     } 
   }
   return (
-    <div>
+    <div style={{width:"100%"}}>
       <FormControl
       name="input"
       onChange={handleChange}

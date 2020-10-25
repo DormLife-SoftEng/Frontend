@@ -11,7 +11,7 @@ function Signup() {
         document.body.style.backgroundColor="#F55E61"
     },[])
     return (
-        <div style={{padding:"2% 4%"}}>
+        <div style={{textAlign:"center",padding:"2% 4%"}}>
             <Row style={{textAlign:"left"}}>
                 <Col>
                     <Button onClick={()=> history.goBack()} variant="" ><ArrowBackIosIcon htmlColor="white" fontSize="large" /></Button>

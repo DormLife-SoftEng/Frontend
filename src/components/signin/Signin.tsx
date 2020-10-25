@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import authService from "../../services/auth.service";
 import { dialogProps, LoginForm } from "../type";
 import Signinpop from "./Dialog";
@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import SigninFormik from './Signinformik'
 import {useAuth , authContextType} from "../../contexts/auth.context"
+import { Button , Row ,Col } from "react-bootstrap";
 
 const Signin = () => {
 
@@ -51,14 +52,21 @@ const Signin = () => {
     }
     
   }
+  useEffect(() => {
+    document.body.style.backgroundColor = "#F55E61"
+  }, []);
 
   return (
-    <>
-    <Header />
-    <SigninFormik handleSubmit={handleSubmit} />
-    <Footer />
-    <Signinpop open={show} title={popup.title} content={popup.content} />
-    </>
+    <div style={{textAlign:"center",padding:"2% 4%"}}> 
+      <Header />
+      <Row style={{color:"white",margin:"0 10%"}} noGutters={true}>
+      <Col lg={5} style={{padding:"1% 4%",textAlign:"left"}}>
+      <SigninFormik handleSubmit={handleSubmit} />
+      </Col>
+      <Footer />
+      </Row>
+      <Signinpop open={show} title={popup.title} content={popup.content} />
+    </div>
   )
 
 }

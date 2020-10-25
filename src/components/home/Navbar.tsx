@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav'
 import Button  from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import {useAuth , authContextType} from "../../contexts/auth.context"
-import dog from "..//pic/finder_silver_2.jpg"
+import {AllImages} from "../pic/pic"
 import authService from "../../services/auth.service";
 import UserModal from "./UserModal";
 
@@ -42,11 +42,11 @@ function NavBar() {
             <div onClick={()=>{
               setShow(true)
             }}>
-              <img style={{marginBottom:"5px",width:"50px" , height : "50px"}} src={dog} />
+              {authToken.role === "owner" ? <img style={{marginBottom:"5px",width:"50px" , height : "50px"}} src={AllImages[authToken.avatar + 6]} /> : <img style={{marginBottom:"5px",width:"50px" , height : "50px"}} src={AllImages[authToken.avatar]} /> }
               <h3 style={{display:"inline-block",margin:"10px 10px 0"}} >{authToken.name.firstName} {authToken.name.lastName}</h3>
             </div>
             <Button onClick={handleClick} style={{backgroundColor:"#F55E61",borderColor:"#F55E61"}}  className="mt-2 ml-1 mb-2 mr-1"  variant="danger" >Signout</Button>
-            <UserModal show={show} handleClose={handleClose} />
+            {/* <UserModal  show={show} handleClose={handleClose} /> */}
           </> 
           : 
           <>

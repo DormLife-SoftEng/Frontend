@@ -21,14 +21,29 @@ export interface Style {
 
 //Lobby Props
 
-export interface user {
-    userID : string,
+export interface user1 {
     name : {
         firstName : string,
         lastName : string
     }
-    ready : boolean,
-    profilepic : number
+    profilePic : number,
+    telephone : string,
+    email : string,
+    email_verified: boolean,
+    sex: string,
+    createdOn: string,
+    modifiedOn: null | string,
+    userType: string
+}
+
+export interface user {
+    userID : string
+    name : {
+        firstName : string,
+        lastName : string
+    }
+    profilepic : number,
+    ready : boolean
 }
 
 export interface chat {
@@ -311,7 +326,7 @@ export interface tokenDto {
     token_type : string,
     exp : number,
     iap : number,
-    avatar : string,
+    avatar : number,
     access_token? : string,
     refresh_token? : string
 }

@@ -6,7 +6,7 @@ import Forgetpassword from "./signin/Forgetpassword";
 import Repassword from "./signin/Repassword";
 import DormOwner from "./signup/DormOwner";
 import DormFinder from "./signup/DormFinder";
-import Dorm from "./dorm/Dorm"
+import Dorm from "./dorm/Dorm";
 import DormHome from  "./dormown/DormHome"
 import ContactSupport from "./dormown/ContactSupport";
 import AddDromFrom from "./dormown/adddormform";
