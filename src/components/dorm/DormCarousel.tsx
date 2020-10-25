@@ -1,22 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Carousel } from "react-bootstrap";
-import { propsCarousel } from "./type";
+import {propsCarousel} from "./type";
 function DormCarousel(props: propsCarousel) {
-  const { dorms } = props;
+  const { images } = props;
   return (
     <Carousel style={{ padding: "1% 2%" }}>
-      {dorms.map((dorm, index) => {
+      {images.map((img, index) => {
         return (
           <Carousel.Item key={index}>
-            <a href={`/dorm/${dorm.id}`}>
-              <img
-                style={{ height: "275px", objectFit: "cover"}}
-                className="d-block w-100"
-                src={dorm.src}
-                alt="First slide"
-              />
-            </a>
+            <img
+              style={{ height: "275px", objectFit: "cover"}}
+              className="d-block w-100"
+              src={img}
+              alt="First slide"
+            />
           </Carousel.Item>
         );
       })}

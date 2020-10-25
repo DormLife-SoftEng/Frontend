@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React , { useEffect } from "react";
 
 import {Image, Row, Col} from "react-bootstrap";
 
@@ -7,7 +7,11 @@ import StarIcon from '@material-ui/icons/Star';
 import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 
 function AReview(props: any) {
-  const { dorms } = props;
+  const { review } = props;
+  useEffect(()=> {
+    console.log(`Fetch from database with ${review.user}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
   return (
     <div className="p-3">
         
@@ -19,19 +23,23 @@ function AReview(props: any) {
         <Col>
         <h6 style={{marginBottom:'-5px'}}>P***** L*****</h6>
         <p style={{color:'gold'}}>
-          <StarIcon fontSize="small"/>
-          <StarIcon fontSize="small"/>
-          <StarIcon fontSize="small"/>
-          <StarBorderOutlinedIcon fontSize="small"/>
-          <StarBorderOutlinedIcon fontSize="small"/>
+          {review.star >= 1 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
+          {review.star >= 2 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
+          {review.star >= 3 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
+          {review.star >= 4 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
+          {review.star >= 5 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
         </p>
         <p>
-          ห้องน้ำสะอาด สว่าง สงบ
+          {review.comment}
         </p>
         <p>
-          <Image style={{ height: "100px", width: "100px", objectFit: "cover"}} src="https://cdn.royalgrandpalace.th/stocks/gallery/o0x0/tn/d0/eykotnd0o0/1.jpg" rounded />
+          {review.image.map((img:string)=>{
+            return (
+              <Image className="m-1" style={{ height: "100px", width: "100px", objectFit: "cover"}} src={img} rounded />
+            )
+          })}
         </p>
-        <p>29/09/2020 11:12</p>
+        <p>{review.createdOn.toLocaleString('th-TH')}</p>
         </Col>
       </Row>
 

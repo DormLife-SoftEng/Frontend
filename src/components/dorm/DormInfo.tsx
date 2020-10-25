@@ -1,21 +1,59 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Carousel } from "react-bootstrap";
+import Googlemap from "../google/google";
+import {dormRoom, dormUtil} from './type';
 
 function DormInfo(props: any) {
-  const { dorms } = props;
+  const { dorm } = props;
+  let allowedPet: boolean = false;
+  let allowedCooking: boolean = false;
   return (
-    <div>
-      <p>Type: Dorm</p>
-      <p>Allowed Sex: Dorm</p>
-      <p>Address: Dorm</p>
-      <p>Phone Number: Dorm</p>
-      <p>Website: Dorm</p>
-      <p>Map: Dorm</p>
-      <p>Facilities: Dorm</p>
-      <p>Allowed Pet: Dorm</p>
-      <p>Allowed Cooking: Dorm</p>
-      <p>Room Type: Dorm</p>
+    <div style={{textTransform: 'capitalize'}}>
+      <p>Type: {dorm.type}</p>
+      <p>Allowed Sex: {dorm.allowedSex}</p>
+      <p>Address: {dorm.location.address}</p>
+      <p>Phone Number: {dorm.contact.telephone}</p>
+      {
+      dorm.contact.website != null &&
+        (<p>Website: {dorm.contact.website}</p>)
+      }
+      <p>Map: 
+        <Googlemap coordinate={{lat:dorm.location.coordinate.coordinates[0],lng:dorm.location.coordinate.coordinates[1]}} containerStyle={{width: '193px', height: '193px'}} zoom={13}/>
+      </p>
+      <p>Facilities: {
+        dorm.utility.map((util: dormUtil, index: number)=>{
+          if(util.type == 'Cooking')allowedCooking = true;
+          if(util.type == 'Pet')allowedPet = true;
+          return (
+            <span>
+              {index != 0 && (<span>{', '}</span>)}
+              {util.type}
+              {util.distance != null && util.distance > 0 && (
+                <span>
+                  {' '}({util.distance}m)
+                </span>
+              )}
+              {util.description != null && (
+                <span>
+                  {' '}({util.description})
+                </span>
+              )}
+            </span>
+          )
+        })
+      }</p>
+      <p>Allowed Pet: {allowedPet?'Yes':'No'}</p>
+      <p>Allowed Cooking: {allowedCooking?'Yes':'No'}</p>
+      <p>Room Type: {
+        dorm.room.map((rt: dormRoom, index: number)=>{
+          return (
+            <a href={'#'}>
+              {index != 0 && (<span>{', '}</span>)}
+              {rt.name}
+            </a>
+          )
+        })
+      }</p>
     </div>
   );
 }
