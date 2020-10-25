@@ -50,7 +50,8 @@ export interface propsDorm {
 }
 
 export interface propsCarousel {
-    images : string[]
+    images : string[],
+    height?: string
 }
 
 export interface propsReview {
