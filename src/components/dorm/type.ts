@@ -54,8 +54,8 @@ export interface propsCarousel {
 }
 
 export interface propsReview {
-    dorm: string,
-    user: string,
+    dorm: {},
+    user: {},
     star: number,
     comment: string|null,
     image: string[],

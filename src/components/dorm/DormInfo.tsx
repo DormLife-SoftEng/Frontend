@@ -22,8 +22,14 @@ function DormInfo(props: any) {
       </p>
       <p>Facilities: {
         dorm.utility.map((util: dormUtil, index: number)=>{
-          if(util.type == 'Cooking')allowedCooking = true;
-          if(util.type == 'Pet')allowedPet = true;
+          if(util.type == 'Cooking'){
+            allowedCooking = true;
+            return;
+          }
+          if(util.type == 'Pet'){
+            allowedPet = true;
+            return;
+          }
           return (
             <span>
               {index != 0 && (<span>{', '}</span>)}

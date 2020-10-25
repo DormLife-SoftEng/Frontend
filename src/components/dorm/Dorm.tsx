@@ -10,11 +10,18 @@ import { useHistory } from "react-router-dom";
 import {useParams } from "react-router-dom"
 import { propsDorm } from "./type"
 import ReviewList from "./ReviewList";
+import dorminfoService from "../../services/dorminfo.service";
 
 function Dorm() {
     const {id} : {id:string} = useParams()
+    const getDormInfo = async () => {
+        const dorm = await dorminfoService.getOneDorm(id)
+        console.log(dorm)
+        setDorm(dorm)
+    }
     useEffect(()=> {
-        console.log(`Fetch from database with ${id}`)
+        console.log(`Fetch DormInfo from database with ${id}`)
+        getDormInfo()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
@@ -99,18 +106,23 @@ function Dorm() {
 
     return (
     <div>
-        <DormNav title="ROYAL GRAND PALACE (พระบรมหาราชวัง) (วังหลวง)"/>
-        <Row className="pt-4">
-            <Col>
-                <DormCarousel images={dorm.image}/>
-                <ReviewList dorm={dorm}/>
-            </Col>
-            <Col>
-                <DormInfo dorm={dorm}/>
-                <h5>Find Roomate</h5>
-                <FindRoomateBTN dorm={dorm}/>
-            </Col>
-        </Row>
+        <DormNav title={dorm.name}/>
+        {
+        (dorm.approved == 'approved') && (
+            <Row className="pt-4 pb-5">
+                <Col>
+                    <DormCarousel images={dorm.image}/>
+                    <ReviewList dorm={id} avgStar={dorm.avgStar}/>
+                </Col>
+                <Col>
+                    <DormInfo dorm={dorm}/>
+                    <h5>Find Roomate</h5>
+                    <FindRoomateBTN dorm={dorm}/>
+                </Col>
+            </Row>
+        ) || (
+            <h2 className="text-center">This dorminfo is not public.</h2>
+        )}
     </div>
     )
 }
