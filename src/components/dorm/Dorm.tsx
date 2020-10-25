@@ -79,7 +79,24 @@ function Dorm() {
                     "pricePer": "month"
                 },
                 "allowedSex": "female"
-            }, // and more
+            },
+            {
+                "name": "Pool view",
+                "capacity": 20,
+                "image": [
+                    "https://cdn.royalgrandpalace.th/stocks/gallery/o0x0/uf/pi/eykoufpimg/2.jpg"
+                ],
+                "bathroom": 1,
+                "aircond": 1,
+                "kitchen": 1,
+                "bedroom": 1,
+                "description": "วิวสระว่ายน้ำ",
+                "price": {
+                    "amount": 0.01,
+                    "pricePer": "month"
+                },
+                "allowedSex": "female"
+            }
         ],
         "allowedSex": "female",
         "avgStar": 4.20,
