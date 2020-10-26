@@ -1,7 +1,37 @@
-.btn-danger {
-    background-color:#F55E61 ;
+.btn-danger,
+.btn-pink {
+    background-color: #F55E61;
     border-color: #F55E61;
+    color: white;
 }
+
 .bg-danger {
-    background-color:#F55E61 !important
+    background-color: #F55E61 !important
+}
+
+.navbar-pink,
+.navbar-danger {
+    background-color: #F55E61;
+    color: white;
+}
+
+.navbar-pink>.navbar-brand,
+.navbar-pink>.navbar-brand>*,
+.navbar-danger>.navbar-brand,
+.navbar-danger>.navbar-brand>* {
+    color: white;
+}
+
+.navbar-pink>*>.navbar-text,
+.navbar-danger>*>.navbar-text {
+    font: Athiti;
+    font-size: 20px;
+    color: white;
+}
+
+.btn-xxl {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    line-height: 2.25;
+    border-radius: .45rem;
 }
