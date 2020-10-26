@@ -23,6 +23,7 @@ import { Label } from "@material-ui/icons";
 import Dropzonef from "./Dropzonef"
 import Termservice from "./Termservice";
 import AddRoomPopUp from "./AddRoomPopUp"
+import SuggestItem from "./SuggestItem";
 
 const styles = createStyles({
   black: {
@@ -952,6 +953,8 @@ function DormOwner(props: any) {
           </Col>
           <Col></Col>
         </Row>
+        <Row className={classes.row} noGutters={true}>
+        </Row>
         <AddRoomPopUp open={showPopup} setOpen={setShowPopup} RoomList={temp} Roomarray={Roomarray} setRoomarray={(Arr :any)=>{values.Roomarray=Arr; setRoomarray(Arr)}}/>
         <Row className={classes.row} noGutters={true}>
           <Col>
@@ -1092,7 +1095,7 @@ const DormOwnerForm = withFormik({
       LineID: LineID || "",
       phone: phone || "",
       Website: Website || "",
-      DormDoc: DormDoc || "",
+      DormDoc: DormDoc || [],
       AllowSex: AllowSex || "any",
       AccomType: AccomType || "dorm",
       ConDistance: ConDistance || "",

@@ -10,8 +10,15 @@ interface DropzoneProps {
 const Dropzonef = (props : DropzoneProps) => {
     const [open, setOpen] = useState<boolean>(false);
     const {files,setFiles} = props
+    const [clear,setClear] = useState<boolean>(true);
     const handleChange = (files : any) => {
         setFiles(files)
+        setClear(false)
+        setOpen(false)
+    }
+    const handleClose = ()=>{
+        setFiles([])
+        setClear(true)
         setOpen(false)
     }
     return (
@@ -26,7 +33,7 @@ const Dropzonef = (props : DropzoneProps) => {
         submitButtonText={"submit"}
         maxFileSize={5000000}
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={handleClose}
         onSave={
           handleChange
         }
