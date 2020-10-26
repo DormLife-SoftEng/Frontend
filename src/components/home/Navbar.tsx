@@ -56,8 +56,8 @@ function NavBar() {
           </> 
           : 
           <>
-            <Button style={{backgroundColor:"#F55E61",borderColor:"#F55E61"}} onClick={()=> history.push("/signup")}  className="mt-1 ml-1 mb-1 mr-1"  variant="danger" >Sign up</Button>
             <Button style={{backgroundColor:"#F55E61",borderColor:"#F55E61"}} onClick={()=> history.push("/signin")} className="mt-1 ml-1 mb-1 mr-1"   variant="danger" >Sign in</Button>
+            <Button style={{backgroundColor:"#F55E61",borderColor:"#F55E61"}} onClick={()=> history.push("/signup")}  className="mt-1 ml-1 mb-1 mr-1"  variant="danger" >Sign up</Button>
           </>
         }
 
