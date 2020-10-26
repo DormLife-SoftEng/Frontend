@@ -20,6 +20,7 @@ function Dorm() {
         setDorm(dorm)
     }
     useEffect(()=> {
+        document.body.style.backgroundColor = "white";
         console.log(`Fetch DormInfo from database with ${id}`)
         getDormInfo()
         // eslint-disable-next-line react-hooks/exhaustive-deps

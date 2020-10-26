@@ -46,7 +46,7 @@ function RoomModal(props: any) {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="pink" onClick={handleClose}>
+          <Button variant="danger" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>

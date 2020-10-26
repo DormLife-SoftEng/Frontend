@@ -11,28 +11,11 @@ function FindRoomateBTN(props: any) {
 
     return (
     <div className="text-center mt-5">
-        <>
-        <style type="text/css">
-            {`
-            .btn-pink {
-              background-color: #F55E61;
-              color: white;
-            }
-            
-            .btn-xxl {
-                padding: 1rem 2rem;
-                font-size: 1.5rem;
-                line-height: 2.25;
-                border-radius: .45rem;
-            }
-            `}
-        </style>
-        </>
-        <a className="btn-xxl btn-pink" onClick={() => {
+        <Button className="btn-xxl btn-danger" onClick={() => {
           history.push("/lobby");
         }}>
         CLICK HERE
-        </a>
+        </Button>
     </div>
   );
 }
