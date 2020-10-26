@@ -43,8 +43,14 @@ export interface propsDormForm {
     AllowedCook? : string,
     DormImage : any,
     acceptTerm : boolean,
+    Roomarray : any,
 }
 export interface termService {
     show : boolean, 
     handleClose : ()=>void
+}
+
+export interface propsAddRoomForm{
+    RT_name : string,
+    RT_capacity: number,
 }

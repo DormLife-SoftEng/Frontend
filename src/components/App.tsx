@@ -28,17 +28,17 @@ import DormFinderRoute from "./routes/DormFinderRoute";
 import Review from "./review/Review"
 
 const Theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#F55E61",
+    palette: {
+        primary: {
+            main: "#F55E61",
+        },
+        secondary: {
+            main: "#F8FBFE",
+        },
+        background: {
+            paper: "#F8FBFE",
+        },
     },
-    secondary: {
-      main: "#F8FBFE",
-    },
-    background: {
-      paper: "#F8FBFE",
-    },
-  },
 });
 function App() {
 

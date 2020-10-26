@@ -22,8 +22,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Label } from "@material-ui/icons";
 import Dropzonef from "./Dropzonef"
 import Termservice from "./Termservice";
+import AddRoomPopUp from "./AddRoomPopUp"
 
-const galleryImageList = [""];
 const styles = createStyles({
   black: {
     color: "black",
@@ -58,8 +58,8 @@ function DormOwner(props: any) {
     document.body.style.backgroundColor = "white";
   }, []);
   const history = useHistory();
-  const [DormDoc, setFiles] = useState<any[]>([])
-  const [DormImage, setFiles2] = useState<any[]>([])
+  const [DormDoc, setFiles] = useState<any[]>([]);
+  const [DormImage, setFiles2] = useState<any[]>([]);
   const [show, setShow] = useState<boolean>(false);
   const [HaveConString, setHaveCon] = useState<string>("");
   const [HaveLaunString, setHaveLaun] = useState<string>("");
@@ -72,6 +72,10 @@ function DormOwner(props: any) {
   const [HaveInternetString, setHaveInternet] = useState<string>("");
   const [HaveRestString, setHaveRest] = useState<string>("");
   const [show2, setShow2] = useState<boolean>(false);
+  const [Roomarray , setRoomarray] = useState<any>([]);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const temp: any = {};
+
   const handleClose = () => {
     setShow2(false);
   };
@@ -337,17 +341,17 @@ function DormOwner(props: any) {
                     >
                       <FormControlLabel
                         value="male"
-                        control={<Radio color="secondary" />}
+                        control={<Radio color="primary" />}
                         label="Male"
                       />
                       <FormControlLabel
                         value="female"
-                        control={<Radio color="secondary" />}
+                        control={<Radio color="primary" />}
                         label="Female"
                       />
                       <FormControlLabel
                         value="any"
-                        control={<Radio color="secondary" />}
+                        control={<Radio color="primary" />}
                         label="Any"
                       />
                     </RadioGroup>
@@ -374,32 +378,32 @@ function DormOwner(props: any) {
                 >
                   <FormControlLabel
                     value="dorm"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Dorm"
                   />
                   <FormControlLabel
                     value="condo"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Condo"
                   />
                   <FormControlLabel
                     value="apartment"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Aparment"
                   />
                   <FormControlLabel
                     value="flat"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Flat"
                   />
                   <FormControlLabel
                     value="hostel"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Hostel"
                   />
                   <FormControlLabel
                     value="house"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="House"
                   />
                 </RadioGroup>
@@ -860,12 +864,12 @@ function DormOwner(props: any) {
                 >
                   <FormControlLabel
                     value="yes"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Yes"
                   />{" "}
                   <FormControlLabel
                     value="no"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="No"
                   />
                 </RadioGroup>
@@ -891,12 +895,12 @@ function DormOwner(props: any) {
                 >
                   <FormControlLabel
                     value="yes"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Yes"
                   />{" "}
                   <FormControlLabel
                     value="no"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="No"
                   />
                 </RadioGroup>
@@ -935,13 +939,36 @@ function DormOwner(props: any) {
                 width: "350px",
               }}
             >
+              <Button
+                className={classes.button}
+                variant="danger"
+                onClick={()=>{
+                  setShowPopup(true);
+                }}
+              >
+                Add Room Type
+              </Button>
+            </div>
+          </Col>
+          <Col></Col>
+        </Row>
+        <AddRoomPopUp open={showPopup} setOpen={setShowPopup} RoomList={temp} Roomarray={Roomarray} setRoomarray={(Arr :any)=>{values.Roomarray=Arr; setRoomarray(Arr)}}/>
+        <Row className={classes.row} noGutters={true}>
+          <Col>
+          <div
+              style={{
+                textAlign: "left",
+                display: "inline-block",
+                width: "350px",
+              }}
+            >
             <Checkbox
               style={{paddingLeft:"0"}}
               checked={values.acceptTerm}
               onChange={handleChange}
               onBlur={handleBlur}
               name="acceptTerm"
-              color="secondary"
+              color="primary"
             />
             <FormLabel style={{fontSize:"0.7rem"}} className={classes.black}>
               I have to read and agree to 
@@ -987,7 +1014,7 @@ function DormOwner(props: any) {
 
               <Button
                 className={classes.button}
-                variant="secondary"
+                variant="primary"
                 type="submit"
                 disabled={isSubmitting}
               >
@@ -1054,6 +1081,7 @@ const DormOwnerForm = withFormik({
     AllowedPet,
     AllowedCook,
     DormImage,
+    Roomarray,
   }: propsDormForm) => {
     return {
       DormName: DormName || "",
@@ -1098,6 +1126,7 @@ const DormOwnerForm = withFormik({
       AllowedPet: AllowedPet || "no",
       AllowedCook: AllowedCook || "no",
       DormImage: DormImage || "",
+      Roomarray: Roomarray || [],
     };
   },
   validationSchema: Yup.object().shape({
@@ -1147,7 +1176,8 @@ const DormOwnerForm = withFormik({
       InternetDescript,
       AllowedPet,
       AllowedCook,
-      DormImage, } = values;
+      DormImage,
+      Roomarray, } = values;
     const form = {
       DormName,
       DormAddress,
@@ -1189,6 +1219,7 @@ const DormOwnerForm = withFormik({
       AllowedPet,
       AllowedCook,
       DormImage,
+      Roomarray,
     };
     console.log(form)
     setTimeout(() => {
