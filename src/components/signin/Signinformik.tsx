@@ -65,14 +65,14 @@ function InnerForm(props: FormikProps<LoginForm>) {
         </Row>
 
       </form>
-      <a
+      {/* <a
         onClick={() => {
           history.push("/signin/forgetpassword");
         }}
         style={{ fontSize:"1.5rem",textDecoration: "underline" }}
       >
         forget your password?
-      </a>
+      </a> */}
     </>
   )
 }
