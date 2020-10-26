@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./BootstrapOverride.css"
 import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom"
 import Home from "./home/Home";

@@ -7,6 +7,8 @@ import {useAuth , authContextType} from "../../contexts/auth.context"
 import {AllImages} from "../pic/pic"
 import authService from "../../services/auth.service";
 import UserModal from "./UserModal";
+import { user} from "../newType";
+import dormfinderService from "../../services/dormfinder.service";
 
 function NavBar() {
 
@@ -14,14 +16,18 @@ function NavBar() {
   const {authToken,setAuthToken} : authContextType = useAuth()
   const [show ,setShow] = useState<boolean>(false)
 
-  // const [userInfo,setUserInfo] = useState({}) usetoset Profile Modal
+  const [userInfo,setUserInfo] = useState<user | null>(null)
   useEffect(() => {
     if (authToken) {
-      console.log(authToken)
-      console.log("Get request")
+      getUserInfo();
     }
   },[authToken])
-
+  const getUserInfo = async () => {
+    const result = await dormfinderService.getUserInfo()
+    if (result) {
+      setUserInfo(result)
+    }
+  }
   const handleClose = () => {
     setShow(false)
   }
@@ -46,7 +52,7 @@ function NavBar() {
               <h3 style={{display:"inline-block",margin:"10px 10px 0"}} >{authToken.name.firstName} {authToken.name.lastName}</h3>
             </div>
             <Button onClick={handleClick} style={{backgroundColor:"#F55E61",borderColor:"#F55E61"}}  className="mt-2 ml-1 mb-2 mr-1"  variant="danger" >Signout</Button>
-            {/* <UserModal  show={show} handleClose={handleClose} /> */}
+            { userInfo && <UserModal user={userInfo}  show={show} handleClose={handleClose} />}
           </> 
           : 
           <>

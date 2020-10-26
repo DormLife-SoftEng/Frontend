@@ -2,14 +2,16 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
 import { propsCarousel } from "./type";
+import { useHistory } from "react-router-dom"
 function DormCarousel(props: propsCarousel) {
   const { dorms } = props;
+  const history = useHistory()
   return (
     <Carousel style={{ padding: "1% 2%" }}>
       {dorms.map((dorm, index) => {
         return (
           <Carousel.Item key={index}>
-            <a href={`/dorm/${dorm.id}`}>
+            <a onClick={() => history.push(`/dorm/${dorm.id}`)  }>
               <img
                 style={{ height: "500px" }}
                 className="d-block w-100"

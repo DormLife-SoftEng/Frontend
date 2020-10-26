@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import "./style.css"
 function Signup() {
     const history = useHistory();
     useEffect(()=>{

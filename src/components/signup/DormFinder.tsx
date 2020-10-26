@@ -21,7 +21,6 @@ import { DormFinderFormValue, dialogProps , Style  , DormFinderMyFormProps , Reg
 import {useAuth , authContextType} from "../../contexts/auth.context"
 import Signuppop  from "../signup/Signupop"
 
-
 const styles = createStyles({
   black: {
     color: "black",
@@ -411,7 +410,7 @@ const DormFinderForm = (props : Style) => {
 
   return (
     <>
-      <Navbar style={{ padding: "1%" }} bg="danger">
+      <Navbar className="test" style={{ padding: "1%" }} bg="danger">
         <Nav className="text-center">
           <Button variant="" onClick={() => history.goBack()}>
             <ArrowBackIosIcon htmlColor="white" fontSize="large" />

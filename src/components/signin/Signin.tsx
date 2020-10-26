@@ -7,7 +7,8 @@ import Footer from "./Footer";
 import Header from "./Header";
 import SigninFormik from './Signinformik'
 import {useAuth , authContextType} from "../../contexts/auth.context"
-import { Button , Row ,Col } from "react-bootstrap";
+import {  Row ,Col } from "react-bootstrap";
+import "./style.css"
 
 const Signin = () => {
 

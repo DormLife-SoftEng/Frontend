@@ -1,7 +1,5 @@
 import React from 'react';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-
+import { Modal } from "react-bootstrap";
 interface dialogProps {
     open : boolean,
     title : string,
@@ -11,9 +9,13 @@ interface dialogProps {
 const Signinpop = (props : dialogProps) => {
     const {open , title , content} = props
     return (
-        <Dialog  open={open}>
-        <DialogTitle >{title}</DialogTitle>
-        </Dialog>
+        <Modal animation={false} dialogClassName="alert-signin" centered size="sm" show={open} >
+            <Modal.Body>
+                <h1>{title}</h1>
+                    {content !== "" && <h3>{content}</h3>}
+            </Modal.Body>
+      
+          </Modal>
     )
 }
 

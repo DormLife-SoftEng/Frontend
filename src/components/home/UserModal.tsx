@@ -1,14 +1,13 @@
 import React , {useState} from "react";
 import { Modal, Button ,Row , Col } from "react-bootstrap";
-import dog from "../pic/finder_silver_2.jpg"
-import { user1 } from "../type";
+import {AllImages} from "../pic/pic"
+import { user } from "../newType";
 import EditProfile from "./EditProfile";
-import "./style.css"
 
 interface UserModalProps {
     show : boolean,
     handleClose : () => void,
-    user : user1
+    user : user
 }
 
 
@@ -27,7 +26,8 @@ function UserModal(props : UserModalProps) {
         <>
         <Row className="Row" noGutters={true}>
             <Col lg={5} >
-                <img src={dog} style={{width:"250px" , height:"250px"}} />
+                { user.userType === "owner" && <img src={AllImages[user.profilePic + 6]} style={{width:"250px" , height:"250px"}} />  }
+                { user.userType === "general" && <img src={AllImages[user.profilePic]} style={{width:"250px" , height:"250px"}} /> }
             </Col>
             <Col style={{margin:"5% 0"}} >
                 <h4>Name : {user.name.firstName} </h4>

@@ -1,0 +1,9 @@
+.alert-signup .modal-content {
+    border-radius: 1rem;
+    text-align: center;
+    color:#F55E61;
+    font-size: 2rem;
+}
+.alert-signup {
+    max-width: 25%;
+}
