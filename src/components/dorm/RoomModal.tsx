@@ -13,7 +13,7 @@ function RoomModal(props: any) {
 
   return (
     <>
-      <a href="#" onClick={handleShow}>
+      <a style={{color:"blue"}} onClick={handleShow}>
         {room.name}
       </a>
       <Modal size="lg" show={show} onHide={handleClose}>

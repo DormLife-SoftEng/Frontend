@@ -1,15 +1,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import DormCarousel from "../dorm/DormCarousel";
+import RoomModal from "../dorm/RoomModal";
 import Googlemap from "../google/google";
-import {dormRoom, dormUtil} from "./type2";
+import {propsDorm,dormRoom, dormUtil} from "./type2";
 
-function DormInfo(props: any) {
+
+interface DormDetailProps {
+  dorm : propsDorm
+}
+
+function DormInfo(props: DormDetailProps) {
   const { dorm } = props;
   let allowedPet: boolean = false;
   let allowedCooking: boolean = false;
   return (
-    <div style={{textTransform: 'capitalize',padding:"0% 2%"}}>
+      <div style={{textTransform: 'capitalize',padding:"0% 2%"}}>
       <h1 style={{textAlign:"center"}}>{dorm.name}</h1>
       <DormCarousel images={dorm.image}/>
       <p>Type: {dorm.type}</p>
@@ -25,8 +31,14 @@ function DormInfo(props: any) {
       </p>
       <p>Facilities: {
         dorm.utility.map((util: dormUtil, index: number)=>{
-          if(util.type == 'Cooking')allowedCooking = true;
-          if(util.type == 'Pet')allowedPet = true;
+          if(util.type == 'Cooking'){
+            allowedCooking = true;
+            return;
+          }
+          if(util.type == 'Pet'){
+            allowedPet = true;
+            return;
+          }
           return (
             <span>
               {index != 0 && (<span>{', '}</span>)}
@@ -50,10 +62,10 @@ function DormInfo(props: any) {
       <p>Room Type: {
         dorm.room.map((rt: dormRoom, index: number)=>{
           return (
-            <a href={'#'}>
-              {index != 0 && (<span>{', '}</span>)}
-              {rt.name}
-            </a>
+            <>
+            {index != 0 && (<span>{', '}</span>)}
+            <RoomModal room={rt}/>
+            </>
           )
         })
       }</p>
