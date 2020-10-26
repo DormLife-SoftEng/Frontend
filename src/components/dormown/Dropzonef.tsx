@@ -32,6 +32,7 @@ const Dropzonef = (props : DropzoneProps) => {
         }
         showPreviews={true}
         showFileNamesInPreview={true}
+        clearOnUnmount = {false}
       />
       </div>
     )
