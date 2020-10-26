@@ -17,6 +17,7 @@ const Signinpop = (props : dialogProps) => {
       
           </Modal>
     )
+    
 }
 
 export default Signinpop;
