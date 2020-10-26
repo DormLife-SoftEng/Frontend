@@ -1,20 +1,14 @@
 import React from "react";
-import Googlemap from "../google/goole";
-
+import DormInfo from "./DormInfo";
 function DormDetail(props:any) {
-
-  
+  const {dorm}=props
   return (
-    <div >
       <div
         className="overflow-auto"
-        style={{ width: "700px", maxHeight: "460px" ,}}
+        style={{maxHeight: "70%" }}
       >
-       <br/>
-       <Googlemap coordinate={{lat:13.846234, lng:100.568526}}/>
+       <DormInfo dorm={dorm}/>
       </div>
-    </div>
   );
 }
-
 export default DormDetail;

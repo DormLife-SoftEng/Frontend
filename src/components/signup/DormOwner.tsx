@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from "react";
-import { FormikProps, withFormik, Form } from "formik";
+import React , {useState,useEffect} from "react";
+import { FormikProps, withFormik } from "formik";
 import * as Yup from "yup";
 import { withStyles, createStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
@@ -14,11 +14,13 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Termservice from "./Termservice";
 import { idenRegExp, phoneRegExp } from "./constant";
 import { useHistory } from "react-router-dom";
-import { Navbar, Nav, Row, Col, Button } from "react-bootstrap";
+import {Navbar,Nav,Row,Col,Button } from "react-bootstrap";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import authService from "../../services/auth.service";
-import EmailPopup from "./EmailPopup";
-import OTPPopup from "./OTPPopup";
+import authService from "../../services/auth.service"
+import { DormOwnerFormValue , dialogProps  , Style  , DormOwnerMyFormProps, RegisterDormOwnerForm} from "../type";
+import {useAuth , authContextType} from "../../contexts/auth.context"
+import Signuppop  from "../signup/Signupop"
+
 const styles = createStyles({
   black: {
     color: "black",
@@ -48,40 +50,10 @@ const styles = createStyles({
   },
 });
 
-interface FormValue {
-  name: string;
-  lastName: string;
-  phone: string;
-  password: string;
-  confirmPassword: string;
-  gender: string;
-  acceptTerm: boolean;
-  email: string;
-  natID: string;
-}
-interface MyFormProps {
-  name?: string;
-  lastName?: string;
-  phone?: string;
-  password?: string;
-  confirmPassword?: string;
-  gender?: string;
-  acceptTerm?: boolean;
-  email?: string;
-  natID?: string;
-}
-interface Style {
-  classes?: any;
-}
 
-function DormOwner(props: FormikProps<FormValue> & Style) {
-  useEffect(() => {
-    document.body.style.backgroundColor = "white";
-  }, []);
-  const history = useHistory();
+function InnerForm(props: FormikProps<DormOwnerFormValue> & Style) {
+
   const [show, setShow] = useState<boolean>(false);
-  const [showEmailPopup, setShowEmailPopup] = useState<boolean>(false);
-  // const [showOTPPopup, setShowOTPPopup] = useState<boolean>(false);
   const handleClose = () => {
     setShow(false);
   };
@@ -98,45 +70,25 @@ function DormOwner(props: FormikProps<FormValue> & Style) {
   } = props;
   return (
     <div>
-      <Navbar style={{ padding: "1%" }} bg="danger">
-        <Nav className="text-center">
-          <Button variant="" onClick={() => history.goBack()}>
-            <ArrowBackIosIcon htmlColor="white" fontSize="large" />
-          </Button>
-          <h1 className={classes.navCenter}>Sign up for Dorm Owner</h1>
-        </Nav>
-      </Navbar>
-      <Form
-        style={{ margin: "3% 20%" }}
-        onSubmit={() => {
-          handleSubmit();
-          props.values.name &&
-            props.values.lastName &&
-            props.values.email &&
-            props.values.password &&
-            props.values.confirmPassword &&
-            props.values.gender &&
-            props.values.acceptTerm &&
-            phoneRegExp.test(props.values.phone) &&
-            idenRegExp.test(props.values.natID) &&
-            setShowEmailPopup(true);
-        }}
-      >
+      <form style={{ margin: "3% 20%" }} onSubmit={handleSubmit}>
         <Row className={classes.row} noGutters={true}>
           <Col>
             <FormControl component="fieldset">
-              <FormLabel error={touched.name && Boolean(errors.name)} className={classes.formLabel}>
+              <FormLabel
+                error={touched.firstName && Boolean(errors.firstName)}
+                className={classes.formLabel}
+              >
                 Name
               </FormLabel>
               <TextField
-                id="name"
+                id="firstName"
                 placeholder="Enter your Name"
                 className={classes.textField}
-                value={values.name}
+                value={values.firstName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                helperText={touched.name ? errors.name : ""}
-                error={touched.name && Boolean(errors.name)}
+                helperText={touched.firstName ? errors.firstName : ""}
+                error={touched.firstName && Boolean(errors.firstName)}
                 margin="dense"
                 variant="outlined"
               />
@@ -169,20 +121,20 @@ function DormOwner(props: FormikProps<FormValue> & Style) {
           <Col>
             <FormControl component="fieldset">
               <FormLabel
-                error={touched.phone && Boolean(errors.phone)}
+                error={touched.telephone && Boolean(errors.telephone)}
                 className={classes.formLabel}
               >
                 Phone number
               </FormLabel>
               <TextField
-                id="phone"
+                id="telephone"
                 placeholder="Enter your Phone number"
-                value={values.phone}
+                value={values.telephone}
                 className={classes.textField}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                helperText={touched.phone ? errors.phone : ""}
-                error={touched.phone && Boolean(errors.phone)}
+                helperText={touched.telephone ? errors.telephone : ""}
+                error={touched.telephone && Boolean(errors.telephone)}
                 margin="dense"
                 variant="outlined"
               />
@@ -216,26 +168,27 @@ function DormOwner(props: FormikProps<FormValue> & Style) {
           <Col>
             <FormControl component="fieldset">
               <FormLabel
-                error={touched.natID && Boolean(errors.natID)}
+                error={touched.natId && Boolean(errors.natId)}
                 className={classes.formLabel}
               >
-                Identification number
+              Identification number
               </FormLabel>
               <TextField
-                id="natID"
+                id="natId"
                 placeholder="Enter your Identification number"
-                value={values.natID}
+                value={values.natId}
                 className={classes.textField}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                helperText={touched.natID ? errors.natID : ""}
-                error={touched.natID && Boolean(errors.natID)}
+                helperText={touched.natId ? errors.natId : ""}
+                error={touched.natId && Boolean(errors.natId)}
                 margin="dense"
                 variant="outlined"
               />
             </FormControl>
           </Col>
-          <Col></Col>
+          <Col>
+          </Col>
         </Row>
         <Row noGutters={true} className={classes.row}>
           <Col>
@@ -264,7 +217,9 @@ function DormOwner(props: FormikProps<FormValue> & Style) {
           <Col>
             <FormControl component="fieldset">
               <FormLabel
-                error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                error={
+                  touched.confirmPassword && Boolean(errors.confirmPassword)
+                }
                 className={classes.formLabel}
               >
                 Confirm Password
@@ -277,15 +232,19 @@ function DormOwner(props: FormikProps<FormValue> & Style) {
                 value={values.confirmPassword}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                helperText={touched.confirmPassword ? errors.confirmPassword : ""}
-                error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                helperText={
+                  touched.confirmPassword ? errors.confirmPassword : ""
+                }
+                error={
+                  touched.confirmPassword && Boolean(errors.confirmPassword)
+                }
                 margin="dense"
                 variant="outlined"
               />
             </FormControl>
           </Col>
         </Row>
-        <Row noGutters={true}>
+        <Row  noGutters={true}>
           <Col>
             <div
               style={{
@@ -298,8 +257,8 @@ function DormOwner(props: FormikProps<FormValue> & Style) {
                 <FormLabel className={classes.formLabel}>Gender</FormLabel>
                 <RadioGroup
                   aria-label="gender"
-                  name="gender"
-                  value={values.gender}
+                  name="sex"
+                  value={values.sex}
                   onChange={handleChange}
                 >
                   <FormControlLabel
@@ -307,7 +266,11 @@ function DormOwner(props: FormikProps<FormValue> & Style) {
                     control={<Radio color="primary" />}
                     label="Female"
                   />{" "}
-                  <FormControlLabel value="male" control={<Radio color="primary" />} label="Male" />
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio color="primary" />}
+                    label="Male"
+                  />
                 </RadioGroup>
               </FormControl>
             </div>
@@ -323,29 +286,28 @@ function DormOwner(props: FormikProps<FormValue> & Style) {
                 width: "350px",
               }}
             >
-              <Checkbox
-                style={{ paddingLeft: "0" }}
-                checked={values.acceptTerm}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="acceptTerm"
-                color="primary"
-              />
-              <FormLabel style={{ fontSize: "0.7rem" }} className={classes.black}>
-                I have to read and agree to
-              </FormLabel>{" "}
-              <a
-                style={{ fontSize: "0.7rem", textDecoration: "underline", color: "#0066cc" }}
-                onClick={() => {
-                  setShow(true);
-                }}
-              >
-                Term service and policy
-              </a>
-              <Termservice show={show} handleClose={handleClose} />
-              <FormHelperText error={true}>
-                {touched.acceptTerm ? errors.acceptTerm : ""}
-              </FormHelperText>
+            <Checkbox
+              style={{paddingLeft:"0"}}
+              checked={values.acceptTerm}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="acceptTerm"
+              color="primary"
+            />
+            <FormLabel style={{fontSize:"0.7rem"}} className={classes.black}>
+              I have to read and agree to 
+            </FormLabel>{" "}
+            <a style={{fontSize:"0.7rem",textDecoration:"underline",color:"#0066cc"}}
+              onClick={() => {
+                setShow(true);
+              }}
+            >
+              Term service and policy
+            </a>
+            <Termservice show={show} handleClose={handleClose} />
+            <FormHelperText error={true}>
+              {touched.acceptTerm ? errors.acceptTerm : ""}
+            </FormHelperText>
             </div>
           </Col>
           <Col></Col>
@@ -359,7 +321,6 @@ function DormOwner(props: FormikProps<FormValue> & Style) {
                 width: "350px",
               }}
             >
-              <EmailPopup open={showEmailPopup} setOpen={setShowEmailPopup} />
               <Button
                 className={classes.button}
                 variant="secondary"
@@ -368,35 +329,41 @@ function DormOwner(props: FormikProps<FormValue> & Style) {
               >
                 SUBMIT
               </Button>
-              <Button className={classes.button} variant="danger" onClick={handleReset}>
+              <Button
+                className={classes.button}
+                variant="danger"
+                onClick={handleReset}
+              >
                 CLEAR
               </Button>
             </div>
           </Col>
           <Col></Col>
         </Row>
-      </Form>
+      </form>
     </div>
   );
 }
-const DormOwnerForm = withFormik<MyFormProps, FormValue>({
-  mapPropsToValues: (props) => {
+const DormOwnerFormik = withFormik<DormOwnerMyFormProps,DormOwnerFormValue>({
+  mapPropsToValues: props => {
     return {
-      name: props.name || "",
+      firstName: props.firstName || "",
       lastName: props.lastName || "",
       email: props.email || "",
       password: props.password || "",
       confirmPassword: props.confirmPassword || "",
-      gender: props.gender || "male",
+      sex: props.sex || "male",
       acceptTerm: props.acceptTerm || false,
-      phone: props.phone || "",
-      natID: props.natID || "",
+      telephone: props.telephone || "",
+      natId: props.natId || "",
     };
   },
   validationSchema: Yup.object().shape({
-    name: Yup.string().required("Required"),
+    firstName: Yup.string().required("Required"),
     lastName: Yup.string().required("Required"),
-    email: Yup.string().email("Enter a valid email").required("Email is required"),
+    email: Yup.string()
+      .email("Enter a valid email")
+      .required("Email is required"),
     password: Yup.string()
       .min(8, "Password must contain at least 8 characters")
       .required("Enter your password"),
@@ -406,25 +373,93 @@ const DormOwnerForm = withFormik<MyFormProps, FormValue>({
     acceptTerm: Yup.boolean()
       .required("Required")
       .oneOf([true], "You must accept the terms and conditions."),
-    gender: Yup.string().required("Required"),
-    phone: Yup.string().matches(phoneRegExp, "Invalid phone number").required("Required"),
-    natID: Yup.string().required("Required").matches(idenRegExp, "Invalid IdenNumber"),
+    sex: Yup.string().required("Required"),
+    telephone: Yup.string()
+      .matches(phoneRegExp, "Invalid phone number")
+      .required("Required"),
+    natId: Yup.string().required("Required")
+      .matches(idenRegExp,"Invalid IdenNumber")
   }),
-
-  handleSubmit: (values, { resetForm }) => {
-    const { name, lastName, email, password, phone, gender, natID } = values;
-    const form = {
-      name,
-      lastName,
-      email,
-      password,
-      phone,
-      gender,
-      natID,
-    };
-    authService.RegisterDormOwner(form);
-    resetForm();
+  handleSubmit: async (values, { resetForm  , props}) => {
+    const { firstName, lastName, email, password, telephone, sex , natId } = values;
+    const form : RegisterDormOwnerForm  = {
+      firstName : firstName,
+      lastName : lastName,
+      email : email,
+      password : password,
+      telephone : telephone,
+      sex : sex,
+      natId : natId,
+      email_verified : "true",
+      userType : "owner"
+    } 
+    const result  = await props.handleSubmit(form)
+    if(result === true) {
+      resetForm();
+    }
+    
   },
-})(DormOwner);
+})(InnerForm);
 
+const DormOwnerForm = (props : Style) => {
+  const {classes} = props
+  const history = useHistory();
+  const  {setAuthToken} : authContextType = useAuth()
+  const [show,setShow] = useState<boolean>(false)
+  const initialState : dialogProps = {
+    title : "",
+    content : "",
+  }
+  const [popup,setPopup] = useState<dialogProps>(initialState)
+
+  const handleSubmit = async (form : RegisterDormOwnerForm) => {
+
+      const result = await authService.RegisterDormOwner(form)
+      if (result.isAuthError) {
+        setPopup({
+          title : "Register Failed",
+          content :"This email is already use"
+        })
+        setShow(true)
+        setTimeout(() => {
+          setShow(false)
+        },800)
+
+      } else {
+        setPopup({
+          title : "Register Success",
+          content :""
+        })
+        setShow(true)
+        setTimeout(() => {
+          setShow(false)
+          if (result.token) {
+            setAuthToken(result.token)
+          }
+        },800)
+
+      }
+      return result.isAuthError
+
+  }
+  useEffect(() => {
+    document.body.style.backgroundColor = "white";
+  }, []);
+
+  return (
+    <>
+      <Navbar style={{ padding: "1%" }} bg="danger">
+        <Nav className="text-center">
+          <Button variant="" onClick={() => history.goBack()}>
+            <ArrowBackIosIcon htmlColor="white" fontSize="large" />
+          </Button>
+          <h1 className={classes.navCenter}>Sign up for Dorm Owner</h1>
+        </Nav>
+      </Navbar>
+      <DormOwnerFormik classes={classes} handleSubmit={handleSubmit} />
+      <Signuppop  open={show} title={popup.title} content={popup.content} />
+    </>
+  )
+}
 export default withStyles(styles)(DormOwnerForm);
+

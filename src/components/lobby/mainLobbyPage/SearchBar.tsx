@@ -1,11 +1,10 @@
 import React , {useState} from "react";
 import { InputGroup, FormControl } from "react-bootstrap";
+import { SearchLobbyProps } from "../../type";
 
-interface SearchProps {
-    handleSubmit : (s : string) => void
-}
 
-const SearchBar = (props : SearchProps) => {
+
+const SearchBar = (props : SearchLobbyProps) => {
     const {handleSubmit} = props
     const [search, setSearch] = useState<string>("");
     const handleChange =  (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -13,8 +12,8 @@ const SearchBar = (props : SearchProps) => {
         setSearch(value)
     }
     return (
-        <div>
-        <InputGroup>
+        
+        <InputGroup >
             <FormControl
             onChange={handleChange}
             value={search}
@@ -26,7 +25,7 @@ const SearchBar = (props : SearchProps) => {
             }} >Search</button>
             </InputGroup.Append>
         </InputGroup>
-        </div>
+    
     );
 };
 export default SearchBar
