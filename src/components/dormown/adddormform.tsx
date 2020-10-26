@@ -72,8 +72,10 @@ function DormOwner(props: any) {
   const [HaveInternetString, setHaveInternet] = useState<string>("");
   const [HaveRestString, setHaveRest] = useState<string>("");
   const [show2, setShow2] = useState<boolean>(false);
-  const [RoomList , setRoomList] = useState<any[]>([]);
+  const [Roomarray , setRoomarray] = useState<any>([]);
   const [showPopup, setShowPopup] = useState<boolean>(false);
+  const temp: any = {};
+
   const handleClose = () => {
     setShow2(false);
   };
@@ -339,17 +341,17 @@ function DormOwner(props: any) {
                     >
                       <FormControlLabel
                         value="male"
-                        control={<Radio color="secondary" />}
+                        control={<Radio color="primary" />}
                         label="Male"
                       />
                       <FormControlLabel
                         value="female"
-                        control={<Radio color="secondary" />}
+                        control={<Radio color="primary" />}
                         label="Female"
                       />
                       <FormControlLabel
                         value="any"
-                        control={<Radio color="secondary" />}
+                        control={<Radio color="primary" />}
                         label="Any"
                       />
                     </RadioGroup>
@@ -376,32 +378,32 @@ function DormOwner(props: any) {
                 >
                   <FormControlLabel
                     value="dorm"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Dorm"
                   />
                   <FormControlLabel
                     value="condo"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Condo"
                   />
                   <FormControlLabel
                     value="apartment"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Aparment"
                   />
                   <FormControlLabel
                     value="flat"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Flat"
                   />
                   <FormControlLabel
                     value="hostel"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Hostel"
                   />
                   <FormControlLabel
                     value="house"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="House"
                   />
                 </RadioGroup>
@@ -862,12 +864,12 @@ function DormOwner(props: any) {
                 >
                   <FormControlLabel
                     value="yes"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Yes"
                   />{" "}
                   <FormControlLabel
                     value="no"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="No"
                   />
                 </RadioGroup>
@@ -893,12 +895,12 @@ function DormOwner(props: any) {
                 >
                   <FormControlLabel
                     value="yes"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="Yes"
                   />{" "}
                   <FormControlLabel
                     value="no"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="primary" />}
                     label="No"
                   />
                 </RadioGroup>
@@ -950,7 +952,7 @@ function DormOwner(props: any) {
           </Col>
           <Col></Col>
         </Row>
-        <AddRoomPopUp open={showPopup} setOpen={setShowPopup} RoomList={RoomList} setRoomList = {setRoomList}/>
+        <AddRoomPopUp open={showPopup} setOpen={setShowPopup} RoomList={temp} Roomarray={Roomarray} setRoomarray={(Arr :any)=>{values.Roomarray=Arr; setRoomarray(Arr)}}/>
         <Row className={classes.row} noGutters={true}>
           <Col>
           <div
@@ -966,7 +968,7 @@ function DormOwner(props: any) {
               onChange={handleChange}
               onBlur={handleBlur}
               name="acceptTerm"
-              color="secondary"
+              color="primary"
             />
             <FormLabel style={{fontSize:"0.7rem"}} className={classes.black}>
               I have to read and agree to 
@@ -1012,7 +1014,7 @@ function DormOwner(props: any) {
 
               <Button
                 className={classes.button}
-                variant="secondary"
+                variant="primary"
                 type="submit"
                 disabled={isSubmitting}
               >
@@ -1079,6 +1081,7 @@ const DormOwnerForm = withFormik({
     AllowedPet,
     AllowedCook,
     DormImage,
+    Roomarray,
   }: propsDormForm) => {
     return {
       DormName: DormName || "",
@@ -1123,6 +1126,7 @@ const DormOwnerForm = withFormik({
       AllowedPet: AllowedPet || "no",
       AllowedCook: AllowedCook || "no",
       DormImage: DormImage || "",
+      Roomarray: Roomarray || [],
     };
   },
   validationSchema: Yup.object().shape({
@@ -1172,7 +1176,8 @@ const DormOwnerForm = withFormik({
       InternetDescript,
       AllowedPet,
       AllowedCook,
-      DormImage, } = values;
+      DormImage,
+      Roomarray, } = values;
     const form = {
       DormName,
       DormAddress,
@@ -1214,6 +1219,7 @@ const DormOwnerForm = withFormik({
       AllowedPet,
       AllowedCook,
       DormImage,
+      Roomarray,
     };
     console.log(form)
     setTimeout(() => {

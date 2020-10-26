@@ -31,7 +31,8 @@ interface AddRoomPopupProps {
   open: boolean;
   setOpen: any;
   RoomList: any;
-  setRoomList: any;
+  Roomarray: any[];
+  setRoomarray: any;
 }
 
 interface Roomtype {
@@ -87,6 +88,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AddRoomPopup(props: AddRoomPopupProps) {
   const [roomname, setroomname] = useState<string>("");
+  let temparray: any[] = [];
   //const { name, capacity, bathroom, kitchen, bedroom, pricing } = props.RoomList
   const handleClickOpen = () => {
     props.setOpen(true);
@@ -94,6 +96,14 @@ export default function AddRoomPopup(props: AddRoomPopupProps) {
   const classes = useStyles();
   const handleClose = () => {
     props.setOpen(false);
+  };
+  const handleSubmit = () => {
+    console.log(props.Roomarray);
+    /*props.setRoomarray([...props.Roomarray,...props.RoomList])
+    temparray = [...temparray,...props.RoomList]
+    console.log(temparray);
+    console.log(props.Roomarray);*/
+    props.setRoomarray([...props.Roomarray, props.RoomList])
   };
 
   return (
@@ -349,9 +359,7 @@ export default function AddRoomPopup(props: AddRoomPopupProps) {
               <Row className={classes.row} noGutters={true}>
                 <Button
                   className={classes.button}
-                  onClick={() => {
-                    console.log(props.RoomList)
-                  }}>
+                  onClick={handleSubmit}>
                   Confirm
                     </Button>
               </Row>
