@@ -26,6 +26,7 @@ import { tokenDto } from "./type";
 import DormOwnerRoute from "./routes/DormOwnerRoute";
 import DormFinderRoute from "./routes/DormFinderRoute";
 import Review from "./review/Review"
+import EditRequest from "./admin/EditRequest";
 
 const Theme = createMuiTheme({
     palette: {
@@ -65,6 +66,7 @@ function App() {
         <DormFinderRoute path="/lobby/:lobbyID" Component={Lobby} />    
         <DormFinderRoute path="/lobby" Component={MainLobby} />
         <DormFinderRoute path="/review" Component={Review} />       
+        <Route path="/admin" component={EditRequest}/>
         <Route component={PageNotFound} />
       </Switch>
 
