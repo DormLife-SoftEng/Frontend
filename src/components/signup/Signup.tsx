@@ -13,12 +13,12 @@ function Signup() {
     }, [])
     return (
         <div style={{ textAlign: "center", padding: "2% 4%" }}>
-            <Row style={{ textAlign: "left" }}>
+            <Row style={{ textAlign: "left" }} noGutters={true}>
                 <Col>
                     <Button onClick={() => history.goBack()} variant="" ><ArrowBackIosIcon htmlColor="white" fontSize="large" /></Button>
                 </Col>
             </Row>
-            <Row style={{ color: "white", height:"600px"}} noGutters={true}>
+            <Row style={{ color: "white", height:"600px"}} noGutters={true} >
                 <Col style={{margin: "15% 0"}}>
                     <h1 style={{ fontSize: "4rem", fontWeight: "bold" }}>Dorm Finder</h1>
                     <Button className="mt-5 btn-lg" onClick={() => {
@@ -42,7 +42,7 @@ function Signup() {
                     }} variant="outline-light">Signup</Button>
                 </Col>
             </Row>
-            <Row style={{ color: "white" }}>
+            <Row style={{ color: "white" }} noGutters={true}>
                 <Col>
                     <h1 style={{ fontSize: "2.5rem", fontWeight: "bold" }}>Already have an account?</h1>
                     <a onClick={() => {
