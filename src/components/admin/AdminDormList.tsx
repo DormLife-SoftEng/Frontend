@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import FormControl from "react-bootstrap/FormControl";
-
+import Navbar from "./Navbar";
 let mockup: any[] = [
   { name: "Hi", url: "12345" },
   { name: "Hello", url: "98765" },
@@ -57,12 +57,32 @@ export default function () {
   }, []);
 
   const [query, setQuery] = useState<string>("");
-
+  const history = useHistory();
   return (
     <>
-      <h1 style={{ textAlign: "center", marginTop: "40px" }}>Edit Request</h1>
-
+      <Navbar />
       <Container>
+        <Row noGutters={true}>
+          <Col xs={0} md={2}></Col>
+          <Col xs={12} md={8}>
+            <Button
+              variant="light"
+              size="lg"
+              block
+              style={{
+                fontSize: "1.25rem",
+                textAlign: "center",
+                color: "black",
+                backgroundColor: "white",
+                fontWeight: 600,
+              }}
+              onClick={() => history.push(`/admin/editrequest`)}
+            >
+              Edit Request
+            </Button>
+          </Col>
+          <Col xs={0} md={2}></Col>
+        </Row>
         <Row noGutters={true}>
           <Col xs={0} md={2}></Col>
           <Col xs={12} md={8}>
