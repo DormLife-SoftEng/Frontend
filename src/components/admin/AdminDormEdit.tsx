@@ -33,28 +33,28 @@ export default function () {
     <>
       <Header />
       <Row noGutters={true}>
-        <Col md={1}></Col>
-        <Col md={5}>
+        <Col xs={1} md={1}></Col>
+        <Col xs={11} md={5}>
           <Row>
-            <Col md={11}>
+            <Col xs={11} md={11}>
               <Card style={{ width: "100%" }}>
                 <Card.Body>Dorm info</Card.Body>
               </Card>
             </Col>
-            <Col md={1}></Col>
+            <Col xs={1} md={1}></Col>
           </Row>
         </Col>
-        <Col md={5}>
+        <Col xs={11} md={5}>
           <Row>
-            <Col md={1}></Col>
-            <Col md={11}>
+            <Col xs={1} md={1}></Col>
+            <Col xs={11} md={11}>
               <Card style={{ width: "100%" }}>
                 <Card.Body>This is some text within a card body.</Card.Body>
               </Card>
             </Col>
           </Row>
         </Col>
-        <Col md={1}></Col>
+        <Col xs={1} md={1}></Col>
       </Row>
     </>
   );
