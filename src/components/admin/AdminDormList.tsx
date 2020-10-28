@@ -60,8 +60,8 @@ export default function () {
   const history = useHistory();
   return (
     <>
-      <Navbar />
       <Container>
+        <Navbar />
         <Row noGutters={true}>
           <Col xs={0} md={2}></Col>
           <Col xs={12} md={8}>
