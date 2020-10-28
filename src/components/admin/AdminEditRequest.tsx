@@ -42,7 +42,7 @@ function DormEditButton(props: any) {
         backgroundColor: "white",
         fontWeight: 600,
       }}
-      onClick={() => history.push(`/admin/${dormLink}`)}
+      onClick={() => history.push(`/admin/editrequest/${dormLink}`)}
     >
       {dormName}
     </Button>
