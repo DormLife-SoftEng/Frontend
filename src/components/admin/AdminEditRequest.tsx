@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <Row>
       <Col xs={3} md={2} style={{ textAlign: "center", marginTop: "20px", marginBottom: "40px" }}>
-        <Button onClick={() => history.push("/")} variant="">
+        <Button onClick={() => history.push("/admin")} variant="">
           <ArrowBackIosIcon htmlColor="white" fontSize="large" />
         </Button>
       </Col>
