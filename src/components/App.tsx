@@ -28,6 +28,7 @@ import DormFinderRoute from "./routes/DormFinderRoute";
 import Review from "./review/Review";
 import AdminDormList from "./admin/AdminDormList";
 import AdminEditRequest from "./admin/AdminEditRequest";
+import AdminRoute from "./routes/AdminRoute";
 
 const Theme = createMuiTheme({
   palette: {
@@ -66,8 +67,8 @@ function App() {
           <DormFinderRoute path="/lobby/:lobbyID" Component={Lobby} />
           <DormFinderRoute path="/lobby" Component={MainLobby} />
           <DormFinderRoute path="/review" Component={Review} />
-          <Route path="/admin" component={AdminDormList} />
-          <Route path="/admin/editrequest" component={AdminEditRequest} />
+          <AdminRoute path="/admin/editrequest" Component={AdminEditRequest} />
+          <AdminRoute path="/admin/" Component={AdminDormList} />
           <Route component={PageNotFound} />
         </Switch>
       </MuiThemeProvider>
