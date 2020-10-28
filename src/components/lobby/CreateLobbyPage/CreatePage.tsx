@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import BackButton from "../mainLobbyPage/BackButton";
 import LobbyService from "../../../services/lobby.service";
 import { token1 } from "../../test";
-import {Nav,Navbar} from "react-bootstrap";
+import { Nav, Navbar, Row, Col ,Button} from "react-bootstrap";
 
 const CreatePage = () => {
   const history = useHistory();
@@ -31,10 +31,11 @@ const CreatePage = () => {
     document.body.style.backgroundColor = "white";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
-    <div style={{textAlign:"center"}}>
+    <div style={{ textAlign: "center" }}>
       <Navbar style={{ padding: "1% 4%" }} bg="danger">
-        <Nav className="text-center" >
+        <Nav className="text-center">
           <BackButton handleGoBack={handleGoBack} />
           <h1
             style={{
@@ -56,27 +57,79 @@ const CreatePage = () => {
       </Navbar>
       <br />
       <form onSubmit={handleForm}>
-        <label>Dorm Name</label>
+        <label style = {{
+            paddingTop:"10%"
+          }}>
+          <Row noGutters={true} xs={12}>
+            <Col lg={6} style={{
+              marginBottom:"auto",
+              marginTop:"auto"
+            }}>
+              <span style = {{
+            fontSize:"32px",
+            color:"#F55E61"
+          }}>Dorm Name</span>
+            </Col>
+            <Col lg={6}>
+              <input style ={{
+                textAlign:"center",
+                width:"500px",
+                height:"50px",
+                fontSize:"18px"
+              }}
+                name="dormName"
+                value={form.dormName}
+                onChange={handleChangeInput}
+                placeholder="Enter your Dorm Name"
+              />
+            </Col>
+          </Row>
+        </label>
         <br />
-        <input
-          name="dormName"
-          value={form.dormName}
-          onChange={handleChangeInput}
-          placeholder="Enter Dorm Name"
-        />
+        <label style = {{
+            paddingTop:"10%"
+          }}>
+          <Row noGutters={true} xs={12}>
+            <Col lg={6} style = {{
+            fontSize:"32px",
+            marginBottom:"auto",
+            marginTop:"auto"
+          }}>
+              <span style={{
+                color:"#F55E61"
+              }}>Room Type</span>
+            </Col>
+            <Col lg={6}>
+              <input style ={{
+                textAlign:"center",
+                width:"500px",
+                height:"50px",
+                fontSize:"18px"
+              }}
+                name="roomType"
+                value={form.roomType}
+                onChange={handleChangeInput}
+                placeholder="Enter your Room Type "
+              />
+            </Col>
+          </Row>
+        </label>
         <br />
-        <label>Room Type</label>
-        <br />
-        <input
-          name="roomType"
-          value={form.roomType}
-          onChange={handleChangeInput}
-          placeholder="Enter Room Type "
-        />
-        <br />
-        <button type="submit">Create</button>
+        <Row style={{
+          paddingTop:"5%"
+        }}>
+          <Col style={{
+            marginLeft:"30%"
+          }}>
+            <Button variant="danger" type="submit" >Create</Button>
+          </Col>
+          <Col style={{
+            marginRight:"30%"
+          }}>
+            <Button variant="secondary" onClick={handleGoBack}>Cancel</Button>
+          </Col>
+        </Row>
       </form>
-      <button onClick={handleGoBack}>Cancel</button>
     </div>
   );
 };
