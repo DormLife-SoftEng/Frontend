@@ -3,7 +3,7 @@ import React from "react";
 import DormCarousel from "../dorm/DormCarousel";
 import RoomModal from "../dorm/RoomModal";
 import Googlemap from "../google/google";
-import {propsDorm,dormRoom, dormUtil} from "./type2";
+import {propsDorm,dormRoom, Utilities, Room} from "./type2";
 
 
 interface DormDetailProps {
@@ -20,17 +20,17 @@ function DormInfo(props: DormDetailProps) {
       <DormCarousel images={dorm.image}/>
       <p>Type: {dorm.type}</p>
       <p>Allowed Sex: {dorm.allowedSex}</p>
-      <p>Address: {dorm.location.address}</p>
+      <p>Address: {dorm.address.address}</p>
       <p>Phone Number: {dorm.contact.telephone}</p>
       {
       dorm.contact.website != null &&
         (<p>Website: {dorm.contact.website}</p>)
       }
       <p>Map: 
-        <Googlemap coordinate={{lat:dorm.location.coordinate.coordinates[0],lng:dorm.location.coordinate.coordinates[1]}} containerStyle={{width: '193px', height: '193px'}} zoom={13}/>
+        <Googlemap coordinate={{lat:dorm.address.coordinate[0],lng:dorm.address.coordinate[1]}} containerStyle={{width: '193px', height: '193px'}} zoom={13}/>
       </p>
       <p>Facilities: {
-        dorm.utility.map((util: dormUtil, index: number)=>{
+        dorm.utility.map((util: Utilities, index: number)=>{
           if(util.type == 'Cooking'){
             allowedCooking = true;
             return;
@@ -60,7 +60,7 @@ function DormInfo(props: DormDetailProps) {
       <p>Allowed Pet: {allowedPet?'Yes':'No'}</p>
       <p>Allowed Cooking: {allowedCooking?'Yes':'No'}</p>
       <p>Room Type: {
-        dorm.room.map((rt: dormRoom, index: number)=>{
+        dorm.room.map((rt,index)=>{
           return (
             <>
             {index != 0 && (<span>{', '}</span>)}

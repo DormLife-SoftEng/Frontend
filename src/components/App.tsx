@@ -8,7 +8,7 @@ import Repassword from "./signin/Repassword";
 import DormOwner from "./signup/DormOwner";
 import DormFinder from "./signup/DormFinder";
 import Dorm from "./dorm/Dorm";
-import DormHome from  "./dormown/dormhome"
+import MyDorm from  "./dormown/MyDorm"
 import ContactSupport from "./dormown/ContactSupport";
 import AddDorm from "./dormown/AddDorm"
 import Lobby from "./lobby/LobbyPage/Lobby";
@@ -61,7 +61,7 @@ function App() {
         <AuthRoute  path="/signin" Component={Signin} />
         <DormOwnerRoute path="/dormowner/adddorm" Component={AddDorm}  />
         <DormOwnerRoute path="/dormowner/contactSupport" Component={ContactSupport} />
-        <DormOwnerRoute path="/dormowner/" Component={DormHome} />
+        <DormOwnerRoute path="/dormowner/" Component={MyDorm} />
         <DormFinderRoute path="/lobby/create" Component={CreatePage} />
         <DormFinderRoute path="/lobby/:lobbyID/chat" Component={Chatpage} />
         <DormFinderRoute path="/lobby/:lobbyID" Component={Lobby} />    
