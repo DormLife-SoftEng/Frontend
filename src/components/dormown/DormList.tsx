@@ -1,27 +1,26 @@
 import React from "react";
+import { useState } from "react";
+import { setSyntheticLeadingComments } from "typescript";
 import SuggestItem from "./SuggestItem";
-import { propsSuggestItem } from "./type";
+import { propsDorm } from "./type2";
 
-function DormList(props: any) {
-  const suggestLists: propsSuggestItem[] = [
-    {
-      id: "999999",
-      name: "บ้านใหญ่พระนคร",
-    },
-    {
-      id: "12534",
-      name: "บ้านเล็กเยอรมัน",
-    },
-  ];
+interface Props {
+  dorms : propsDorm[],
+  setdorm : React.Dispatch<React.SetStateAction<number>>,
+  search : any
+}
+
+function DormList(props: Props) {
+  const {dorms,setdorm}=props
   return (
     <div
       className="overflow-auto"
-      style={{ textAlign: "center", maxHeight: "80%" }}
+      style={{ textAlign: "center", maxHeight: "480px" }}
     >
-      {suggestLists.map(
-        (item: any, index) =>
+      {dorms.map(
+        (item ,  index) =>
           item["name"].includes(props.search) && (
-            <SuggestItem {...item} key={index} />
+            <SuggestItem index={index} dorm={item} key={index} setdorm={setdorm}/>
           )
       )}
     </div>

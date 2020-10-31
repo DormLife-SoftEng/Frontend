@@ -1,28 +1,31 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Carousel } from "react-bootstrap";
+import { Carousel, Row, Col } from "react-bootstrap";
 import { propsCarousel } from "./type";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 function DormCarousel(props: propsCarousel) {
   const { dorms } = props;
-  const history = useHistory()
+  const history = useHistory();
   return (
-    <Carousel style={{ padding: "1% 2%" }}>
-      {dorms.map((dorm, index) => {
-        return (
-          <Carousel.Item key={index}>
-            <a onClick={() => history.push(`/dorm/${dorm.id}`)  }>
-              <img
-                style={{ height: "500px" }}
-                className="d-block w-100"
-                src={dorm.src}
-                alt="First slide"
-              />
-            </a>
-          </Carousel.Item>
-        );
-      })}
-{/* 
+    <Row noGutters={true}>
+      <Col xs={1}></Col>
+      <Col xs={10}>
+        <Carousel style={{ padding: "1% 2%" }}>
+          {dorms.map((dorm, index) => {
+            return (
+              <Carousel.Item key={index}>
+                <a onClick={() => history.push(`/dorm/${dorm.id}`)}>
+                  <img
+                    style={{ height: "350px", overflow: "hidden", flex: "1", objectFit: "cover" }}
+                    className="d-block w-100"
+                    src={dorm.src}
+                    alt="First slide"
+                  />
+                </a>
+              </Carousel.Item>
+            );
+          })}
+          {/* 
       <Carousel.Item>
         <a href="#">
           <img
@@ -33,7 +36,10 @@ function DormCarousel(props: propsCarousel) {
           />
         </a>
       </Carousel.Item> */}
-    </Carousel>
+        </Carousel>
+      </Col>
+      <Col xs={1}></Col>
+    </Row>
   );
 }
 export default DormCarousel;

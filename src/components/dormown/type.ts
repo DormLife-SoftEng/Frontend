@@ -1,6 +1,9 @@
+import { propsDorm } from "./type2";
+
 export interface propsSuggestItem  {
-    id : string,
-    name : string
+    dorm : propsDorm,
+    setdorm: React.Dispatch<React.SetStateAction<number>>,
+    index : number
 }
 
 export interface DormInform {

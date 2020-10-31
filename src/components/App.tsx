@@ -8,7 +8,7 @@ import Repassword from "./signin/Repassword";
 import DormOwner from "./signup/DormOwner";
 import DormFinder from "./signup/DormFinder";
 import Dorm from "./dorm/Dorm";
-import DormHome from  "./dormown/DormHome"
+import DormHome from  "./dormown/dormhome"
 import ContactSupport from "./dormown/ContactSupport";
 import AddDorm from "./dormown/AddDorm"
 import Lobby from "./lobby/LobbyPage/Lobby";
