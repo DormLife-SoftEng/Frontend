@@ -3,6 +3,7 @@ import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import authService from "../../services/auth.service";
+import adminService from "../../services/admin.service";
 
 const Header = (props: any) => {
   const history = useHistory();
@@ -37,7 +38,7 @@ export default function () {
   const history = useHistory();
   const [dormID] = location.pathname.split("/").splice(-1);
   const getDormData = async () => {
-    const result = await authService.adminGetDormData(dormID);
+    const result = await adminService.adminGetDormData(dormID);
     if (result !== false) {
       setData(result);
     } else {
@@ -117,7 +118,7 @@ export default function () {
               <div style={{ textAlign: "center" }}>
                 <Button
                   onClick={() => {
-                    authService.adminChangeDormData(dormID);
+                    adminService.adminChangeDormData(dormID);
                   }}
                   variant="danger"
                 >
@@ -128,7 +129,7 @@ export default function () {
                     {"  "}
                     <Button
                       onClick={() => {
-                        authService.adminDeleteDormData(dormID);
+                        adminService.adminDeleteDormData(dormID);
                         history.push("/admin/editrequest");
                       }}
                       variant="secondary"

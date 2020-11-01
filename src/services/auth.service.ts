@@ -11,8 +11,6 @@ const API_URL = "http://localhost:5000/api/v1/users/";
 
 const API_URLSignin = "http://localhost:5000/api/v1/oauth/";
 
-const API_URLAdmin = "http://localhost:5000/api/v1/tickets/";
-
 async function RegisterDormFinder(form: RegisterDormFinderForm) {
   try {
     await axios.post(`${API_URL}sign-up`, form);
@@ -77,41 +75,6 @@ async function Logout() {
     return false;
   }
 }
-
-async function adminListGetDormData() {
-    try {
-      const result = axios.get(`${API_URLAdmin}`).then((res) => res.data);
-      return result;
-    } catch (err) {
-      return false;
-    }
-  }
-
-async function adminGetDormData(urlPath: string) {
-  try {
-    const result = axios.get(`${API_URLAdmin}${urlPath}?offset=0&stop0`).then((res) => res.data);
-    return result;
-  } catch (err) {
-    return false;
-  }
-}
-
-async function adminChangeDormData(urlPath: string) {
-  try {
-    const result = axios.get(`${API_URLAdmin}${urlPath}`).then((res) => res.data);
-    return result;
-  } catch (err) {
-    return false;
-  }
-}
-async function adminDeleteDormData(urlPath: string) {
-  const result = axios
-    .delete(`${API_URLAdmin}${urlPath}`)
-    .then((res) => res.data)
-    .catch((err) => {
-      console.error(err);
-    });
-}
 // function getCurrentUser() {
 
 //     const token  = localStorage.getItem("token")
@@ -146,8 +109,4 @@ export default {
   Logout,
   isExpired,
   getToken,
-  adminListGetDormData,
-  adminGetDormData,
-  adminChangeDormData,
-  adminDeleteDormData,
 };

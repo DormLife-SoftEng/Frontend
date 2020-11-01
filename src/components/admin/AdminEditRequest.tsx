@@ -3,7 +3,7 @@ import { Button, Row, Col, Container } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import authService from "../../services/auth.service";
-
+import adminService from "../../services/admin.service";
 const Header = () => {
   const history = useHistory();
 
@@ -47,7 +47,7 @@ function DormEditButton(props: any) {
 export default function () {
   const [data, setData] = useState<any[]>([]);
   document.body.style.backgroundColor = "#F55E61";
-  authService.adminListGetDormData().then((res) => setData(res));
+  adminService.adminListGetDormData().then((res) => setData(res));
 
   return (
     <>
