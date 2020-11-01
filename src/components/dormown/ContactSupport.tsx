@@ -2,7 +2,7 @@ import React, { useEffect, useState, Component } from "react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import { withStyles, createStyles } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Navbar, Nav, Row, Col, Button, Container } from "react-bootstrap";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { Grid } from "@material-ui/core";
@@ -11,6 +11,7 @@ import DeleteModal from "./DeleteModal"
 
 function Contactsupport() {
   const history = useHistory();
+  const {id}:{id:string} = useParams();
   useEffect(() => {
     document.body.style.backgroundColor = "#FFBDBD";
   }, []);

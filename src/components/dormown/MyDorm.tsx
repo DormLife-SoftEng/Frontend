@@ -86,9 +86,11 @@ function MyDorm() {
           <Col xs={6}>
             {dorms.length >=1 &&
               
-              <Col style={{ background: "white", margin: "0% 2%" }}>
+              <Col style={{ background: "white", padding: "0% 2%" }}>
                 <Row noGutters={true}>
+                  <Col xs={12}>
                   <DormDetail dorm={dorms[dorm]} />
+                  </Col>
                 </Row>
                 <Row
                   noGutters={true}
@@ -101,7 +103,7 @@ function MyDorm() {
                     <Button
                       variant="warning"
                       style={{ color: "white" }}
-                      onClick={() => history.push(`/dormowner/contactsupport`)}
+                      onClick={() => history.push(`/dormowner/contactsupport/${dorms[dorm].id}`)}
                     >
                       Contact Support
                     </Button>
