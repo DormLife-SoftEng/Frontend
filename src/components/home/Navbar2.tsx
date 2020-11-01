@@ -8,6 +8,7 @@ import { useAuth, authContextType } from "../../contexts/auth.context";
 function Navbar2() {
   const history = useHistory();
   const { authToken }: authContextType = useAuth();
+  authToken && authToken.role === "admin" && history.push("/admin");
   return (
     <Row noGutters={true}>
       {authToken && authToken.role === "owner" ? (
