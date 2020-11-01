@@ -9,26 +9,15 @@ import ChatList from "./ChatList";
 import lobbyService from "../../../services/lobby.service";
 import { useParams } from "react-router-dom";
 import { propsSendMessage  , chat} from "../../type";
-import { token1 , token2 } from "../../test"
+import {useAuth , authContextType} from "../../../contexts/auth.context"
 
 const Chatpage = () => {
+    const {authToken,setAuthToken} : authContextType = useAuth()
+
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const [loading,setLoading] = useState<boolean>(true)
-    const {lobbyID,userID} : {lobbyID:string,userID:string} = useParams();
-    const [chats,setChats] = useState<chat[]>([])
-    var token = {
-        userID : "",
-        name : {
-            firstName : "",
-            lastName : ""
-        },
-        profilepic : 0
-    }
-    if (userID === "1") {
-        token = token1
-    } else  {
-        token = token2 
-    }
+    const {lobbyID} : {lobbyID:string} = useParams();
+    const [chats,setChats] = useState<any[]>([])
 
     const getAllChat = async () => {
         const allChat = await lobbyService.getAllMessage(lobbyID)
@@ -43,24 +32,29 @@ const Chatpage = () => {
     }
 
     const handleSubmit = async (message : string) => {
-        const form : propsSendMessage = {message : message,author : token.name.firstName,userID : token.userID , profilepic : token.profilepic}
+        const form : propsSendMessage = {message : message}
         await lobbyService.sendMessage(lobbyID,form)
 
     }
 
     useEffect(() => {
-        console.log("mount")
-        getAllChat()
+        document.body.style.backgroundColor = "#fff";
+        setInterval(() => {
+            getAllChat()
+        },1500)
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
+    <>
+    {authToken && 
     <Container style={{padding:"0"}} fluid>
     {loading && <Spinner className="Absolute-Center" animation="border" variant="danger" />}
     <Header />
     <ChatList>
         {chats.map((chat,index)=> {
             return <div key={index}>
-                {chat.userID === token.userID ? <Sender key={index} author={chat.author} userID={chat.userID} profilepic={chat.profilepic} message={chat.message} /> : <Receiver key={index} author={chat.author} userID={chat.userID} profilepic={chat.profilepic} message={chat.message} /> }
+                {chat.user.userId === authToken.userId ? <Sender key={index} author={chat.user.name} userID={chat.user.userId} profilepic={chat.user.PictureProfile} message={chat.message} /> : <Receiver key={index} author={chat.user.name} userID={chat.user.userId} profilepic={chat.user.PictureProfile} message={chat.message} /> }
             </div>
             
         })}
@@ -68,6 +62,8 @@ const Chatpage = () => {
     </ChatList>
     <Chatbox handleSubmit={handleSubmit} />
     </Container>
+    }
+    </>
     )
 }
 export default Chatpage;

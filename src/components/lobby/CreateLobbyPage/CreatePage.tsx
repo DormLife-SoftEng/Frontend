@@ -4,10 +4,13 @@ import BackButton from "../mainLobbyPage/BackButton";
 import LobbyService from "../../../services/lobby.service";
 import { token1 } from "../../test";
 import { Nav, Navbar, Row, Col ,Button} from "react-bootstrap";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from "@material-ui/core/TextField"
 
 const CreatePage = () => {
   const history = useHistory();
-  const [form, setForm] = useState({ dormName: "", roomType: "" });
+  const [form, setForm] = useState({ dormId: "", roomId: "" });
+  const [inputValue, setInputValue] = React.useState('');
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -19,9 +22,8 @@ const CreatePage = () => {
     history.goBack();
   };
   const handleSubmit = async () => {
-    const lobby = { ...form, token: token1, maxMember: 4 };
-    const lobbyID: string = await LobbyService.createLobby(lobby);
-    history.push(`/lobby/${lobbyID}`);
+    const lobbyID = await LobbyService.createLobby(form) as { id : string}
+    history.push(`/lobby/${lobbyID.id}`);
   };
   const handleForm = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -77,8 +79,8 @@ const CreatePage = () => {
                 height:"50px",
                 fontSize:"18px"
               }}
-                name="dormName"
-                value={form.dormName}
+                name="dormId"
+                value={form.dormId}
                 onChange={handleChangeInput}
                 placeholder="Enter your Dorm Name"
               />
@@ -106,8 +108,8 @@ const CreatePage = () => {
                 height:"50px",
                 fontSize:"18px"
               }}
-                name="roomType"
-                value={form.roomType}
+                name="roomId"
+                value={form.roomId}
                 onChange={handleChangeInput}
                 placeholder="Enter your Room Type "
               />

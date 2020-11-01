@@ -13,20 +13,20 @@ import ReviewList from "./ReviewList";
 import dorminfoService from "../../services/dorminfo.service";
 
 function Dorm() {
-    const {id} : {id:string} = useParams()
+    const {dormID} : {dormID:string} = useParams()
     const getDormInfo = async () => {
-        const dorm = await dorminfoService.getOneDorm(id)
+        const dorm = await dorminfoService.getOneDorm(dormID)
         console.log(dorm)
         setDorm(dorm)
     }
     useEffect(()=> {
         document.body.style.backgroundColor = "white";
-        console.log(`Fetch DormInfo from database with ${id}`)
+        console.log(`Fetch DormInfo from database with ${dormID}`)
         getDormInfo()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-    console.log(id)
+    console.log(dormID)
     const history = useHistory();
 
     const test : propsDorm = {
@@ -130,7 +130,7 @@ function Dorm() {
             <Row className="pt-4 pb-5">
                 <Col>
                     <DormCarousel images={dorm.image}/>
-                    <ReviewList dorm={id} avgStar={dorm.avgStar}/>
+                    <ReviewList dorm={dormID} avgStar={dorm.avgStar}/>
                 </Col>
                 <Col>
                     <DormInfo dorm={dorm}/>

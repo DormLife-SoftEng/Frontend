@@ -55,7 +55,7 @@ export interface chat {
 }
 
 export interface Lobby {
-    _id? : ObjectID
+    id? : ObjectID
     dormName : string,
     roomType : string,
     owner : user,
@@ -67,9 +67,9 @@ export interface Lobby {
 //Lobby MainPage
 
 export interface LobbyRowProps {
-    dormName : string,
-    roomType : string,
-    _id? : ObjectID
+    dormName : any,
+    room : any
+    id? : ObjectID
 }
 export interface backButtonProps {
     handleGoBack : () => void
@@ -88,7 +88,7 @@ export interface ModalMainPageProps {
     handleRouting : (s : string) => void
 }
 export interface LobbyListProps {
-    lobbylist : Lobby[]
+    lobbylist : any
 }
 
 export interface SearchLobbyProps {
@@ -115,20 +115,20 @@ export interface HomeButtonProps {
 }
 
 export interface ImagesProps {
-    attr : user,
+    attr : any,
     key : number,
     index : number
 }
 
 export interface ImagesListProps {
-    member : user[] ,
+    member : any ,
     maxMember : number,
     isOwner : boolean,
     handleKick : (userID : string) => void
 }
 
 export interface ImagesOwnerProps {
-    attr : user
+    attr : any
     handleKick : (userID : string) => void,
     index : number
 }
@@ -160,10 +160,7 @@ export interface ChatListProps {
 }
 
 export interface propsSendMessage {
-    author : string,
-    userID : string,
     message : string,
-    profilepic : number
 }
 
 export interface propsReceiver {

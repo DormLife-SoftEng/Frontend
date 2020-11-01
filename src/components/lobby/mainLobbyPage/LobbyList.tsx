@@ -12,8 +12,8 @@ const LobbyList = (props : LobbyListProps) => {
             className="overflow-auto"
             style={{ textAlign: "center", maxWidth: "800px", maxHeight: "400px" }}
             >
-            {lobbylist.map((lobby,index) => {
-                return <LobbyRow roomType={lobby.roomType} _id={lobby._id} dormName={lobby.dormName}  key={index} />
+            {lobbylist.map((lobby:any,index:number) => {
+                return <LobbyRow room={lobby.room} id={lobby.id} dormName={lobby.dormName}  key={index} />
             })}
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HomeButton from "./HomeButton";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams , Redirect } from "react-router-dom";
 import CloseLobby from "./CloseLobby";
 import DeleteLobby from "./DeleteLobby";
 import LeaveLobby from "./LeaveLobby";
@@ -11,41 +11,16 @@ import { Lobby } from "../../type";
 import lobbyService from "../../../services/lobby.service";
 import { token1, token2 } from "../../test"
 import {Nav,Navbar} from "react-bootstrap"
+import {useAuth , authContextType} from "../../../contexts/auth.context"
 
 const LobbyPage = () => {
     const history = useHistory();
-    const initialstate: Lobby = {
-        owner: {
-            userID: "",
-            name: {
-                firstName: "",
-                lastName: ""
-            },
-            profilepic: 0,
-            ready: false
-        },
-        member: [],
-        dormName: "",
-        maxMember: 0,
-        roomType: "",
-        chat: []
-    }
+    const {authToken,setAuthToken} : authContextType = useAuth()
+    const [lobbyInfo, setLobbyInfo] = useState<any>()
+    const { lobbyID }: { lobbyID: string } = useParams();
+    var interval = setInterval(()=> {
 
-    const [lobbyInfo, setLobbyInfo] = useState<Lobby>(initialstate)
-    const { lobbyID, userID }: { lobbyID: string, userID: string } = useParams();
-    var token = {
-        userID: "",
-        name: {
-            firstName: "",
-            lastName: ""
-        },
-        profilepic: 0
-    }
-    if (userID === "1") {
-        token = token1
-    } else {
-        token = token2
-    }
+    },1500);
     const handleGoHome = () => {
         history.push("/")
     }
@@ -56,19 +31,27 @@ const LobbyPage = () => {
         const lobby = await lobbyService.getSpecificLobby(lobbyID)
         console.log(lobby)
         setLobbyInfo(lobby)
+        if (authToken) {
+            const result = lobby.member.some((mem : any) => mem.user.userId === authToken.userId) as boolean
+            if(!result) {
+                clearInterval(interval)
+                history.push("/")
+            }
+        }
     }
     const setLobbyReadyInfo = async () => {
-        const lobby = await lobbyService.setReady(lobbyID, token.userID)
-        setLobbyInfo(lobby)
+        await lobbyService.setReady(lobbyID)
     }
     const handleGoChatPage = () => {
-        history.push(`/lobby/${lobbyID}/chat/${token.userID}`)
+        clearInterval(interval)
+        history.push(`/lobby/${lobbyID}/chat/`)
     }
     const handleKick = async (userID: string) => {
-        await lobbyService.kickMember(lobbyID, userID)
+        await lobbyService.kickMember(lobbyID,userID)
     }
     const handleLeave = async () => {
-        await lobbyService.leaveLobby(lobbyID, userID)
+        await lobbyService.leaveLobby(lobbyID)
+        clearInterval(interval)
         history.push("/")
     }
     const handleDelete = async () => {
@@ -80,11 +63,15 @@ const LobbyPage = () => {
 
     useEffect(() => {
         document.body.style.backgroundColor = "#F55E61"
-        getLobbyInfo()
+        interval = setInterval(() => {
+            getLobbyInfo()
+        },1500)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
+        <>
+        {lobbyInfo && 
         <div style={{textAlign:"center"}}>
             <Navbar style={{ padding: "1% 4%" }} bg="">
                 <Nav className="text-center">
@@ -100,26 +87,32 @@ const LobbyPage = () => {
                         fontStyle: "normal",
                         fontWeight: 600,
                         fontSize: "45px",
-                    }}>{lobbyInfo.dormName} {lobbyInfo.roomType}</h1>
+                    }}>{lobbyInfo.dorm.name} {lobbyInfo.room.name}</h1>
                 </Nav>
             </Navbar>
             <p>Lobby ID {lobbyID}</p>
-
-            {(lobbyInfo.owner.userID === token.userID) ?
+            {authToken &&             
+            <>
+            {(lobbyInfo.owner.userId === authToken.userId) ?
                 <>
                     <ImageList handleKick={handleKick} isOwner={true} maxMember={lobbyInfo.maxMember} member={lobbyInfo.member} />
-                    <CloseLobby disable={lobbyInfo.member.some(mem => mem.ready === false)} handleCloseLobby={handleCloseLobby} />
+                    <CloseLobby disable={lobbyInfo.member.some((mem : any) => mem.ready === false)} handleCloseLobby={handleCloseLobby} />
                     <DeleteLobby handleDelete={handleDelete} />
                 </>
                 :
                 <>
                     <ImageList handleKick={handleKick} isOwner={false} maxMember={lobbyInfo.maxMember} member={lobbyInfo.member} />
-                    {lobbyInfo.member.find((mem => mem.userID === token.userID))?.ready ? <Ready text="Unready" handleReady={handleReady} /> : <Ready text="Ready" handleReady={handleReady} />}
+                    {lobbyInfo.member.find((mem : any) => mem.user.userId === authToken.userId).ready ? <Ready text="Unready" handleReady={handleReady} /> : <Ready text="Ready" handleReady={handleReady} />}
                     <LeaveLobby handleLeave={handleLeave} />
                 </>
             }
+            
             <ChatRoom handleGoChatPage={handleGoChatPage} />
+            </> }
+
         </div>
+        }
+        </>
     )
 }
 

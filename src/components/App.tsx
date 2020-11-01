@@ -14,11 +14,11 @@ import AddDorm from "./dormown/AddDorm"
 import Lobby from "./lobby/LobbyPage/Lobby";
 import MainLobby from "./lobby/mainLobbyPage/MainLobby";
 import CreatePage from "./lobby/CreateLobbyPage/CreatePage";
+import CreatePage1 from "./lobby/CreateLobbyPage/CreatePageSuggest";
 import Chatpage from "./lobby/Chatpage/Chatpage";
 import PageNotFound from "./pagenotfound/PageNotFound";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { AuthContext } from "../contexts/auth.context";
-import { RoomContext } from "../contexts/room.context"
 import authService from "../services/auth.service";
 import AuthRoute from "./routes/AuthRoute";
 import Signin from "./signin/Signin";
@@ -27,7 +27,6 @@ import { tokenDto } from "./type";
 import DormOwnerRoute from "./routes/DormOwnerRoute";
 import DormFinderRoute from "./routes/DormFinderRoute";
 import Review from "./review/Review"
-import { addRoomFormValue } from "./dormown/newType";
 
 const Theme = createMuiTheme({
     palette: {
@@ -62,7 +61,7 @@ function App() {
         <DormOwnerRoute path="/dormowner/adddorm" Component={AddDorm}  />
         <DormOwnerRoute path="/dormowner/contactSupport" Component={ContactSupport} />
         <DormOwnerRoute path="/dormowner/" Component={MyDorm} />
-        <DormFinderRoute path="/lobby/create" Component={CreatePage} />
+        <DormFinderRoute path="/lobby/create" Component={CreatePage1} />
         <DormFinderRoute path="/lobby/:lobbyID/chat" Component={Chatpage} />
         <DormFinderRoute path="/lobby/:lobbyID" Component={Lobby} />    
         <DormFinderRoute path="/lobby" Component={MainLobby} />
