@@ -37,7 +37,7 @@ function RoomModal(props: any) {
             <p>No. of Kitchen: {room.kitchen}</p>
             <p>No. of Bedroom: {room.bedroom}</p>
             <p>No. of Aircond: {room.aircond}</p>
-            <p>Pricing (1 {room.price.pricePer}): {room.price.amount} ฿</p>
+            <p>Pricing: {room.price}฿/month</p>
           </span>
           <br/>
           <h5>Description</h5>

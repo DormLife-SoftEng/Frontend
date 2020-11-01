@@ -28,18 +28,18 @@ export interface Room {
 
 export interface  Utilities {
     type : string,
-    distance : number,
-    description : string
+    distance? : number,
+    description? : string
 }
 
 export interface propsDorm {
     id: string,
     name: string,
     contact: {
-        telephone: string,
-        email: string,
-        lineID: string,
-        website: string
+        telephone?: string,
+        email?: string,
+        lineID?: string,
+        website?: string
     },
     address: {
         address: string,

@@ -2,24 +2,23 @@
 import React from "react";
 import Googlemap from "../google/google";
 import RoomModal from "./RoomModal";
-import {dormRoom, Utilities} from './type';
+import { propsDorm, Room, Utilities} from './type';
 
-function DormInfo(props: any) {
-  const { dorm } = props;
+function DormInfo(dorm: propsDorm) {
   let allowedPet: boolean = false;
   let allowedCooking: boolean = false;
   return (
     <div style={{textTransform: 'capitalize'}}>
       <p>Type: {dorm.type}</p>
       <p>Allowed Sex: {dorm.allowedSex}</p>
-      <p>Address: {dorm.location.address}</p>
+      <p>Address: {dorm.address.address}</p>
       <p>Phone Number: {dorm.contact.telephone}</p>
       {
       dorm.contact.website != null &&
         (<p>Website: {dorm.contact.website}</p>)
       }
       <p>Map: 
-        <Googlemap coordinate={{lat:dorm.location.coordinate.coordinates[0],lng:dorm.location.coordinate.coordinates[1]}} containerStyle={{width: '193px', height: '193px'}} zoom={13}/>
+        <Googlemap coordinate={{lat:dorm.address.coordinate[0],lng:dorm.address.coordinate[1]}} containerStyle={{width: '193px', height: '193px'}} zoom={13}/>
       </p>
       <p>Facilities: {
         dorm.utility.map((util: Utilities, index: number)=>{
@@ -37,7 +36,7 @@ function DormInfo(props: any) {
               {util.type}
               {util.distance != null && util.distance > 0 && (
                 <span>
-                  {' '}({util.distance}m)
+                  {' '}({util.distance}km)
                 </span>
               )}
               {util.description != null && (
@@ -52,7 +51,7 @@ function DormInfo(props: any) {
       <p>Allowed Pet: {allowedPet?'Yes':'No'}</p>
       <p>Allowed Cooking: {allowedCooking?'Yes':'No'}</p>
       <p>Room Type: {
-        dorm.room.map((rt: dormRoom, index: number)=>{
+        dorm.room.map((rt: Room, index: number)=>{
           return (
             <>
             {index != 0 && (<span>{', '}</span>)}
