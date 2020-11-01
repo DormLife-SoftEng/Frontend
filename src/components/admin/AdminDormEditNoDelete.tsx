@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Row, Col, Card } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import adminService from "../../services/admin.service";
@@ -17,7 +17,7 @@ const Header = (props: any) => {
       noGutters={true}
     >
       <Col xs={3} md={2} style={{ textAlign: "center" }}>
-        <Button onClick={() => history.push("/admin/editrequest")} variant="">
+        <Button onClick={() => history.push("/admin/")} variant="">
           <ArrowBackIosIcon htmlColor="white" fontSize="large" />
         </Button>
       </Col>
@@ -30,37 +30,27 @@ const Header = (props: any) => {
 };
 
 export default function () {
-  const [approve, setApprove] = useState<boolean>(false);
-  const [showDelete, setShowDelete] = useState<boolean>(true);
+  const [approve, setApprove] = useState<boolean>(true);
   const [data, setData] = useState<any>(false);
   const location = useLocation();
   const history = useHistory();
   const [dormID] = location.pathname.split("/").splice(-1);
   const getDormData = async () => {
-    const result = await adminService.adminGetDormData(dormID);
+    const result = await adminService.adminGetApprovedDormData(dormID);
     if (result !== false) {
       setData(result);
     } else {
       history.goBack();
     }
   };
-  const setState = () => {
-    if (data?.status == "approved") {
-      setApprove(true);
-    }
-  };
-  const getImgPath = (path: string): string => `http://localhost:5000/api/v1/dorms/images/${path}`;
-
-  useEffect(() => {
-    setState();
-  }, [data]);
+  const getImgPath = (path: any) => `http://localhost:5000/api/v1/dorms/images/${path}`;
   document.body.style.backgroundColor = "#FFFFFF";
   !data && getDormData();
   const stringToCapital = (text: any) => text?.charAt(0).toUpperCase() + text?.slice(1);
-  console.log(data?.newdata);
+  console.log(data);
   return (
     <>
-      <Header dormName={data?.newdata?.name} />
+      <Header dormName={data?.name} />
       <Row noGutters={true}>
         <Col xs={1} md={1}></Col>
         <Col xs={11} md={5}>
@@ -81,17 +71,17 @@ export default function () {
                   <Row>
                     <Col xs={1} md={1}></Col>
                     <Col xs={10} md={10}>
-                      <p>Name: {data?.newdata?.name}</p>
-                      <p>Address: {data?.newdata?.address?.address}</p>
-                      <p>Dorm Longitude: {data?.newdata?.address?.coordinate[0]}</p>
-                      <p>Dorm Latitude: {data?.newdata?.address?.coordinate[1]}</p>
-                      <p>Dorm Phone Number: {data?.newdata?.contact?.telephone}</p>
-                      <p>Dorm LineID: {data?.newdata?.contact?.lineID}</p>
+                      <p>Name: {data?.name}</p>
+                      <p>Address: {data?.address?.address}</p>
+                      <p>Dorm Longitude: {data?.address?.coordinate[0]}</p>
+                      <p>Dorm Latitude: {data?.address?.coordinate[1]}</p>
+                      <p>Dorm Phone Number: {data?.contact?.telephone}</p>
+                      <p>Dorm LineID: {data?.contact?.lineID}</p>
                       <p>Accommodation Type: {stringToCapital(data?.type)}</p>
-                      <p>Allowed Sex: {stringToCapital(data?.newdata?.allowedSex)}</p>
+                      <p>Allowed Sex: {stringToCapital(data?.allowedSex)}</p>
                       <p>
                         Facilities:
-                        {data?.newdata?.utility
+                        {data?.utility
                           ?.map((item: any, index: number) => {
                             return ` ${stringToCapital(item?.type)} [${item?.distance}m]`;
                           })
@@ -99,7 +89,7 @@ export default function () {
                       </p>
                       <p>Room Type:</p>
 
-                      {data?.newdata?.room?.map((item: any, index: number) => {
+                      {data?.room?.map((item: any, index: number) => {
                         return (
                           <Dorm
                             name={item?.name}
@@ -129,7 +119,7 @@ export default function () {
                           flex: "1",
                           objectFit: "cover",
                         }}
-                        src={`${getImgPath(data?.newdata?.image[0])}`}
+                        src={`${getImgPath(data.image && data?.image[0])}`}
                       />
                     </Col>
                     <Col xs={1} md={1}></Col>
@@ -147,31 +137,9 @@ export default function () {
           <Row>
             <Col xs={11} md={11}>
               <div style={{ textAlign: "center" }}>
-                <Button
-                  onClick={() => {
-                    adminService.adminChangeDormData(dormID);
-                    setState();
-                  }}
-                  variant="danger"
-                >
+                <Button onClick={() => {}} variant="secondary">
                   {approve ? "Unapprove" : "Approve"}
                 </Button>
-                {showDelete ? (
-                  <>
-                    {"  "}
-                    <Button
-                      onClick={() => {
-                        adminService.adminDeleteDormData(dormID);
-                        history.push("/admin/editrequest");
-                      }}
-                      variant="secondary"
-                    >
-                      Delete
-                    </Button>
-                  </>
-                ) : (
-                  <></>
-                )}
               </div>
             </Col>
             <Col xs={1}></Col>
@@ -191,7 +159,7 @@ export default function () {
                       flex: "1",
                       objectFit: "cover",
                     }}
-                    src={`${getImgPath(data?.newdata?.license[0])}`}
+                    src={`${getImgPath(data.license && data?.license[0])}`}
                   />
                 </Card.Body>
               </Card>

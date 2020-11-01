@@ -22,7 +22,7 @@ async function adminGetDormData(urlPath: string) {
 
 async function adminChangeDormData(urlPath: string) {
   try {
-    const result = axios.get(`${API_URLAdmin}${urlPath}`).then((res) => res.data);
+    const result = axios.patch(`${API_URLAdmin}${urlPath}`).then((res) => res.data);
     return result;
   } catch (err) {
     return false;
@@ -36,11 +36,21 @@ async function adminDeleteDormData(urlPath: string) {
       console.error(err);
     });
 }
-const adminListGetAllDorm = async () =>
-  axios
+async function adminListGetAllDorm() {
+  const result = axios
     .get(`http://localhost:5000/api/v1/dorms`)
     .then((res) => res.data)
     .catch((err) => console.error(err));
+  return result;
+}
+
+async function adminGetApprovedDormData(dormID: string) {
+  const result = axios
+    .get(`http://localhost:5000/api/v1/dorms/${dormID}`)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+  return result;
+}
 
 export default {
   adminListGetAllDorm,
@@ -48,4 +58,5 @@ export default {
   adminGetDormData,
   adminChangeDormData,
   adminDeleteDormData,
+  adminGetApprovedDormData
 };

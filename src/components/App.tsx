@@ -32,6 +32,8 @@ import AdminDormList from "./admin/AdminDormList";
 import AdminEditRequest from "./admin/AdminEditRequest";
 import AdminRoute from "./routes/AdminRoute";
 import AdminDormEdit from "./admin/AdminDormEdit";
+import AdminDormEditNoDelete from "./admin/AdminDormEditNoDelete";
+import "./style.css"
 
 const Theme = createMuiTheme({
   palette: {
@@ -72,6 +74,7 @@ function App() {
             <DormFinderRoute path="/review/:reviewID" Component={Review} />
             <AdminRoute path="/admin/editrequest/:dormEditId" Component={AdminDormEdit} />
             <AdminRoute path="/admin/editrequest" Component={AdminEditRequest} />
+            <AdminRoute path="/admin/view/:dormEditId" Component={AdminDormEditNoDelete} />
             <AdminRoute path="/admin/" Component={AdminDormList} />
             <Route component={PageNotFound} />
         </Switch>

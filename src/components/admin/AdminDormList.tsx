@@ -1,64 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import FormControl from "react-bootstrap/FormControl";
 import Navbar from "./Navbar";
-let mockup: any[] = [
-  {
-    id: "5f9d55417b1604001e8b1d53",
-    request: "add",
-    type: "dorm",
-    newdata: {
-      name: "asd",
-      code: "ebvti",
-      owner: "5f9d30f598fba20028c95cfe",
-      contact: {
-        telephone: "0987654222",
-        email: "peerawich.pru@ku.th",
-        lineID: "asdasd",
-        website: "google.com",
-      },
-      address: {
-        address: "asd",
-        coordinate: [1, 1],
-      },
-      utility: [],
-      type: "dorm",
-      description: "1",
-      room: [
-        {
-          image: ["dorm_owner_3-5fda.jpg"],
-          _id: "5f9d55417b1604001e8b1d52",
-          name: "1",
-          capacity: 1,
-          bathroom: 1,
-          aircond: 1,
-          kitchen: 1,
-          bedroom: 1,
-          description: "1",
-          price: {
-            amount: 1,
-            pricePer: 1,
-          },
-          allowedSex: "male",
-        },
-      ],
-      allowedSex: "male",
-      avgStar: 0,
-      image: ["finder_gold_2p-92e1.jpg"],
-      license: ["dorm_owner_2-8497.jpg"],
-      createdOn: 1604146497865,
-      modifiedOn: 1604146497865,
-      approved: "pending",
-      approvedOn: null,
-    },
-    createdOn: "2020-10-31T12:14:57.865Z",
-    createdBy: "5f9d30f598fba20028c95cfe",
-    status: "pending",
-  },
-];
+import adminService from "../../services/admin.service";
 
-function DormEditButton(props: any) {
+function DormViewButton(props: any) {
   const history = useHistory();
   const { dormName, dormLink } = props;
   return (
@@ -73,7 +20,7 @@ function DormEditButton(props: any) {
         backgroundColor: "#F55E61",
         fontWeight: 600,
       }}
-      onClick={() => history.push(`/admin/${dormLink}`)}
+      onClick={() => history.push(`/admin/view/${dormLink}`)}
     >
       {dormName}
     </Button>
@@ -101,12 +48,11 @@ function SearchBar(props: any) {
 }
 
 export default function () {
-  useEffect(() => {
-    document.body.style.backgroundColor = "white";
-  }, []);
-
+  document.body.style.backgroundColor = "white";
   const [query, setQuery] = useState<string>("");
   const history = useHistory();
+  const [data, setData] = useState<any[]>([]);
+  !data.length && adminService.adminListGetAllDorm().then((res) => setData(res));
   return (
     <>
       <Container>
@@ -146,9 +92,9 @@ export default function () {
         <Row noGutters={true}>
           <Col xs={0} md={1}></Col>
           <Col xs={12} md={10}>
-            {mockup.map((item, index) =>
-              item.newdata.name.includes(query) ? (
-                <DormEditButton dormName={item.newdata.name} dormLink={item.id} />
+            {data.map((item, index) =>
+              item?.name.includes(query) ? (
+                <DormViewButton dormName={item.name} dormLink={item.id} />
               ) : (
                 <></>
               )
