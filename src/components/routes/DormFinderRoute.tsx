@@ -8,7 +8,6 @@ const DormFinderRoute = (props : RouteProp) => {
     const {path , Component} = props
     const routeComponent : any = () => {
         return authToken && authToken.role === "general" ? <Component /> : <Redirect to="/signin" />
-        // return <Component />
     }
     return <Route component={routeComponent} exact path={path} />
 }

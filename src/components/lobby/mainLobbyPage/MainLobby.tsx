@@ -16,7 +16,7 @@ function MainLobby() {
     history.push(s);
   }
   const handleGoBack = () => {
-    history.goBack();
+    history.push("/");
   }
   const handleSubmit = (s: string) => {
     // search by parameter & set new State 

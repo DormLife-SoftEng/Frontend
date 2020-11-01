@@ -10,6 +10,7 @@ import generalService from "../../../services/general.service";
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { FormLabel } from "@material-ui/core";
 
 
 const CreatePage = () => {
@@ -70,7 +71,6 @@ const CreatePage = () => {
     
     const findDormID = (dormName : string) => {
         const dorm = allDorm.find((dorm,index) => {
-            console.log(dorm.name)
             return dorm.name === dormName
         })
         setCreateProps((prev : any) => {
@@ -81,10 +81,11 @@ const CreatePage = () => {
 
     useEffect(() => {
         getDorm();
+        document.body.style.backgroundColor = "white";
     },[])
 
     useEffect(() => {
-        setRoomType(alllRoomType[0])
+        setRoomType(alllRoomType[0]) 
     },[alllRoomType])
 
     useEffect(() => {
@@ -97,42 +98,83 @@ const CreatePage = () => {
 
     return (
         <>
-        <form onSubmit={handleForm} >
+        <Navbar style={{ padding: "1% 4%" }} bg="danger">
+        <Nav className="text-center">
+          <BackButton handleGoBack={handleGoBack} />
+          <h1
+            style={{
+              position: "absolute",
+              width: "100%",
+              textAlign: "center",
+              overflow: "visible",
+              height: "0",
+              left: "0%",
+              color: "white",
+              fontStyle: "normal",
+              fontWeight: 600,
+              fontSize: "45px",
+            }}
+          >
+            Create Lobby
+          </h1>
+        </Nav>
+        </Navbar>
+        <form style={{padding:"10% 30%",textAlign:"center"}} onSubmit={handleForm} >
+        <Row noGutters={true}>
+        <Col>
+            <FormLabel style={{color:"#F55E61",fontSize:"2rem",margin:"3%"}}>Dorm Name</FormLabel>
+        </Col>
+
+        <Col>
         <Autocomplete
             value={value}
             onChange={(event,newValue: string | null) => {
                 if (newValue) {
                     const dorm =  findDormID(newValue)
+                    setAllRoomType([])
                     mapRoomType(dorm.room)
+                } else {
+                    setRoomType("")
+                    setAllRoomType([])
                 }
                 setValue(newValue);
             }}
             options={nameDorm}
-            style={{ width: 300 }}
-            renderInput={(params) => <TextField {...params}  variant="outlined" />}
+            style={{ width: 300 ,display:"inline-block"}}
+            renderInput={(params) => <TextField   {...params}  variant="outlined" />}
         />
-        <FormControl variant="outlined" >
-            <Select
-            value={roomType}
-            onChange={handleRoomType}
-            >
-            {alllRoomType.map((room,index) => {
-                return <MenuItem key={index} value={room} >{room}</MenuItem>
-            })}
-            </Select>
-        </FormControl>
-        <Row style={{
-          paddingTop:"5%"
-        }}>
+        </Col>
+
+        </Row>
+
+        <Row style={{marginTop:"10%"}} noGutters={true}>
+        <Col>
+            <FormLabel style={{color:"#F55E61",fontSize:"2rem",margin:"3%"}}>Room Type</FormLabel>
+        </Col>
+        <Col>
+            <FormControl variant="outlined" >
+                <Select
+                value={roomType}
+                onChange={handleRoomType}
+                style={{width: 300,textAlign:"left"}}
+                >
+                {alllRoomType.map((room,index) => {
+                    return <MenuItem key={index} value={room} >{room}</MenuItem>
+                })}
+                </Select>
+            </FormControl>
+        </Col>
+        </Row>
+        <Row noGutters={true} style={{marginTop:"20%"}} >
           <Col style={{
-            marginLeft:"30%"
+            marginLeft:"20%"
           }}>
-            <Button variant="danger" type="submit" >Create</Button>
+            <Button size="lg" variant="danger" type="submit" >Create</Button>
           </Col>
           <Col style={{
-            marginRight:"30%"
+            marginRight:"20%"
           }}>
-            <Button variant="secondary" onClick={handleGoBack}>Cancel</Button>
+            <Button size="lg" variant="secondary" onClick={handleGoBack}>Cancel</Button>
           </Col>
         </Row>
         </form>

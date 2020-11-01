@@ -1,9 +1,3 @@
-export interface dormUtil {
-    type: string,
-    distance: number|null,
-    description: string
-}
-
 export interface dormRoom {
     name: string,
     capacity: number,
@@ -19,36 +13,51 @@ export interface dormRoom {
     },
     allowedSex: string
 }
-
-export interface propsDorm {
-    _id: string,
+export interface Room {
     name: string,
-    code: string|null,
-    owner: string,
-    contact: {
-        telephone: string,
-        email: string|null,
-        lineID: string|null,
-        website: string|null
-    },
-    location: {
-        address: string,
-        coordinate: { type: string, coordinates: [ number, number ] }
-    },
-    utility: dormUtil[],
-    type: string,
+    capacity: string,
+    image: [string],
+    bathroom: string,
+    aircond: string,
+    kitchen: string,
+    bedroom: string,
     description: string,
-    room: dormRoom[],
-    allowedSex: string,
-    avgStar: number,
-    license: string[],
-    image: string[],
-    createdOn: any,
-    modifiedOn: any,
-    approved: string,
-    approvedOn: any
+    price: string,
+    allowedSex: string
 }
 
+export interface  Utilities {
+    type : string,
+    distance? : number,
+    description? : string
+}
+
+export interface propsDorm {
+    id: string,
+    name: string,
+    contact: {
+        telephone?: string,
+        email?: string,
+        lineID?: string,
+        website?: string
+    },
+    address: {
+        address: string,
+        coordinate: [
+            number,
+            number
+        ]
+    },
+    utility:Utilities[],
+    type: string,
+    description: string,
+    allowedSex: string,
+    avgStar: number,
+    image: string[],
+    license: string[],
+    room: Room[],
+    code: string
+}
 export interface propsCarousel {
     images : string[],
     height?: string

@@ -15,7 +15,7 @@ function DormInfo(props: DormDetailProps) {
   let allowedPet: boolean = false;
   let allowedCooking: boolean = false;
   return (
-      <div style={{textTransform: 'capitalize',padding:"0% 2%"}}>
+      <div style={{textTransform: 'capitalize',padding:"0% 2%",width:"100%"}}>
       <h1 style={{textAlign:"center"}}>{dorm.name}</h1>
       <DormCarousel images={dorm.image}/>
       <p>Type: {dorm.type}</p>

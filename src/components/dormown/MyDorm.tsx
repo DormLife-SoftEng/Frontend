@@ -23,17 +23,19 @@ function MyDorm() {
 
   async function GetDorms() {
       const result = await dormownerService.getMydorm() as propsDorm[]
+      console.log(result)
       setDorms(result)
       
   }
 
   const [searchname, SetSearch] = useState<string>("");
 
+
   return (
     <div>
       <Navbar style={{ padding: "1% 4%" }} bg="">
         <Nav className="text-center">
-          <Button variant="" onClick={() => history.goBack()}>
+          <Button variant="" onClick={() => history.push("/")}>
             <ArrowBackIosIcon htmlColor="white" fontSize="large" />
           </Button>
           <h1
@@ -88,7 +90,9 @@ function MyDorm() {
               
               <Col style={{ background: "white", margin: "0% 2%" }}>
                 <Row noGutters={true}>
+                  <Col xs={12}>
                   <DormDetail dorm={dorms[dorm]} />
+                  </Col>
                 </Row>
                 <Row
                   noGutters={true}
@@ -101,14 +105,13 @@ function MyDorm() {
                     <Button
                       variant="warning"
                       style={{ color: "white" }}
-                      onClick={() => history.push(`/dormowner/contactsupport`)}
+                      onClick={() => history.push(`/dormowner/contactsupport/${dorms[dorm].id}`)}
                     >
                       Contact Support
                     </Button>
                   </Col>
                 </Row>
               </Col>
-              
             }
           </Col>
         </Row>

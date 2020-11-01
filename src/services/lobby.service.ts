@@ -162,11 +162,11 @@ async function kickMember(lobbyID : string,userID : string) {
         const config = {
             headers: { Authorization : `Bearer ${access_token}` },
             params: {
-                userId: userID
+                userId:userID
             }
         };
         try {
-            const result = await axios.put(`${API_URL}${lobbyID}/kick`,{},config)
+            const result = await axios.put(`${API_URL}${lobbyID}/kick`,{message : "kuy"},config)
             return result.data 
         } catch (err) {
             return {}

@@ -17,7 +17,7 @@ const ImageOwner = (props : ImagesOwnerProps) =>  {
     const AllImage = [dog,cat,mon,dogp,catp,monp]
     const {attr,handleKick,index} = props
     const handleClick = () => {
-        handleKick(attr.user._id)
+        handleKick(attr.user.userId)
     }
     useEffect(() => {
         console.log(attr)

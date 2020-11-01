@@ -59,13 +59,13 @@ function App() {
         <AuthRoute  path="/signin/forgetpassword" Component={Forgetpassword} />
         <AuthRoute  path="/signin" Component={Signin} />
         <DormOwnerRoute path="/dormowner/adddorm" Component={AddDorm}  />
-        <DormOwnerRoute path="/dormowner/contactSupport" Component={ContactSupport} />
+        <DormOwnerRoute path="/dormowner/contactSupport/:dormID" Component={ContactSupport} />
         <DormOwnerRoute path="/dormowner/" Component={MyDorm} />
         <DormFinderRoute path="/lobby/create" Component={CreatePage1} />
         <DormFinderRoute path="/lobby/:lobbyID/chat" Component={Chatpage} />
         <DormFinderRoute path="/lobby/:lobbyID" Component={Lobby} />    
         <DormFinderRoute path="/lobby" Component={MainLobby} />
-        <DormFinderRoute path="/review" Component={Review} />       
+        <DormFinderRoute path="/review/:reviewID" Component={Review} />       
         <Route component={PageNotFound} />
       </Switch>
 
