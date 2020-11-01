@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Container } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import authService from "../../services/auth.service";
 
 const Header = () => {
   const history = useHistory();
+
   return (
     <Row>
       <Col xs={3} md={2} style={{ textAlign: "center", marginTop: "20px", marginBottom: "40px" }}>
@@ -16,16 +18,9 @@ const Header = () => {
         <h1 style={{ fontWeight: 600, color: "white" }}>Edit Request</h1>
       </Col>
       <Col xs={3} md={2}></Col>
-      {/* <Col xs={9} md={10}></Col> */}
     </Row>
   );
 };
-
-let mockup: any[] = [
-  { name: "Hi", url: "12345" },
-  { name: "Hello", url: "98765" },
-  { name: "御機嫌よう", url: "13579" },
-];
 
 function DormEditButton(props: any) {
   const history = useHistory();
@@ -50,9 +45,9 @@ function DormEditButton(props: any) {
 }
 
 export default function () {
-  useEffect(() => {
-    document.body.style.backgroundColor = "#F55E61";
-  }, []);
+  const [data, setData] = useState<any[]>([]);
+  document.body.style.backgroundColor = "#F55E61";
+  authService.adminListGetDormData().then((res) => setData(res));
 
   return (
     <>
@@ -61,8 +56,8 @@ export default function () {
         <Row noGutters={true}>
           <Col xs={0} md={1}></Col>
           <Col xs={12} md={10}>
-            {mockup.map((item, index) => (
-              <DormEditButton dormName={item.name} dormLink={item.url} />
+            {data?.map((item: any, index) => (
+              <DormEditButton dormName={item.newdata.name} dormLink={item.id} />
             ))}
           </Col>
           <Col xs={0} md={1}></Col>
