@@ -10,11 +10,18 @@ import dormfinderService from "../../services/dormfinder.service";
 
 function NavBar() {
   const { authToken, setAuthToken }: authContextType = useAuth();
+  const history = useHistory();
 
+  useEffect(() => {
+    if (!!!authToken) {
+      history.push("/");
+    }
+  }, [authToken]);
   const handleClick = async () => {
     const result = await authService.Logout();
     if (result) {
       setAuthToken(null);
+      history.push("/");
     }
   };
 
