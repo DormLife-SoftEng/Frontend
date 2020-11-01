@@ -66,10 +66,36 @@ const addDorm = async (dorm : AddDormServiceProps) => {
     }
     return false
 }
- 
+
+export interface Ticket {
+        target:{},
+        newdata:{},
+        type: string,
+        request: string,
+}
+
+const deleteDorm = async (props:Ticket)=>{
+    const token = localStorage.getItem("token")
+    if (token) {
+        const tokenObj : tokenDto = JSON.parse(token)
+        const access_token = tokenObj.access_token
+        const config = {
+            headers: { Authorization : `Bearer ${access_token}` }
+        };
+        try {
+            const result = await axios.post("http://localhost:5000/api/v1/ticket",props,config)
+            return true
+        } catch (err) {
+            return false
+        }
+    }
+    return false
+}
+
 export default {
     uploadImage1,
     uploadImageMany,
     addDorm,
-    getMydorm
+    getMydorm,
+    deleteDorm
 }

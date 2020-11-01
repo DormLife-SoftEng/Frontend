@@ -2,7 +2,7 @@
 import React from "react";
 import Googlemap from "../google/google";
 import RoomModal from "./RoomModal";
-import {dormRoom, dormUtil} from './type';
+import {dormRoom, Utilities} from './type';
 
 function DormInfo(props: any) {
   const { dorm } = props;
@@ -22,7 +22,7 @@ function DormInfo(props: any) {
         <Googlemap coordinate={{lat:dorm.location.coordinate.coordinates[0],lng:dorm.location.coordinate.coordinates[1]}} containerStyle={{width: '193px', height: '193px'}} zoom={13}/>
       </p>
       <p>Facilities: {
-        dorm.utility.map((util: dormUtil, index: number)=>{
+        dorm.utility.map((util: Utilities, index: number)=>{
           if(util.type == 'Cooking'){
             allowedCooking = true;
             return;

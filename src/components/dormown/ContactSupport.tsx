@@ -81,7 +81,7 @@ function Contactsupport() {
             </Grid>
             <Grid container direction="column" spacing={10}>
               <Grid item >
-              <DeleteModal/>
+              <DeleteModal id={id}/>
               </Grid>
             </Grid>
           </Grid>
