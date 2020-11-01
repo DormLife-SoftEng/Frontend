@@ -14,7 +14,7 @@ function Contactsupport() {
     document.body.style.backgroundColor = "#FFBDBD";
   }, []);
   return (
-    <div>
+    <div style={{textAlign:"center"}}>
       <div>
         <Navbar style={{ padding: "1%" }} bg="white">
           <Nav className="text-right">

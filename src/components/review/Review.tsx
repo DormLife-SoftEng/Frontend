@@ -22,7 +22,7 @@ function ReviewAdd(props: any) {
       <div>
         <Navbar style={{ padding: "1%", backgroundColor: "#F55E61" }}>
           <Nav className="text-right">
-            <Button variant="" onClick={() => history.goBack()}>
+            <Button variant="" onClick={() => history.push("/")}>
               <ArrowBackIosIcon htmlColor="white" fontSize="large" />
             </Button>
             <h1
@@ -84,6 +84,7 @@ function ReviewAdd(props: any) {
               <Button
                 variant="contained"
                 style={{ backgroundColor: "#989595", color: "white" }}
+                onClick={() => history.push("/")}
               >
                 CANCEL
                 </Button>
