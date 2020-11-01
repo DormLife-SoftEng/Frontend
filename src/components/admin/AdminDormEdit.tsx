@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import authService from "../../services/auth.service";
 
 const Header = (props: any) => {
   const history = useHistory();
@@ -31,9 +32,38 @@ const Header = (props: any) => {
 export default function () {
   const [approve, setApprove] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
+  const [data, setData] = useState<any>(false);
+  const location = useLocation();
+  const history = useHistory();
+  const [dormID] = location.pathname.split("/").splice(-1);
+  const getDormData = async () => {
+    const result = await authService.adminGetDormData(dormID);
+    if (result !== false) {
+      setData(result);
+    } else {
+      history.goBack();
+    }
+  };
+  const setState = () => {
+    if (data?.request == "delete") {
+      setShowDelete(true);
+    }
+    if (data?.status == "approved") {
+      setApprove(true);
+    }
+  };
+  const getImgPath = (): string =>
+    `http://localhost:5000/api/v1/dorms/images/${data?.newdata?.license[0]}`;
+
+  useEffect(() => {
+    setState();
+  }, [data]);
+
+  getDormData();
+
   return (
     <>
-      <Header dormName={"Helloworld"} />
+      <Header dormName={data?.newdata?.name} />
       <Row noGutters={true}>
         <Col xs={1} md={1}></Col>
         <Col xs={11} md={5}>
@@ -85,11 +115,26 @@ export default function () {
           <Row>
             <Col xs={11} md={11}>
               <div style={{ textAlign: "center" }}>
-                <Button variant="danger">{approve ? "Approve" : "Unapprove"}</Button>
-                {!showDelete ? (
+                <Button
+                  onClick={() => {
+                    authService.adminChangeDormData(dormID);
+                  }}
+                  variant="danger"
+                >
+                  {approve ? "Unapprove" : "Approve"}
+                </Button>
+                {showDelete ? (
                   <>
                     {"  "}
-                    <Button variant="secondary">Delete</Button>
+                    <Button
+                      onClick={() => {
+                        authService.adminDeleteDormData(dormID);
+                        history.push("/admin/editrequest");
+                      }}
+                      variant="secondary"
+                    >
+                      Delete
+                    </Button>
                   </>
                 ) : (
                   <></>
@@ -104,7 +149,7 @@ export default function () {
             <Col xs={1} md={1}></Col>
             <Col xs={11} md={11}>
               <Card border="dark" style={{ width: "100%" }}>
-                <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+                <Card.Img variant="top" src={getImgPath()} />
               </Card>
             </Col>
           </Row>
