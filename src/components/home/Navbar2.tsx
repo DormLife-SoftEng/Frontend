@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import { useAuth, authContextType } from "../../contexts/auth.context";
+import ReviewcodeModal from "../review/ReviewcodeModal";
 
 function Navbar2() {
   const history = useHistory();
@@ -28,15 +29,7 @@ function Navbar2() {
       ) : (
         <>
           <Col>
-            <Button
-              onClick={() => history.push("/review")}
-              size="lg"
-              variant="light"
-              block
-              style={{ fontWeight: "bold" }}
-            >
-              Review
-            </Button>
+            <ReviewcodeModal />
           </Col>
           <Col>
             <Button

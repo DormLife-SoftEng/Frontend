@@ -7,8 +7,7 @@ const DormOwnerRoute = (props : RouteProp) => {
     const {authToken}  : authContextType  = useAuth()
     const {path , Component} = props
     const routeComponent : any = () => {
-        //return authToken && authToken.role === "owner" ? <Component /> : <Redirect to="/signin" />
-        return <Component />
+        return authToken && authToken.role === "owner" ? <Component /> : <Redirect to="/signin" />
     }
     return <Route component={routeComponent} exact path={path} />
 }

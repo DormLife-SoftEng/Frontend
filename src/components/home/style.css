@@ -4,6 +4,9 @@
 .info-modal .modal-content {
   border-radius: 1rem;
 }
+.des.card {
+  border: none;
+}
 
 
 

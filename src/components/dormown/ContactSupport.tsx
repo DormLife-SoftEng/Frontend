@@ -2,14 +2,16 @@ import React, { useEffect, useState, Component } from "react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import { withStyles, createStyles } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Navbar, Nav, Row, Col, Button, Container } from "react-bootstrap";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { Grid } from "@material-ui/core";
+import DeleteModal from "./DeleteModal"
 //import { View, StyleSheet, Text } from 'react-native';
 
 function Contactsupport() {
   const history = useHistory();
+  const {id}:{id:string} = useParams();
   useEffect(() => {
     document.body.style.backgroundColor = "#FFBDBD";
   }, []);
@@ -78,20 +80,8 @@ function Contactsupport() {
               </Grid>
             </Grid>
             <Grid container direction="column" spacing={10}>
-              <Grid item>
-                <Button
-                  style={{
-                    //fontFamily: "Athiti",
-                    fontSize: "40px",
-                    height: "91px",
-                    width: "963px",
-                    background: "#F55E61",
-                    borderRadius: "10px",
-                 }}
-                
-               >
-                 Delete Dorm
-               </Button>
+              <Grid item >
+              <DeleteModal/>
               </Grid>
             </Grid>
           </Grid>

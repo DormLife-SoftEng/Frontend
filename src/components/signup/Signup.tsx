@@ -13,43 +13,43 @@ function Signup() {
     }, [])
     return (
         <div style={{ textAlign: "center", padding: "2% 4%" }}>
-            <Row style={{ textAlign: "left" }}>
-                <Col>
-                    <Button onClick={() => history.goBack()} variant="" ><ArrowBackIosIcon htmlColor="white" fontSize="large" /></Button>
-                </Col>
-            </Row>
-            <Row style={{ color: "white", height:"600px"}} noGutters={true}>
-                <Col style={{margin: "15% 0"}}>
-                    <h1 style={{ fontSize: "4rem", fontWeight: "bold" }}>Dorm Finder</h1>
-                    <Button className="mt-5 btn-lg" onClick={() => {
-                        history.push("/signup/dormfinder")
-                    }} variant="outline-light">Signup</Button>
-                </Col>
-                <Col lg={2} style={{ padding: "50px 5px" }}>
-                    <div
-                        style={{
-                            display: "inline-block",
-                            backgroundColor: "white",
-                            width: "4px",
-                            height: "500px",
-                        }}
-                    ></div>
-                </Col>
-                <Col style={{margin: "15% 0"}}>
-                    <h1 style={{ fontSize: "4rem", fontWeight: "bold" }}>Dorm Owner</h1>
-                    <Button className="mt-5 btn-lg" onClick={() => {
-                        history.push("/signup/dormowner")
-                    }} variant="outline-light">Signup</Button>
-                </Col>
-            </Row>
-            <Row style={{ color: "white" }}>
-                <Col>
-                    <h1 style={{ fontSize: "2.5rem", fontWeight: "bold" }}>Already have an account?</h1>
-                    <a onClick={() => {
-                        history.push("/signin")
-                    }} style={{ fontSize: "1.5rem", textDecoration: "underline" }} role="button">Sign in</a>
-                </Col>
-            </Row>
+                <Row lg={1} style={{ textAlign: "left" }}>
+                    <Col>
+                        <Button onClick={() => history.goBack()} variant="" ><ArrowBackIosIcon htmlColor="white" fontSize="large" /></Button>
+                    </Col>
+                </Row>
+                <Row lg={9} style={{ color: "white", height: "600px" }} noGutters={true}>
+                    <Col lg={5} style={{ margin: "15% 0" }}>
+                        <h1 style={{ fontSize: "4rem", fontWeight: "bold" }}>Dorm Finder</h1>
+                        <Button className="mt-5 btn-lg" onClick={() => {
+                            history.push("/signup/dormfinder")
+                        }} variant="outline-light">Signup</Button>
+                    </Col>
+                    <Col lg={2} style={{ padding: "50px 5px" }}>
+                        <div
+                            style={{
+                                display: "inline-block",
+                                backgroundColor: "white",
+                                width: "4px",
+                                height: "500px",
+                            }}
+                        ></div>
+                    </Col>
+                    <Col lg={5} style={{ margin: "15% 0" }}>
+                        <h1 style={{ fontSize: "4rem", fontWeight: "bold" }}>Dorm Owner</h1>
+                        <Button className="mt-5 btn-lg" onClick={() => {
+                            history.push("/signup/dormowner")
+                        }} variant="outline-light">Signup</Button>
+                    </Col>
+                </Row>
+                <Row style={{ color: "white" }}>
+                    <Col>
+                        <h1 style={{ fontSize: "2.5rem", fontWeight: "bold" }}>Already have an account?</h1>
+                        <a onClick={() => {
+                            history.push("/signin")
+                        }} style={{ fontSize: "1.5rem", textDecoration: "underline" }} role="button">Sign in</a>
+                    </Col>
+                </Row>
 
         </div>
     )
