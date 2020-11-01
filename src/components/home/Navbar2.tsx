@@ -9,6 +9,7 @@ import ReviewcodeModal from "../review/ReviewcodeModal";
 function Navbar2() {
   const history = useHistory();
   const { authToken }: authContextType = useAuth();
+  authToken && authToken.role === "admin" && history.push("/admin");
   return (
     <Row noGutters={true}>
       {authToken && authToken.role === "owner" ? (
