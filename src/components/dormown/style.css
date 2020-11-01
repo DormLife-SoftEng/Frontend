@@ -1,0 +1,22 @@
+.result .modal-content {
+    border-radius: 1rem;
+    text-align: center;
+    color: #fff;
+    background-color: #F55E61;
+    font-size: 2rem;
+}
+.result {
+    max-width: 30%;
+}
+
+.addroom .modal-content {
+    border-radius: 1rem;
+}
+.addroom {
+    max-width: 60%;
+}
+
+.delete .modal-content {
+    background-color: #F55E61;
+    border-radius: 1rem;
+}

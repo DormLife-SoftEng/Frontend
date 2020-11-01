@@ -12,27 +12,6 @@ function DormNav(props: any) {
 
     return (
     <div>
-        <>
-        <style type="text/css">
-            {`
-            .navbar-pink {
-              background-color: #F55E61;
-              color: white;
-            }
-            
-            .navbar-pink > .navbar-brand, .navbar-pink > .navbar-brand > *{
-                color: white;
-            }
-
-
-            .navbar-pink > * > .navbar-text{
-                font: Athiti;
-                font-size: 20px;
-                color: white;
-            }
-            `}
-        </style>
-        </>
         <Navbar className="navbar-pink">
             <Navbar.Brand href="#">
                 <Button onClick={()=> history.goBack()} variant="" ><ArrowBackIosIcon fontSize="large" /></Button>

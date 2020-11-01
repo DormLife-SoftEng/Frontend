@@ -8,9 +8,9 @@ import Repassword from "./signin/Repassword";
 import DormOwner from "./signup/DormOwner";
 import DormFinder from "./signup/DormFinder";
 import Dorm from "./dorm/Dorm";
-import DormHome from  "./dormown/dormhome"
+import MyDorm from  "./dormown/MyDorm"
 import ContactSupport from "./dormown/ContactSupport";
-import AddDromFrom from "./dormown/adddormform";
+import AddDorm from "./dormown/AddDorm"
 import Lobby from "./lobby/LobbyPage/Lobby";
 import MainLobby from "./lobby/mainLobbyPage/MainLobby";
 import CreatePage from "./lobby/CreateLobbyPage/CreatePage";
@@ -18,6 +18,7 @@ import Chatpage from "./lobby/Chatpage/Chatpage";
 import PageNotFound from "./pagenotfound/PageNotFound";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { AuthContext } from "../contexts/auth.context";
+import { RoomContext } from "../contexts/room.context"
 import authService from "../services/auth.service";
 import AuthRoute from "./routes/AuthRoute";
 import Signin from "./signin/Signin";
@@ -26,6 +27,7 @@ import { tokenDto } from "./type";
 import DormOwnerRoute from "./routes/DormOwnerRoute";
 import DormFinderRoute from "./routes/DormFinderRoute";
 import Review from "./review/Review"
+import { addRoomFormValue } from "./dormown/newType";
 
 const Theme = createMuiTheme({
     palette: {
@@ -57,14 +59,14 @@ function App() {
         <AuthRoute  path="/signin/repassword" Component={Repassword} />
         <AuthRoute  path="/signin/forgetpassword" Component={Forgetpassword} />
         <AuthRoute  path="/signin" Component={Signin} />
-        <DormOwnerRoute path="/dormowner/adddorm" Component={AddDromFrom}  />
-        <DormOwnerRoute path="/dormowner/contactSupport" Component={ContactSupport} />
-        <DormOwnerRoute path="/dormowner/" Component={DormHome} />
+        <DormOwnerRoute path="/dormowner/adddorm" Component={AddDorm}  />
+        <DormOwnerRoute path="/dormowner/contactSupport/:dormID" Component={ContactSupport} />
+        <DormOwnerRoute path="/dormowner/" Component={MyDorm} />
         <DormFinderRoute path="/lobby/create" Component={CreatePage} />
         <DormFinderRoute path="/lobby/:lobbyID/chat" Component={Chatpage} />
         <DormFinderRoute path="/lobby/:lobbyID" Component={Lobby} />    
         <DormFinderRoute path="/lobby" Component={MainLobby} />
-        <DormFinderRoute path="/review" Component={Review} />       
+        <DormFinderRoute path="/review/:reviewID" Component={Review} />       
         <Route component={PageNotFound} />
       </Switch>
 

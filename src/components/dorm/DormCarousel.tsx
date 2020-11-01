@@ -3,6 +3,7 @@ import React from "react";
 import { Carousel } from "react-bootstrap";
 import {propsCarousel} from "./type";
 function DormCarousel(props: propsCarousel) {
+  const path  = "http://localhost:5000/api/v1/dorms/images/"
   var { images, height } = props;
   if(height == null)height = '275px';
   return (
@@ -13,7 +14,7 @@ function DormCarousel(props: propsCarousel) {
             <img
               style={{ height: height, objectFit: "cover"}}
               className="d-block w-100"
-              src={img}
+              src={`${path}${img}`}
               alt="First slide"
             />
           </Carousel.Item>
