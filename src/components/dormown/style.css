@@ -15,3 +15,8 @@
 .addroom {
     max-width: 60%;
 }
+
+.delete .modal-content {
+    background-color: #F55E61;
+    border-radius: 1rem;
+}

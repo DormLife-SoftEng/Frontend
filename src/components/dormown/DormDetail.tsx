@@ -12,7 +12,7 @@ function DormDetail(props: DormDetailProps) {
   return (
       <div
         className="overflow-auto"
-        style={{maxHeight: "550px" }}
+        style={{maxHeight: "550px",width:"100%" }}
       >
        <DormInfo dorm={dorm}/>
       </div>
