@@ -4,9 +4,58 @@ import { useHistory } from "react-router-dom";
 import FormControl from "react-bootstrap/FormControl";
 import Navbar from "./Navbar";
 let mockup: any[] = [
-  { name: "Hi", url: "12345" },
-  { name: "Hello", url: "98765" },
-  { name: "御機嫌よう", url: "13579" },
+  {
+    id: "5f9d55417b1604001e8b1d53",
+    request: "add",
+    type: "dorm",
+    newdata: {
+      name: "asd",
+      code: "ebvti",
+      owner: "5f9d30f598fba20028c95cfe",
+      contact: {
+        telephone: "0987654222",
+        email: "peerawich.pru@ku.th",
+        lineID: "asdasd",
+        website: "google.com",
+      },
+      address: {
+        address: "asd",
+        coordinate: [1, 1],
+      },
+      utility: [],
+      type: "dorm",
+      description: "1",
+      room: [
+        {
+          image: ["dorm_owner_3-5fda.jpg"],
+          _id: "5f9d55417b1604001e8b1d52",
+          name: "1",
+          capacity: 1,
+          bathroom: 1,
+          aircond: 1,
+          kitchen: 1,
+          bedroom: 1,
+          description: "1",
+          price: {
+            amount: 1,
+            pricePer: 1,
+          },
+          allowedSex: "male",
+        },
+      ],
+      allowedSex: "male",
+      avgStar: 0,
+      image: ["finder_gold_2p-92e1.jpg"],
+      license: ["dorm_owner_2-8497.jpg"],
+      createdOn: 1604146497865,
+      modifiedOn: 1604146497865,
+      approved: "pending",
+      approvedOn: null,
+    },
+    createdOn: "2020-10-31T12:14:57.865Z",
+    createdBy: "5f9d30f598fba20028c95cfe",
+    status: "pending",
+  },
 ];
 
 function DormEditButton(props: any) {
@@ -98,8 +147,8 @@ export default function () {
           <Col xs={0} md={1}></Col>
           <Col xs={12} md={10}>
             {mockup.map((item, index) =>
-              item.name.includes(query) ? (
-                <DormEditButton dormName={item.name} dormLink={item.url} />
+              item.newdata.name.includes(query) ? (
+                <DormEditButton dormName={item.newdata.name} dormLink={item.id} />
               ) : (
                 <></>
               )
