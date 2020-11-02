@@ -24,11 +24,11 @@ const ImageList = (props : ImagesListProps) => {
         <div>
             {isOwner ? 
             <>
-                {member.map((user,index) => <ImageOwner handleKick={handleKick} attr={user} key={index} index={index} />)}
+                {member.map((user : any,index : number) => <ImageOwner handleKick={handleKick} attr={user} key={index} index={index} />)}
             </> 
             : 
             <>
-                {member.map((user,index) => <Image attr={user} key={index} index={index} />)}Î
+                {member.map((user : any,index : number) => <Image attr={user} key={index} index={index} />)}
             </>
             }
             {space.map((temp,index) => <img alt="" key={index} style={{margin:"2%",border:"10px solid #000",width:"200px",height:"200px"}} />

@@ -13,7 +13,7 @@ function ReviewcodeModal() {
     const handleShow = () => setShow(true);
     function reviewSS(){
         console.log(code)
-        history.push("/review");
+        history.push(`/review/${code}`);
     }
     return (
         <>

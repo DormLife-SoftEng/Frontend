@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {Image, Row, Col, Modal, Button} from "react-bootstrap";
 import DormCarousel from "./DormCarousel";
@@ -11,9 +11,14 @@ function RoomModal(props: any) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  useEffect(() => {
+    console.log(room)
+  },[])
   return (
     <>
-      <a style={{color:"blue"}} onClick={handleShow}>
+      <a style={{color:"blue"}} onClick={()=> {
+        handleShow()
+      }}>
         {room.name}
       </a>
       <Modal size="lg" show={show} onHide={handleClose}>
@@ -37,11 +42,15 @@ function RoomModal(props: any) {
             <p>No. of Kitchen: {room.kitchen}</p>
             <p>No. of Bedroom: {room.bedroom}</p>
             <p>No. of Aircond: {room.aircond}</p>
-            <p>Pricing (1 {room.price.pricePer}): {room.price.amount} ฿</p>
+            <p>Pricing: {room.price.amount}฿/month</p>
           </span>
           <br/>
-          <h5>Description</h5>
-          <p>{room.description}</p>
+          {room.description !== "" && 
+          <>
+            <h5>Description</h5>
+            <p>{room.description}</p>
+          </>
+          }
           </Col>
           </Row>
         </Modal.Body>

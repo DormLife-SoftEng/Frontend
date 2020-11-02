@@ -41,7 +41,7 @@ function NavBar() {
 
   return (
     <Navbar bg="light">
-      <Navbar.Brand style={{color:"red" , fontSize:"2rem" , fontWeight:"bold"}} >DormLife</Navbar.Brand>
+      <Navbar.Brand style={{color:"#F55E61" , fontSize:"2rem" , fontWeight:"bold"}} >DormLife</Navbar.Brand>
       <Nav className="ml-auto">
         {authToken ? 
           <>

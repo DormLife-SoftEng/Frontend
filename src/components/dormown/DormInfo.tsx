@@ -3,7 +3,7 @@ import React from "react";
 import DormCarousel from "../dorm/DormCarousel";
 import RoomModal from "../dorm/RoomModal";
 import Googlemap from "../google/google";
-import {propsDorm,dormRoom, Utilities, Room} from "./type2";
+import {propsDorm, Utilities,} from "./type2";
 
 
 interface DormDetailProps {

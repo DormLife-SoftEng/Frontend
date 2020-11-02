@@ -10,13 +10,13 @@ import lobbyService from "../../../services/lobby.service"
 import { Nav, Navbar, Row, Col } from "react-bootstrap";
 function MainLobby() {
   const history = useHistory();
-  const [lobbylist, setLobbyList] = useState<Lobby[]>([])
+  const [lobbylist, setLobbyList] = useState<any>([])
 
   const handleRouting = (s: string) => {
     history.push(s);
   }
   const handleGoBack = () => {
-    history.goBack();
+    history.push("/");
   }
   const handleSubmit = (s: string) => {
     // search by parameter & set new State 
@@ -26,6 +26,7 @@ function MainLobby() {
 
   const getAllLobbys = async () => {
     const allLobbys = await lobbyService.getLobbys();
+    console.log(allLobbys)
     setLobbyList(allLobbys)
   }
 

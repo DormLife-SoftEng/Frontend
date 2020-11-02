@@ -6,10 +6,7 @@ import {RouteProp } from "../type"
 const DormOwnerRoute = (props : RouteProp) => {
     const {authToken}  : authContextType  = useAuth()
     const {path , Component} = props
-    const routeComponent : any = () => {
-        return authToken && authToken.role === "owner" ? <Component /> : <Redirect to="/signin" />
-    }
-    return <Route component={routeComponent} exact path={path} />
+    return <Route component={Component} exact path={path} />
 }
 
 export default DormOwnerRoute;
