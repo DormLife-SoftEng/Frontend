@@ -49,9 +49,9 @@ const Room = (props: addRoomFormValue) => {
         style={{ width: "100%", margin: "2% 0", borderRadius: "20px", border: "solid 1px #000" }}
         noGutters={true}
       >
-        <div style={{ width: "100%", padding: "2%" }}>
+        <div style={{ width: "100%", padding: "2% 1%" }}>
           <Col lg={12}>
-            <Row noGutters={true}>
+            <Row>
               <Col xs={12} md={6} lg={6}>
                 <Row noGutters={true}>
                   <Col xs={12}>
