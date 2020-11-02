@@ -33,10 +33,10 @@ function Contactsupport() {
                 top: "0",
                 left: "-5%",
                 color: "#F55E61",
-                fontFamily: "Prompt",
+                //fontFamily: "Prompt",
                 fontStyle: "normal",
                 fontSize: "63px",
-                fontWeight: 900,
+                fontWeight: "bold",
                 //font-family: "Times New Roman"
               }}
             >
@@ -54,7 +54,7 @@ function Contactsupport() {
                 style={{
                   width: "100%",
                   overflow: "visible",
-                  fontFamily: "Athiti",
+                  //fontFamily: "Athiti",
                   fontStyle: "normal",
                   fontSize: "72px",
                 }}

@@ -1117,7 +1117,7 @@ const InnerForm = (props : FormikProps<AddDormFormValue> & Style) => {
               color="primary"
             />
             <FormLabel style={{fontSize:"1rem"}} className={classes.black}>
-              I have to read and agree to 
+              I have read and agreed to 
             </FormLabel>{" "}
             <a style={{fontSize:"1rem",textDecoration:"underline",color:"#0066cc"}}
               onClick={() => {
