@@ -160,7 +160,7 @@ export default function () {
                         }
                   }
                   variant={approve ? "secondary" : "danger"}
-                  disabled
+                  disabled={approve}
                 >
                   {approve ? "Approved" : "Approve"}
                 </Button>
