@@ -18,18 +18,16 @@ function MyDorm() {
 
   useEffect(() => {
     document.body.style.backgroundColor = "#F55E61";
-    GetDorms()
+    GetDorms();
   }, []);
 
   async function GetDorms() {
-      const result = await dormownerService.getMydorm() as propsDorm[]
-      console.log(result)
-      setDorms(result)
-      
+    const result = (await dormownerService.getMydorm()) as propsDorm[];
+    console.log(result);
+    setDorms(result);
   }
 
   const [searchname, SetSearch] = useState<string>("");
-
 
   return (
     <div>
@@ -77,7 +75,7 @@ function MyDorm() {
                   variant="light"
                   size="lg"
                   block
-                  style={{ fontSize: "1.5rem", color: "red", width: "150px" }}
+                  style={{ fontSize: "1.5rem", color: "#F55E61", width: "150px" }}
                   onClick={() => history.push("/dormowner/adddorm/")}
                 >
                   Add Dorm
@@ -86,18 +84,14 @@ function MyDorm() {
             </Row>
           </Col>
           <Col xs={6}>
-            {dorms.length >=1 &&
-              
+            {dorms.length >= 1 && (
               <Col style={{ background: "white", margin: "0% 2%" }}>
                 <Row noGutters={true}>
                   <Col xs={12}>
-                  <DormDetail dorm={dorms[dorm]} />
+                    <DormDetail dorm={dorms[dorm]} />
                   </Col>
                 </Row>
-                <Row
-                  noGutters={true}
-                  style={{ width: "100%", padding: "1% 0%" }}
-                >
+                <Row noGutters={true} style={{ width: "100%", padding: "1% 0%" }}>
                   <Col xs={6} style={{ textAlign: "center" }}>
                     <ReviewCodeModal dorm={dorms[dorm]} />
                   </Col>
@@ -112,7 +106,7 @@ function MyDorm() {
                   </Col>
                 </Row>
               </Col>
-            }
+            )}
           </Col>
         </Row>
       </div>
