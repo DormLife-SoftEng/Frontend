@@ -73,8 +73,8 @@ export default function () {
                     <Col xs={10} md={10}>
                       <p>Name: {data?.name}</p>
                       <p>Address: {data?.address?.address}</p>
-                      <p>Dorm Longitude: {data?.address?.coordinate[0]}</p>
-                      <p>Dorm Latitude: {data?.address?.coordinate[1]}</p>
+                      <p>Dorm Longitude: {data?.address?.coordinate[1]}</p>
+                      <p>Dorm Latitude: {data?.address?.coordinate[0]}</p>
                       <p>Dorm Phone Number: {data?.contact?.telephone}</p>
                       <p>Dorm LineID: {data?.contact?.lineID}</p>
                       <p>Accommodation Type: {stringToCapital(data?.type)}</p>
@@ -137,8 +137,8 @@ export default function () {
           <Row>
             <Col xs={11} md={11}>
               <div style={{ textAlign: "center" }}>
-                <Button onClick={() => {}} variant="secondary">
-                  {approve ? "Unapprove" : "Approve"}
+                <Button onClick={() => {}} variant="secondary" disabled>
+                  {approve ? "Approved" : "Approve"}
                 </Button>
               </div>
             </Col>
