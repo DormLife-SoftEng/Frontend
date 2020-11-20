@@ -16,7 +16,7 @@ function SuggestItem(props: any) {
             alt="..."
             style={{
               height: "200px",
-              width: "100%",
+              width: "600px",
               overflow: "hidden",
               flex: "1",
               objectFit: "cover",

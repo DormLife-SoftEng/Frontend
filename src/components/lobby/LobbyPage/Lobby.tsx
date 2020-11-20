@@ -7,19 +7,18 @@ import LeaveLobby from "./LeaveLobby";
 import Ready from "./Ready"
 import ImageList from "./ImageList";
 import ChatRoom from "./ChatRoom";
-import { Lobby } from "../../type";
 import lobbyService from "../../../services/lobby.service";
 import {Nav,Navbar} from "react-bootstrap"
 import {useAuth , authContextType} from "../../../contexts/auth.context"
 import { lobbyProps } from "../../newType";
+var interval : NodeJS.Timeout;
 
 const LobbyPage = () => {
     const history = useHistory();
     const {authToken} : authContextType = useAuth()
     const [lobbyInfo, setLobbyInfo] = useState<lobbyProps | null>(null)
     const { lobbyID }: { lobbyID: string } = useParams();
-    var interval = setInterval(()=> {
-    },1500);
+
     const handleGoHome = () => {
         history.push("/")
     }
@@ -33,6 +32,7 @@ const LobbyPage = () => {
             if (authToken) {
                 const result = lobby.member.some((mem : any) => mem.user.userId === authToken.userId) as boolean
                 if(!result) {
+                    console.log("Kick")
                     clearInterval(interval)
                     history.push("/")
                 }
