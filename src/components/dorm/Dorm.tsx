@@ -43,8 +43,6 @@ function Dorm() {
                     <FindRoomateBTN dorm={dorm}/>
                 </Col>
             </Row>
-        ) || (
-            <h2 className="text-center">This dorminfo is not public.</h2>
         )}
     </div>
     )

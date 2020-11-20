@@ -20,7 +20,9 @@ const LobbyPage = () => {
     const { lobbyID }: { lobbyID: string } = useParams();
 
     const handleGoHome = () => {
+        clearInterval(interval)
         history.push("/")
+
     }
     const handleReady = async () => {
         await setLobbyReadyInfo()
@@ -32,7 +34,6 @@ const LobbyPage = () => {
             if (authToken) {
                 const result = lobby.member.some((mem : any) => mem.user.userId === authToken.userId) as boolean
                 if(!result) {
-                    console.log("Kick")
                     clearInterval(interval)
                     history.push("/")
                 }
