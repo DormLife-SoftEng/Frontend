@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import dog from "../../pic/finder_silver_2.jpg";
 import cat from "../../pic/finder_silver_1.jpg";
 import catp from "../../pic/finder_silver_1p.jpg";
 import dogp from "../../pic/finder_silver_2p.jpg";
 import mon from "../../pic/finder_silver_3.jpg";
 import monp from "../../pic/finder_silver_3p.jpg";
-import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 import "./image.css";
@@ -13,15 +12,12 @@ import { ImagesOwnerProps } from "../../type";
 import { useAuth, authContextType } from "../../../contexts/auth.context";
 
 const ImageOwner = (props: ImagesOwnerProps) => {
-  const { authToken, setAuthToken }: authContextType = useAuth();
+  const { authToken}: authContextType = useAuth();
   const AllImage = [dog, cat, mon, dogp, catp, monp];
   const { attr, handleKick, index } = props;
   const handleClick = () => {
     handleKick(attr.user.userId);
   };
-  useEffect(() => {
-    console.log(attr);
-  }, []);
   return (
     <>
       {authToken && (

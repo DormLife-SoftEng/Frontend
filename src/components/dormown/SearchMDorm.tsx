@@ -7,7 +7,7 @@ function SearchMdorm(props: any) {
     setInput(val);
   }
   function handleKeyPress(target: any) {
-    if(target.charCode==13){
+    if(target.charCode===13){
       props.search(input);    
     } 
   }

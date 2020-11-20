@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {addRoomFormValue, RoomMethod} from "./newType"
 import { Row  ,Col, Button , Card } from "react-bootstrap"
 
@@ -9,9 +9,6 @@ const Room = (props : addRoomFormValue & RoomMethod) => {
 
     const {handleEdit,index,handleDelete,name,aircond,capacity,description,bedroom,bathroom,kitchen,price,allowedSex,image} = props
 
-    const room : addRoomFormValue = {
-        name,aircond,capacity,description,bedroom,bathroom,kitchen,price,allowedSex,image
-    }
 
     return (
         <>
@@ -20,7 +17,7 @@ const Room = (props : addRoomFormValue & RoomMethod) => {
             <Col lg={12}>
                 <Row noGutters={true}>
                 <Col lg={3}>
-                    <img style={{width:"200px",height:"200px"}} src={`${path}${image[0]}`} />
+                    <img alt="" style={{width:"200px",height:"200px"}} src={`${path}${image[0]}`} />
                     <p>Room Type Name: {name}</p>
                     <p>Room Capacity: {capacity}</p>
                 </Col>

@@ -9,10 +9,6 @@ import { Marker } from '@react-google-maps/api';
 const onLoad = (marker: any) => {
     console.log('marker: ', marker)
 }
-const center = {
-    lat: 13.845754,
-    lng: 100.569766
-};
 
 function Googlemap(props: any) {
     let {coordinate, containerStyle, zoom} = props

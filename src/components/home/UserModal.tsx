@@ -13,6 +13,7 @@ interface UserModalProps {
 
 
 function UserModal(props : UserModalProps) {
+
   const {show,handleClose,user} = props 
   const [edit,setEdit] = useState<boolean>(false)
   return (
@@ -26,8 +27,8 @@ function UserModal(props : UserModalProps) {
         <>
         <Row className="Row" noGutters={true}>
             <Col lg={5} >
-                { user.userType === "owner" && <img src={AllImages[user.profilePic + 6]} style={{width:"250px" , height:"250px"}} />  }
-                { user.userType === "general" && <img src={AllImages[user.profilePic]} style={{width:"250px" , height:"250px"}} /> }
+                { user.userType === "owner" && <img src={AllImages[user.PictureProfile + 6]} alt="" style={{width:"250px" , height:"250px"}} />  }
+                { user.userType === "general" && <img src={AllImages[user.PictureProfile]} alt="" style={{width:"250px" , height:"250px"}} /> }
             </Col>
             <Col style={{margin:"5% 0"}} >
                 <h4>Name : {user.name.firstName} </h4>

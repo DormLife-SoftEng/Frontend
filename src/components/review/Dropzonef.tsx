@@ -1,15 +1,13 @@
-import React, {Component, useState} from 'react'
-import {DropzoneAreaBase,DropzoneDialog} from 'material-ui-dropzone'
-import { AnyARecord } from 'dns';
+import React, {useState} from 'react'
+import {DropzoneDialog} from 'material-ui-dropzone'
 import {Button } from "react-bootstrap";
-import styles from'./dropzoneclass.module.css';
 interface DropzoneProps {
     files : any
     setFiles : any
 }
 const Dropzonef = (props : DropzoneProps) => {
     const [open, setOpen] = useState<boolean>(false);
-    const {files,setFiles} = props
+    const {setFiles} = props
     const handleChange = (files : any) => {
         setFiles(files)
         setOpen(false)

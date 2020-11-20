@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FormikProps, withFormik} from "formik";
 import * as Yup from "yup";
 import { withStyles, createStyles } from "@material-ui/core";
@@ -7,7 +7,6 @@ import TextField from "@material-ui/core/TextField";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { phoneRegExp } from "../signup/constant";
-import { useHistory } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
 import { EditProfileFormValue , Style  , EditProfileMyFormProps , EditProfileProps } from "../type";
 

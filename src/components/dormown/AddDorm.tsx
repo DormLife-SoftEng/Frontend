@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { withFormik ,FormikProps } from "formik";
@@ -100,6 +101,7 @@ const InnerForm = (props : FormikProps<AddDormFormValue> & Style) => {
 
     useEffect(() => {
         values.room = allRoom
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[allRoom])
 
     const handleCloseAddRoom = () => {

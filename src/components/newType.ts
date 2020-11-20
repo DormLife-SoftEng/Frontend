@@ -1,10 +1,11 @@
 
 export interface user {
+    PictureProfile : number,
     name : {
         firstName : string,
         lastName : string
     }
-    profilePic : number,
+    userId : string,
     telephone : string,
     email : string,
     email_verified: boolean,
@@ -15,4 +16,29 @@ export interface user {
 }
 export interface UserInfoProps {
     user : user | null
+}
+
+export interface chat {
+    message : string,
+    time : string,
+    user : user,
+
+}
+export interface member {
+    ready : boolean,
+    user : user
+}
+export interface lobbyProps {
+    _id : string,
+    blacklist : user[],
+    chat : chat[],
+    code : string,
+    dorm : any,
+    expireOn : string,
+    maxMember : number,
+    member : member[],
+    owner : user,
+    room : any
+
+
 }

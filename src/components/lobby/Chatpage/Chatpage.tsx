@@ -8,11 +8,11 @@ import Receiver from "./Receiver";
 import ChatList from "./ChatList";
 import lobbyService from "../../../services/lobby.service";
 import { useParams } from "react-router-dom";
-import { propsSendMessage  , chat} from "../../type";
+import { propsSendMessage } from "../../type";
 import {useAuth , authContextType} from "../../../contexts/auth.context"
 
 const Chatpage = () => {
-    const {authToken,setAuthToken} : authContextType = useAuth()
+    const {authToken} : authContextType = useAuth()
 
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const [loading,setLoading] = useState<boolean>(true)
@@ -42,7 +42,6 @@ const Chatpage = () => {
         setInterval(() => {
             getAllChat()
         },1500)
-        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (

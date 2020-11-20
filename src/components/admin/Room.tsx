@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Row, Col, Button, Card } from "react-bootstrap";
+import React  from "react";
+import { Row, Col, Card } from "react-bootstrap";
 
 const path = "http://localhost:5000/api/v1/dorms/images/";
 
@@ -29,18 +29,18 @@ const Room = (props: addRoomFormValue) => {
     image,
   } = props;
 
-  const room: addRoomFormValue = {
-    name,
-    aircond,
-    capacity,
-    description,
-    bedroom,
-    bathroom,
-    kitchen,
-    price,
-    allowedSex,
-    image,
-  };
+  // const room: addRoomFormValue = {
+  //   name,
+  //   aircond,
+  //   capacity,
+  //   description,
+  //   bedroom,
+  //   bathroom,
+  //   kitchen,
+  //   price,
+  //   allowedSex,
+  //   image,
+  // };
   const stringToCapital = (text: any) => text?.charAt(0).toUpperCase() + text?.slice(1);
 
   return (
@@ -60,8 +60,9 @@ const Room = (props: addRoomFormValue) => {
                         width: "90%",
                         overflow: "hidden",
                         flex: "1",
-                        objectFit: "cover",
+                        objectFit: "cover"
                       }}
+                      alt=""
                       src={`${path}${image[0]}`}
                     />
                   </Col>

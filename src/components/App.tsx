@@ -13,8 +13,7 @@ import ContactSupport from "./dormown/ContactSupport";
 import AddDorm from "./dormown/AddDorm"
 import Lobby from "./lobby/LobbyPage/Lobby";
 import MainLobby from "./lobby/mainLobbyPage/MainLobby";
-import CreatePage from "./lobby/CreateLobbyPage/CreatePage";
-import CreatePage1 from "./lobby/CreateLobbyPage/CreatePageSuggest";
+import CreatePage from "./lobby/CreateLobbyPage/CreatePageSuggest";
 import Chatpage from "./lobby/Chatpage/Chatpage";
 import PageNotFound from "./pagenotfound/PageNotFound";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";

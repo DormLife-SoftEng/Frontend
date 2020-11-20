@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import { useAuth, authContextType } from "../../contexts/auth.context";
 import authService from "../../services/auth.service";
-import { user } from "../newType";
-import dormfinderService from "../../services/dormfinder.service";
 
 function NavBar() {
   const { authToken, setAuthToken }: authContextType = useAuth();
@@ -16,6 +14,7 @@ function NavBar() {
     if (!!!authToken) {
       history.push("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authToken]);
   const handleClick = async () => {
     const result = await authService.Logout();

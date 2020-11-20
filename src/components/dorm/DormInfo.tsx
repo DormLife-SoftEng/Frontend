@@ -22,13 +22,13 @@ function DormInfo(dorm: propsDorm) {
       </p>
       <p>Facilities: {
         dorm.utility.map((util: Utilities, index: number)=>{
-          if(util.type == 'Cooking'){
+          if(util.type === 'Cooking'){
             allowedCooking = true;
-            return;
+            return <></>
           }
-          if(util.type == 'Pet'){
+          if(util.type === 'Pet'){
             allowedPet = true;
-            return;
+            return <></>
           }
           return (
             <span key={index}>
@@ -54,7 +54,7 @@ function DormInfo(dorm: propsDorm) {
         dorm.room.map((rt: Room, index: number)=>{
           return (
             <>
-            {index != 0 && (<span>{', '}</span>)}
+            {index !== 0 && (<span>{', '}</span>)}
             <RoomModal key={index} room={rt}/>
             </>
           )
