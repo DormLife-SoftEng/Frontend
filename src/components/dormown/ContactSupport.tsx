@@ -14,21 +14,20 @@ import dorminfoService from "../../services/dorminfo.service";
 function Contactsupport() {
   const history = useHistory();
   const {dormID}:{dormID:string} = useParams();
-  const [_delete , _deleteHandle] = useState<boolean>(false); 
   const tickets:Ticket = {
     target: {},
     newdata: {},
     type: "dorm",
     request: "delete",
   };
-  function deleteSubmit() {}
+  function deleteHandle() {}
     console.log(dormID)
     dorminfoService.getOneDorm(dormID).then(res=> res).then(data=>tickets.target=data).then(()=>dormownerService.deleteDorm(tickets))
     console.log(tickets)
-    document.body.style.backgroundColor = "#FFBDBD";
+    history.goBack()
   useEffect(() => {
-     deleteSubmit()
-  }, [_delete]);
+    document.body.style.backgroundColor = "#FFBDBD";
+  }, );
   return (
     <div style={{textAlign:"center"}}>
       <div>
@@ -95,7 +94,7 @@ function Contactsupport() {
             </Grid>
             <Grid container direction="column" spacing={10}>
               <Grid item >
-              <DeleteModal deleteSubmit={_deleteHandle}/>
+              <DeleteModal deleteSubmit={deleteHandle}/>
               </Grid>
             </Grid>
           </Grid>

@@ -81,7 +81,7 @@ function DeleteModal(props: any) {
             <Row>
               <Col lg={6} style={{ textAlign: "center" }}>
                 <Button
-                  onClick={() => deleteSubmit(true)}
+                  onClick={() => deleteSubmit()}
                   style={{
                     borderRadius: "10px",
                     background: "white",
