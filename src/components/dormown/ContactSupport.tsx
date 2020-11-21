@@ -20,6 +20,7 @@ function Contactsupport() {
     newdata: {},
     type: "dorm",
     request: "delete",
+    status: "pending",
   };
   function deleteSubmit() {}
     console.log(dormID)
