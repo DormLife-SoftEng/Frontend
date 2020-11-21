@@ -44,7 +44,7 @@ export default function () {
       history.goBack();
     }
   };
-  const setState = () => {
+  const setState = async () => {
     if (data?.status == "approved") {
       setApprove(true);
     } else {
@@ -153,9 +153,9 @@ export default function () {
                   onClick={
                     approve
                       ? () => {}
-                      : () => {
-                          adminService.adminChangeDormData(dormID);
-                          getDormData();
+                      : async () => {
+                          await adminService.adminChangeDormData(dormID);
+                          await getDormData();
                           setState();
                         }
                   }
