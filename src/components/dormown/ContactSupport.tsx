@@ -19,6 +19,7 @@ function Contactsupport() {
     newdata: {},
     type: "dorm",
     request: "delete",
+    status: "pending",
   };
   function deleteHandle() {}
     console.log(dormID)

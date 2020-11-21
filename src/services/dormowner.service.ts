@@ -72,6 +72,7 @@ export interface Ticket {
         newdata:{},
         type: string,
         request: string,
+        status: string,
 }
 
 const deleteDorm = async (props:Ticket)=>{
