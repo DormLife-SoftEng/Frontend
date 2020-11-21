@@ -29,19 +29,25 @@ function DeleteModal(props: any) {
 
   return (
     <>
-      <Button
-        style={{
-          //fontFamily: "Athiti",
-          fontSize: "40px",
-          height: "91px",
-          width: "963px",
-          background: "#F55E61",
-          borderRadius: "10px",
-        }}
-        onClick={handleShow}
-      >
-        Delete Dorm
-      </Button>
+      <Row className={"mt-4 mb-4"}>
+        <Col xs={1} sm={2}></Col>
+        <Col xs={10} sm={8}>
+          <Button
+            style={{
+              //fontFamily: "Athiti",
+              fontSize: "40px",
+              background: "#F55E61",
+              borderRadius: "10px",
+            }}
+            onClick={handleShow}
+            block
+          >
+            Delete Dorm
+          </Button>
+        </Col>
+        <Col xs={1} sm={2}></Col>
+      </Row>
+
       <Modal centered={true} show={show} onHide={handleClose} dialogClassName="delete">
         <Modal.Body
           style={{
