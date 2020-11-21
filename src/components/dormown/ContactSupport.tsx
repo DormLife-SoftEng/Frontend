@@ -7,14 +7,28 @@ import { Navbar, Nav, Row, Col, Button, Container } from "react-bootstrap";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { Grid } from "@material-ui/core";
 import DeleteModal from "./DeleteModal"
+import dormownerService, { Ticket } from "../../services/dormowner.service";
+import dorminfoService from "../../services/dorminfo.service";
 //import { View, StyleSheet, Text } from 'react-native';
 
 function Contactsupport() {
   const history = useHistory();
-  const {id}:{id:string} = useParams();
-  useEffect(() => {
+  const {dormID}:{dormID:string} = useParams();
+  const [_delete , _deleteHandle] = useState<boolean>(false); 
+  const tickets:Ticket = {
+    target: {},
+    newdata: {},
+    type: "dorm",
+    request: "delete",
+  };
+  function deleteSubmit() {}
+    console.log(dormID)
+    dorminfoService.getOneDorm(dormID).then(res=> res).then(data=>tickets.target=data).then(()=>dormownerService.deleteDorm(tickets))
+    console.log(tickets)
     document.body.style.backgroundColor = "#FFBDBD";
-  }, []);
+  useEffect(() => {
+     deleteSubmit()
+  }, [_delete]);
   return (
     <div style={{textAlign:"center"}}>
       <div>
@@ -81,7 +95,7 @@ function Contactsupport() {
             </Grid>
             <Grid container direction="column" spacing={10}>
               <Grid item >
-              <DeleteModal id={id}/>
+              <DeleteModal deleteSubmit={_deleteHandle}/>
               </Grid>
             </Grid>
           </Grid>

@@ -11,23 +11,29 @@ import {
   Card,
   Container,
 } from "react-bootstrap";
-import { Ticket } from "../../services/dormowner.service";
+import dormownerService, { Ticket } from "../../services/dormowner.service";
+import dorminfoService from "../../services/dorminfo.service";
+import { useHistory } from "react-router-dom";
 
 function DeleteModal(props: any) {
-  const { id } = props;
+  const { deleteSubmit } = props;
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  
-  const ticket:Ticket = {
-    target: {},
-    newdata: {},
-    type: "dorm",
-    request: "delete",
-  };
-  function deleteSubmit() {}
+  // const history = useHistory();
+  // const ticket:Ticket = {
+  //   target: {},
+  //   newdata: {},
+  //   type: "dorm",
+  //   request: "delete",
+  // };
+  // function deleteSubmit() {}
+  //   console.log(id)
+  //   const dorm = await dorminfoService.getOneDorm(id)
+  //   console.log(dorm)
+  //   ticket.target={}
+  //   const result = await dormownerService.deleteDorm(ticket)
 
   return (
     <>
@@ -75,7 +81,7 @@ function DeleteModal(props: any) {
             <Row>
               <Col lg={6} style={{ textAlign: "center" }}>
                 <Button
-                  onClick={() => deleteSubmit()}
+                  onClick={() => deleteSubmit(true)}
                   style={{
                     borderRadius: "10px",
                     background: "white",

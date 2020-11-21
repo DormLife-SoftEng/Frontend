@@ -83,7 +83,7 @@ const deleteDorm = async (props:Ticket)=>{
             headers: { Authorization : `Bearer ${access_token}` }
         };
         try {
-            const result = await axios.post("http://localhost:5000/api/v1/ticket",props,config)
+            const result = await axios.post("http://localhost:5000/api/v1/tickets",props,config)
             return true
         } catch (err) {
             return false
