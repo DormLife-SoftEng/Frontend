@@ -1,5 +1,5 @@
 import React , {useState} from "react";
-import { InputGroup, FormControl } from "react-bootstrap";
+import { InputGroup, FormControl, Button } from "react-bootstrap";
 import { SearchLobbyProps } from "../../type";
 
 
@@ -20,9 +20,9 @@ const SearchBar = (props : SearchLobbyProps) => {
             placeholder="Search"
             />
             <InputGroup.Append>
-            <button onClick={() => {
+            <Button variant="light" onClick={() => {
                 handleSubmit(search)
-            }} >Search</button>
+            }} >Search</Button>
             </InputGroup.Append>
         </InputGroup>
     

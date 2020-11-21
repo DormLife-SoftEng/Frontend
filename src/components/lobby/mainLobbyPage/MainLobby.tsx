@@ -10,8 +10,8 @@ import lobbyService from "../../../services/lobby.service"
 import { Nav, Navbar, Row, Col } from "react-bootstrap";
 function MainLobby() {
   const history = useHistory();
-  const [lobbylist, setLobbyList] = useState<any>([])
-
+  const [lobbylist, setLobbyList] = useState<any[]>([])
+  const [lobbylistSearch,setlobbylistSearch] = useState<any[]>([])
   const handleRouting = (s: string) => {
     history.push(s);
   }
@@ -20,16 +20,20 @@ function MainLobby() {
   }
   const handleSubmit = (s: string) => {
     // search by parameter & set new State 
-    alert(s)
-    setLobbyList([])
+    const search = lobbylist.filter(lobby =>  {
+      const name = lobby.dormName+", "+lobby.room as string
+      return name.includes(s)
+    })
+    setlobbylistSearch(search)
   }
 
   const getAllLobbys = async () => {
     const allLobbys = await lobbyService.getLobbys();
     console.log(allLobbys)
     setLobbyList(allLobbys)
+    setlobbylistSearch(allLobbys)
   }
-
+  
   useEffect(() => {
     getAllLobbys()
     document.body.style.backgroundColor = "#F55E61"
@@ -58,14 +62,14 @@ function MainLobby() {
       <Row noGutters={true} style={{padding:"1%"}}>
       <Col xs="4"></Col>
       <Col xs="4">
-      <SearchBar handleSubmit={handleSubmit} />
+      <SearchBar handleSubmit={handleSubmit}/>
       </Col>
       <Col xs="4"></Col>
       </Row>
       <Row noGutters={true}>
       <Col xs="2"></Col>
       <Col xs="8">
-      <LobbyList lobbylist={lobbylist} />
+      <LobbyList lobbylist={lobbylistSearch} />
       </Col>
       <Col xs="2"></Col>
       </Row>

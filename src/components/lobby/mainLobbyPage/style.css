@@ -1,0 +1,10 @@
+.lobby .modal-content {
+  border-radius: 1rem;
+  text-align: center;
+  color: #F55E61;
+  background-color: #fff;
+  font-size: 2rem;
+}
+.lobby {
+  max-width: 40%;
+}

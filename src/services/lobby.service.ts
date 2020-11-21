@@ -12,7 +12,8 @@ interface propsCreateLobby {
 }
 
 interface propsJoinLobby {
-    id? : ObjectID
+    id? : ObjectID,
+    lobbyCode? : string
 }
 
 interface propsSendMessage {
@@ -84,6 +85,32 @@ async function joinLobby(form : propsJoinLobby) {
 
     }
     return false
+}
+
+async function joinLobbyCode(form : propsJoinLobby) {
+
+    const {lobbyCode} = form
+    const token = localStorage.getItem("token")
+    if (token) {
+        const tokenObj : tokenDto = JSON.parse(token)
+        const access_token = tokenObj.access_token
+        if (lobbyCode) {
+            const config = {
+                headers: { Authorization : `Bearer ${access_token}` },
+                params: {
+                    lobbyCode : lobbyCode
+                }
+            };
+            try {
+                const result = await axios.put(`${API_URL}join`,{},config)
+                return result.data.id as string
+            } catch (err) {
+                return null
+            }
+        }
+
+    }
+    return null
 }
 
 async function getSpecificLobby(lobbyID : string) {
@@ -182,6 +209,9 @@ async function leaveLobby(lobbyID : string) {
         const access_token = tokenObj.access_token
         const config = {
             headers: { Authorization : `Bearer ${access_token}` },
+            params: {
+                id:lobbyID
+            }
         };
         try {
             const result = await axios.put(`${API_URL}${lobbyID}/leave`,{},config)
@@ -198,6 +228,9 @@ async function deleteLobby(lobbyID : string) {
         const access_token = tokenObj.access_token
         const config = {
             headers: { Authorization : `Bearer ${access_token}` },
+            params: {
+                id : lobbyID
+            }
         };
         try {
             const result = await axios.delete(`${API_URL}${lobbyID}/delete`,config)
@@ -214,6 +247,9 @@ async function closeLobby(lobbyID : string) {
         const access_token = tokenObj.access_token
         const config = {
             headers: { Authorization : `Bearer ${access_token}` },
+            params : {
+                id : lobbyID
+            }
         };
         try {
             const result = await axios.delete(`${API_URL}${lobbyID}/close`,config)
@@ -235,5 +271,6 @@ export default {
     kickMember,
     leaveLobby,
     deleteLobby,
-    closeLobby
+    closeLobby,
+    joinLobbyCode
 }

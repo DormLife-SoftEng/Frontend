@@ -38,11 +38,11 @@ const ImageOwner = (props: ImagesOwnerProps) => {
               ) : (
                 <div className="image">
                   <Button onClick={handleClick} className="delete-image-btn" variant="">
-                    <CancelPresentationIcon fontSize="large" htmlColor="#F55E61" />
+                    <CancelPresentationIcon fontSize="large" htmlColor="#000" />
                   </Button>
                   <img
                     alt=""
-                    style={{ border: "10px solid #555", width: "200px", height: "200px" }}
+                    style={{ border: "10px solid #FFF", width: "200px", height: "200px" }}
                     src={AllImage[attr.user.PictureProfile]}
                   />
                 </div>
@@ -68,11 +68,11 @@ const ImageOwner = (props: ImagesOwnerProps) => {
               ) : (
                 <div className="image">
                   <Button onClick={handleClick} className="delete-image-btn" variant="">
-                    <CancelPresentationIcon fontSize="large" htmlColor="#F55E61" />
+                    <CancelPresentationIcon fontSize="large" htmlColor="#000" />
                   </Button>
                   <img
                     alt=""
-                    style={{ border: "10px solid #555", width: "200px", height: "200px" }}
+                    style={{ border: "10px solid #FFF", width: "200px", height: "200px" }}
                     src={
                       attr.ready
                         ? AllImage[attr.user.PictureProfile + 3]

@@ -8,7 +8,7 @@ import Ready from "./Ready"
 import ImageList from "./ImageList";
 import ChatRoom from "./ChatRoom";
 import lobbyService from "../../../services/lobby.service";
-import {Nav,Navbar} from "react-bootstrap"
+import {Nav,Navbar, Row,Col} from "react-bootstrap"
 import {useAuth , authContextType} from "../../../contexts/auth.context"
 import { lobbyProps } from "../../newType";
 var interval : NodeJS.Timeout;
@@ -38,6 +38,9 @@ const LobbyPage = () => {
                     history.push("/")
                 }
             }
+        } else {
+            clearInterval(interval)
+            history.push("/")
         }
 
     }
@@ -67,7 +70,7 @@ const LobbyPage = () => {
         document.body.style.backgroundColor = "#F55E61"
         interval = setInterval(() => {
             getLobbyInfo()
-        },1500)
+        },500)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -75,7 +78,7 @@ const LobbyPage = () => {
         <>
         {lobbyInfo && 
         <div style={{textAlign:"center"}}>
-            <Navbar style={{ padding: "1% 4%" }} bg="">
+            <Navbar style={{ padding: "2.4% 4%" }} bg="">
                 <Nav className="text-center">
                 <HomeButton handleGoHome={handleGoHome} />
                     <h1 style={{
@@ -97,19 +100,51 @@ const LobbyPage = () => {
             <>
             {(lobbyInfo.owner.userId === authToken.userId) ?
                 <>
+                    <Row style={{margin:"7% 0%"}} >
+                    <Col>
                     <ImageList handleKick={handleKick} isOwner={true} maxMember={lobbyInfo.maxMember} member={lobbyInfo.member} />
+                    </Col>
+                    </Row>
+                    <Row style={{margin:"1% 0%"}}>
+                    <Col>
                     <CloseLobby disable={lobbyInfo.member.some((mem : any) => mem.ready === false)} handleCloseLobby={handleCloseLobby} />
+                    </Col>
+                    </Row>
+                    <Row style={{margin:"2% 0%"}} >
+                    <Col lg="4"/>
+                    <Col lg="2">
                     <DeleteLobby handleDelete={handleDelete} />
+                    </Col>
+                    <Col lg="2">
+                    <ChatRoom handleGoChatPage={handleGoChatPage} />
+                    </Col>
+                    <Col lg="4"/>
+                    </Row>
                 </>
                 :
                 <>
+                    <Row style={{margin:"7% 0%"}} >
+                    <Col>
                     <ImageList handleKick={handleKick} isOwner={false} maxMember={lobbyInfo.maxMember} member={lobbyInfo.member} />
+                    </Col>
+                    </Row>
+                    <Row style={{margin:"1% 0%"}}>
+                    <Col>
                     {lobbyInfo.member.find((mem) => mem.user.userId === authToken.userId)?.ready ? <Ready text="Unready" handleReady={handleReady} /> : <Ready text="Ready" handleReady={handleReady} />}
+                    </Col>
+                    </Row>
+                    <Row style={{margin:"2% 0%"}} >
+                    <Col lg="4"/>
+                    <Col lg="2">
                     <LeaveLobby handleLeave={handleLeave} />
+                    </Col>
+                    <Col lg="2">
+                    <ChatRoom handleGoChatPage={handleGoChatPage} />
+                    </Col>
+                    <Col lg="4"/>
+                    </Row>
                 </>
             }
-            
-            <ChatRoom handleGoChatPage={handleGoChatPage} />
             </> }
 
         </div>

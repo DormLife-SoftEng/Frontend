@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import { DeleteLobbyProps } from "../../type";
 import ModalCheckup from "./ModalCheckup";
 
@@ -14,9 +15,9 @@ const DeleteLobby = (props : DeleteLobbyProps) => {
     }
     return (
         <div>
-            <button onClick={()=> {
+            <Button variant="light" size="lg" style={{color:"#F55E61",border:"3px solid white"}} onClick={()=> {
                 setShow(true)
-            }}>Delete Lobby</button>
+            }}>Delete Lobby</Button>
             <ModalCheckup handleCancel={handleCancel} handleAction={handleAction} show={show} action="Delete"  />
         </div>
     )

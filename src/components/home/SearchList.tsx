@@ -30,15 +30,16 @@ const styles = createStyles({
 
 interface FormValue {
   dormName? : string,
-  price? : number,
-  distance? : number,
-  maxPerson? : number,
-  rating? : number,
-  roomSize? : number,
-  roomType : string,
-  gender : string,
+  price? : string,
+  distance? : string,
+  maxPerson? : string,
+  rating? : string,
+  dormType? : string,
+  gender? : string,
   convenienceStore? : boolean,
-  kitchen? : boolean,
+  kitchen? : string,
+  bedroom? : string,
+  bathroom? : string,
   laundry? : boolean,
   parking? : boolean,
   pet? : boolean,
@@ -47,19 +48,20 @@ interface FormValue {
   fitness? : boolean,
   pool? : boolean,
   cooking? : boolean,
-  restRoom? : boolean,
+  aircond? : string,
 }
 interface MyFormProps {
   dormName? : string,
-  price? : number,
-  distance? : number,
-  maxPerson? : number,
-  rating? : number,
-  roomSize? : number,
-  roomType? : string,
+  price? : string,
+  distance? : string,
+  maxPerson? : string,
+  rating? : string,
+  dormType? : string,
   gender? : string,
   convenienceStore? : boolean,
-  kitchen? : boolean,
+  kitchen? : string,
+  bedroom? : string,
+  bathroom? : string,
   laundry? : boolean,
   parking? : boolean,
   pet? : boolean,
@@ -68,7 +70,7 @@ interface MyFormProps {
   fitness? : boolean,
   pool? : boolean,
   cooking? : boolean,
-  restRoom? : boolean,
+  aircond? : string,
   handleSubmit : (form : any) => void,
 }
 interface Style {
@@ -89,6 +91,8 @@ function SearchList(props: FormikProps<FormValue> & Style) {
   } = props;
   return (
       <form onSubmit={handleSubmit}>
+        <Row style={{margin:"2%"}} noGutters={true}>
+          <Col>
           <TextField
             onChange={handleChange}
             value={values.dormName}
@@ -97,7 +101,12 @@ function SearchList(props: FormikProps<FormValue> & Style) {
             label="DormName"
             margin="dense"
             variant="outlined"
+            onBlur={handleBlur}
+            helperText={touched.dormName ? errors.dormName : ""}
+            error={touched.dormName && Boolean(errors.dormName)}
           />
+          </Col>
+          <Col>
           <TextField
             onChange={handleChange}
             value={values.distance}
@@ -106,7 +115,13 @@ function SearchList(props: FormikProps<FormValue> & Style) {
             label="Distance(KM)"
             margin="dense"
             variant="outlined"
+            type="number"
+            onBlur={handleBlur}
+            helperText={touched.distance ? errors.distance : ""}
+            error={touched.distance && Boolean(errors.distance)}
           />
+          </Col>
+          <Col>
           <TextField
             onChange={handleChange}
             value={values.maxPerson}
@@ -115,7 +130,13 @@ function SearchList(props: FormikProps<FormValue> & Style) {
             label="Max Person"
             margin="dense"
             variant="outlined"
+            type="number"
+            onBlur={handleBlur}
+            helperText={touched.maxPerson ? errors.maxPerson : ""}
+            error={touched.maxPerson && Boolean(errors.maxPerson)}
           />
+          </Col>
+          <Col>
           <TextField
             className={classes.formSpace}
             onChange={handleChange}
@@ -124,7 +145,15 @@ function SearchList(props: FormikProps<FormValue> & Style) {
             label="Price"
             margin="dense"
             variant="outlined"
+            type="number"
+            onBlur={handleBlur}
+            helperText={touched.price ? errors.price : ""}
+            error={touched.price && Boolean(errors.price)}
           />
+          </Col>
+        </Row>
+        <Row style={{margin:"2%"}}  noGutters={true}>
+          <Col>
           <TextField
             onChange={handleChange}
             value={values.rating}
@@ -133,38 +162,98 @@ function SearchList(props: FormikProps<FormValue> & Style) {
             label="Rating"
             margin="dense"
             variant="outlined"
+            type="number"
+            onBlur={handleBlur}
+            helperText={touched.rating ? errors.rating : ""}
+            error={touched.rating && Boolean(errors.rating)}
           />
+          </Col>
+          <Col>
           <TextField
             onChange={handleChange}
-            value={values.roomSize}
+            value={values.kitchen}
             className={classes.formSpace}
-            id="roomSize"
-            label="RoomSize"
+            id="kitchen"
+            label="Kitchen"
             margin="dense"
             variant="outlined"
+            type="number"
+            onBlur={handleBlur}
+            helperText={touched.kitchen ? errors.kitchen : ""}
+            error={touched.kitchen && Boolean(errors.kitchen)}
           />
+          </Col>
+          <Col>
+          <TextField
+            onChange={handleChange}
+            value={values.bathroom}
+            className={classes.formSpace}
+            id="bathroom"
+            label="Bathroom"
+            margin="dense"
+            variant="outlined"
+            type="number"
+            onBlur={handleBlur}
+            helperText={touched.bathroom ? errors.bathroom : ""}
+            error={touched.bathroom && Boolean(errors.bathroom)}
+          />
+          </Col>
+          <Col>
+          <TextField
+            onChange={handleChange}
+            value={values.bedroom}
+            className={classes.formSpace}
+            id="bedroom"
+            label="Bedroom"
+            margin="dense"
+            variant="outlined"
+            type="number"
+            onBlur={handleBlur}
+            helperText={touched.bedroom ? errors.bedroom : ""}
+            error={touched.bedroom && Boolean(errors.bedroom)}
+          />
+          </Col>
+        </Row>
+        <Row style={{margin:"2%"}} noGutters={true}>
+          <Col>
+          <TextField
+            onChange={handleChange}
+            value={values.aircond}
+            className={classes.formSpace}
+            id="aircond"
+            label="Air conditioner"
+            margin="dense"
+            variant="outlined"
+            type="number"
+            onBlur={handleBlur}
+            helperText={touched.aircond ? errors.aircond : ""}
+            error={touched.aircond && Boolean(errors.aircond)}
+          />            
+          </Col>
+          <Col>
           <FormControl className={classes.formControl}>
-            <InputLabel>RoomType</InputLabel>
+            <InputLabel>DormType</InputLabel>
             <Select
-              value={values.roomType}
-              onChange={handleChange("roomType")}
-              onBlur={handleBlur("roomType")}
-              id="roomType"
-              error={touched.roomType && Boolean(errors.roomType)}
+              value={values.dormType}
+              onChange={handleChange("dormType")}
+              onBlur={handleBlur("dormType")}
+              id="dormType"
+              error={touched.dormType && Boolean(errors.dormType)}
             >
-              <MenuItem value="หอพัก">หอพัก</MenuItem>
-              <MenuItem value="อพาร์ตเมนต์">อพาร์ตเมนต์</MenuItem>
-              <MenuItem value="คอนโด">คอนโด</MenuItem>
-              <MenuItem value="แฟลต">แฟลต</MenuItem>
-              <MenuItem value="แรือนแรม">เรือนแรม(hostel)</MenuItem>
-              <MenuItem value="บ้านพัก">บ้านพัก</MenuItem>
+              <MenuItem value="Dorm">Dorm</MenuItem>
+              <MenuItem value="Condo">Condo</MenuItem>
+              <MenuItem value="ApartMent">Apartment</MenuItem>
+              <MenuItem value="Flat">Flat</MenuItem>
+              <MenuItem value="Hostel">Hostel</MenuItem>
+              <MenuItem value="House">House</MenuItem>
             </Select>
             <FormHelperText error={true}>
-              {touched.roomType ? errors.roomType : ""}
+              {touched.dormType ? errors.dormType : ""}
             </FormHelperText>
           </FormControl>
-
-          <FormControl className={classes.formControl}>
+          </Col> 
+          <Col>
+          <FormControl className={classes.formControl} >
             <InputLabel>Gender</InputLabel>
             <Select
               value={values.gender}
@@ -181,64 +270,71 @@ function SearchList(props: FormikProps<FormValue> & Style) {
               {touched.gender ? errors.gender : ""}
             </FormHelperText>
           </FormControl>
-          <br />
+          </Col>
+          <Col>
+          </Col>
+        </Row>
           <FormGroup>
-            <FormLabel style={{ color: "black" }}>Utilities</FormLabel>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.convenienceStore}
-                  name="convenienceStore"
-                  color="primary"
+            <Row style={{margin:"0 2%"}} noGutters={true}>
+              <Col>
+                <FormLabel style={{ color: "black" }}>Utilities</FormLabel>
+              </Col>
+            </Row>
+            <Row style={{margin:"0 2%"}} noGutters={true}>
+              <Col>
+                <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleChange}
+                    value={values.convenienceStore}
+                    name="convenienceStore"
+                    color="primary"
+                  />
+                }
+                label="Convenience Store"
                 />
-              }
-              label="Convenience Store"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.kitchen}
-                  name="kitchen"
-                  color="primary"
+              </Col>
+              <Col>
+                <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleChange}
+                    value={values.laundry}
+                    name="laundry"
+                    color="primary"
+                  />
+                }
+                label="Laundry"
                 />
-              }
-              label="Kitchen"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.laundry}
-                  name="laundry"
-                  color="primary"
+              </Col>
+              <Col>
+                <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleChange}
+                    value={values.parking}
+                    name="parking"
+                    color="primary"
+                  />
+                }
+                label="Parking"
                 />
-              }
-              label="Laundry"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.parking}
-                  name="parking"
-                  color="primary"
+              </Col>
+              <Col>
+                <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleChange}
+                    value={values.pet}
+                    name="pet"
+                    color="primary"
+                  />
+                }
+                label="Pet"
                 />
-              }
-              label="Parking"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.pet}
-                  name="pet"
-                  color="primary"
-                />
-              }
-              label="Pet"
-            />
+
+              </Col>
+            </Row>
             <FormControlLabel
               control={
                 <Checkbox
@@ -294,17 +390,6 @@ function SearchList(props: FormikProps<FormValue> & Style) {
               }
               label="Cooking"
             />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.restRoom}
-                  name="restRoom"
-                  color="primary"
-                />
-              }
-              label="ห้องน้ำรวม"
-            />
           </FormGroup>
           <Row noGutters={true}>
             <Col style={{textAlign:"right"}}>
@@ -328,15 +413,14 @@ const SearchFilter = withFormik<MyFormProps,FormValue>({
   mapPropsToValues: props => {
     return {
       dormName: props.dormName || "",
-      price: props.price,
-      distance: props.distance,
-      maxPerson: props.maxPerson,
-      rating: props.rating,
+      price: props.price || "",
+      distance: props.distance || "",
+      maxPerson: props.maxPerson || "",
+      rating: props.rating || "",
       gender: props.gender || "",
-      roomSize: props.roomSize,
-      roomType: props.roomType || "",
+      dormType: props.dormType || "",
       convenienceStore: props.convenienceStore || false,
-      kitchen: props.kitchen || false,
+      kitchen: props.kitchen || "",
       laundry: props.laundry || false,
       parking: props.parking || false,
       pet: props.pet || false,
@@ -345,18 +429,17 @@ const SearchFilter = withFormik<MyFormProps,FormValue>({
       fitness: props.fitness || false,
       pool: props.pool || false,
       cooking: props.cooking || false,
-      restRoom: props.restRoom || false,
+      aircond: props.aircond || "",
+      bedroom: props.bedroom || "",
+      bathroom : props.bathroom || ""
     };
   },
   validationSchema: Yup.object().shape({
-    gender: Yup.string().required("Select your gender"),
-    roomType: Yup.string().required("Select Room Type"),
-    // pet : Yup.boolean().oneOf([true],"Hello")
+
   }),
 
   handleSubmit: (values, { resetForm , props }) => {
-    props.handleSubmit(JSON.stringify(values));
-    alert(JSON.stringify(values));
+    props.handleSubmit({});
     
     resetForm();
   },
