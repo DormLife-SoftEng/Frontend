@@ -29,7 +29,7 @@ async function adminChangeDormData(urlPath: string) {
   }
 }
 async function adminDeleteDormData(urlPath: string) {
-  const result = axios
+  axios
     .delete(`${API_URLAdmin}${urlPath}`)
     .then((res) => res.data)
     .catch((err) => {

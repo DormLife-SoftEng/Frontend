@@ -7,37 +7,39 @@ import LeaveLobby from "./LeaveLobby";
 import Ready from "./Ready"
 import ImageList from "./ImageList";
 import ChatRoom from "./ChatRoom";
-import { Lobby } from "../../type";
 import lobbyService from "../../../services/lobby.service";
-import { token1, token2 } from "../../test"
 import {Nav,Navbar} from "react-bootstrap"
 import {useAuth , authContextType} from "../../../contexts/auth.context"
+import { lobbyProps } from "../../newType";
+var interval : NodeJS.Timeout;
 
 const LobbyPage = () => {
     const history = useHistory();
-    const {authToken,setAuthToken} : authContextType = useAuth()
-    const [lobbyInfo, setLobbyInfo] = useState<any>()
+    const {authToken} : authContextType = useAuth()
+    const [lobbyInfo, setLobbyInfo] = useState<lobbyProps | null>(null)
     const { lobbyID }: { lobbyID: string } = useParams();
-    var interval = setInterval(()=> {
 
-    },1500);
     const handleGoHome = () => {
+        clearInterval(interval)
         history.push("/")
+
     }
     const handleReady = async () => {
         await setLobbyReadyInfo()
     }
     const getLobbyInfo = async () => {
         const lobby = await lobbyService.getSpecificLobby(lobbyID)
-        console.log(lobby)
-        setLobbyInfo(lobby)
-        if (authToken) {
-            const result = lobby.member.some((mem : any) => mem.user.userId === authToken.userId) as boolean
-            if(!result) {
-                clearInterval(interval)
-                history.push("/")
+        if (lobby) {
+            setLobbyInfo(lobby)
+            if (authToken) {
+                const result = lobby.member.some((mem : any) => mem.user.userId === authToken.userId) as boolean
+                if(!result) {
+                    clearInterval(interval)
+                    history.push("/")
+                }
             }
         }
+
     }
     const setLobbyReadyInfo = async () => {
         await lobbyService.setReady(lobbyID)
@@ -102,7 +104,7 @@ const LobbyPage = () => {
                 :
                 <>
                     <ImageList handleKick={handleKick} isOwner={false} maxMember={lobbyInfo.maxMember} member={lobbyInfo.member} />
-                    {lobbyInfo.member.find((mem : any) => mem.user.userId === authToken.userId).ready ? <Ready text="Unready" handleReady={handleReady} /> : <Ready text="Ready" handleReady={handleReady} />}
+                    {lobbyInfo.member.find((mem) => mem.user.userId === authToken.userId)?.ready ? <Ready text="Unready" handleReady={handleReady} /> : <Ready text="Ready" handleReady={handleReady} />}
                     <LeaveLobby handleLeave={handleLeave} />
                 </>
             }

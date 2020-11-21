@@ -1,6 +1,6 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { Navbar, Nav, Row, Button, Col, Container } from "react-bootstrap";
+import { Navbar, Nav, Row, Button, Col  } from "react-bootstrap";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
@@ -24,6 +24,7 @@ function ReviewAdd() {
   }
   useEffect(() => {
     getDormId();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   interface review {
     dorm: string,

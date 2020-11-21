@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ObjectID } from "mongodb"
 import {Token,tokenDto} from "../components/type"
+import {lobbyProps} from "../components/newType"
 const API_URL = "http://localhost:5000/api/v1/lobbies/"
 
 
@@ -95,12 +96,12 @@ async function getSpecificLobby(lobbyID : string) {
         };
         try {
             const result = await axios.get(`${API_URL}${lobbyID}`,config)
-            return result.data 
+            return result.data as lobbyProps
         } catch (err) {
-            return {}
+            return null
         }
     }
-    return {}
+    return null
 }
 async function setReady(lobbyID : string) {
     const token = localStorage.getItem("token")

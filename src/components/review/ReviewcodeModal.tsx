@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Image, Row, Col, Modal, Button } from "react-bootstrap";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
+import { useAuth, authContextType } from "../../contexts/auth.context";
 
 function ReviewcodeModal() {
     const [ code, codeChange ] = useState<string>("");
@@ -15,6 +16,9 @@ function ReviewcodeModal() {
         console.log(code)
         history.push(`/review/${code}`);
     }
+    const { authToken }: authContextType = useAuth();
+    show && !!!authToken && history.push("/signin");
+
     return (
         <>
             <Button

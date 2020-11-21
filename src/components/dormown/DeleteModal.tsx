@@ -102,7 +102,7 @@ function DeleteModal(props: any) {
                     fontWeight: "bold",
                   }}
                 >
-                  Cancle
+                  Cancel
                 </Button>
               </Col>
             </Row>

@@ -23,7 +23,7 @@ const Header = () => {
 
 function DormEditButton(props: any) {
   const history = useHistory();
-  const { dormName, dormLink } = props;
+  const { dormName, dormLink, dormRequest } = props;
   return (
     <Button
       variant="light"
@@ -38,7 +38,15 @@ function DormEditButton(props: any) {
       }}
       onClick={() => history.push(`/admin/editrequest/${dormLink}`)}
     >
-      {dormName}
+      <Row>
+        <Col style={{ textAlign: "center" }} xs={2} md={2}>
+          {dormName}
+        </Col>
+        <Col xs={8} md={8}></Col>
+        <Col style={{ textAlign: "center" }} xs={2} md={2}>
+          {dormRequest}
+        </Col>
+      </Row>
     </Button>
   );
 }
@@ -47,7 +55,7 @@ export default function () {
   const [data, setData] = useState<any[]>([]);
   document.body.style.backgroundColor = "#F55E61";
   !data.length && adminService.adminListGetDormData().then((res) => setData(res));
-
+  console.log(data);
   return (
     <>
       <Header />
@@ -56,7 +64,11 @@ export default function () {
           <Col xs={0} md={1}></Col>
           <Col xs={12} md={10}>
             {data?.map((item: any, index) => (
-              <DormEditButton dormName={item.newdata.name} dormLink={item.id} />
+              <DormEditButton
+                dormName={item.newdata.name}
+                dormLink={item.id}
+                dormRequest={item.request}
+              />
             ))}
           </Col>
           <Col xs={0} md={1}></Col>

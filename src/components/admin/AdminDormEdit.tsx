@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Button ,Row, Col, Card } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import adminService from "../../services/admin.service";
@@ -44,9 +44,11 @@ export default function () {
       history.goBack();
     }
   };
-  const setState = () => {
+  const setState = async () => {
     if (data?.status == "approved") {
       setApprove(true);
+    } else {
+      setApprove(false);
     }
   };
   const getImgPath = (path: string): string => `http://localhost:5000/api/v1/dorms/images/${path}`;
@@ -83,8 +85,8 @@ export default function () {
                     <Col xs={10} md={10}>
                       <p>Name: {data?.newdata?.name}</p>
                       <p>Address: {data?.newdata?.address?.address}</p>
-                      <p>Dorm Longitude: {data?.newdata?.address?.coordinate[0]}</p>
-                      <p>Dorm Latitude: {data?.newdata?.address?.coordinate[1]}</p>
+                      <p>Dorm Longitude: {data?.newdata?.address?.coordinate[1]}</p>
+                      <p>Dorm Latitude: {data?.newdata?.address?.coordinate[0]}</p>
                       <p>Dorm Phone Number: {data?.newdata?.contact?.telephone}</p>
                       <p>Dorm LineID: {data?.newdata?.contact?.lineID}</p>
                       <p>Accommodation Type: {stringToCapital(data?.type)}</p>
@@ -148,13 +150,19 @@ export default function () {
             <Col xs={11} md={11}>
               <div style={{ textAlign: "center" }}>
                 <Button
-                  onClick={() => {
-                    adminService.adminChangeDormData(dormID);
-                    setState();
-                  }}
-                  variant="danger"
+                  onClick={
+                    approve
+                      ? () => {}
+                      : async () => {
+                          await adminService.adminChangeDormData(dormID);
+                          await getDormData();
+                          setState();
+                        }
+                  }
+                  variant={approve ? "secondary" : "danger"}
+                  disabled={approve}
                 >
-                  {approve ? "Unapprove" : "Approve"}
+                  {approve ? "Approved" : "Approve"}
                 </Button>
                 {showDelete ? (
                   <>

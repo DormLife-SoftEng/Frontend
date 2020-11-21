@@ -1,5 +1,4 @@
 import React from "react";
-import { Row } from "react-bootstrap";
 import DormInfo from "./DormInfo";
 import { propsDorm } from "./type2";
 

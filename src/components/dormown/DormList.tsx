@@ -1,6 +1,4 @@
 import React from "react";
-import { useState } from "react";
-import { setSyntheticLeadingComments } from "typescript";
 import SuggestItem from "./SuggestItem";
 import { propsDorm } from "./type2";
 

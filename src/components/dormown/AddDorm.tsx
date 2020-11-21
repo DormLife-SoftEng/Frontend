@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { withFormik ,FormikProps } from "formik";
@@ -100,6 +101,7 @@ const InnerForm = (props : FormikProps<AddDormFormValue> & Style) => {
 
     useEffect(() => {
         values.room = allRoom
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[allRoom])
 
     const handleCloseAddRoom = () => {
@@ -1117,7 +1119,7 @@ const InnerForm = (props : FormikProps<AddDormFormValue> & Style) => {
               color="primary"
             />
             <FormLabel style={{fontSize:"1rem"}} className={classes.black}>
-              I have to read and agree to 
+              I have read and agreed to 
             </FormLabel>{" "}
             <a style={{fontSize:"1rem",textDecoration:"underline",color:"#0066cc"}}
               onClick={() => {

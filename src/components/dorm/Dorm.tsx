@@ -6,7 +6,6 @@ import DormNav from "./DormNav"
 import FindRoomateBTN from "./FindRoomateBTN"
 import {Row, Col} from "react-bootstrap";
 import React, { useEffect, useState } from "react"
-import { useHistory } from "react-router-dom";
 import {useParams } from "react-router-dom"
 import { propsDorm } from "./type"
 import ReviewList from "./ReviewList";
@@ -27,7 +26,6 @@ function Dorm() {
     },[])
 
     console.log(dormID)
-    const history = useHistory();
     const [dorm,setDorm] = useState<propsDorm | null>(null)
 
     return (
@@ -45,8 +43,6 @@ function Dorm() {
                     <FindRoomateBTN dorm={dorm}/>
                 </Col>
             </Row>
-        ) || (
-            <h2 className="text-center">This dorminfo is not public.</h2>
         )}
     </div>
     )

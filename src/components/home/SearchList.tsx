@@ -1,7 +1,7 @@
 import React from "react";
 import { FormikProps, withFormik } from "formik";
 import * as Yup from "yup";
-import { Modal, Button} from "react-bootstrap";
+import {Row, Col, Button} from "react-bootstrap";
 import {
   withStyles,
   createStyles,
@@ -69,20 +69,13 @@ interface MyFormProps {
   pool? : boolean,
   cooking? : boolean,
   restRoom? : boolean,
-  show : boolean,
-  handleClose : () => void
-  sendBack : (data : string) => void
+  handleSubmit : (form : any) => void,
 }
 interface Style {
   classes? : any
 }
-interface Control {
-  show? : boolean,
-  handleClose : () => void
-}
 
-function SearchList(props: FormikProps<FormValue> & Style & Control) {
-  const { show, handleClose } = props;
+function SearchList(props: FormikProps<FormValue> & Style) {
   const {
     classes,
     values,
@@ -95,13 +88,7 @@ function SearchList(props: FormikProps<FormValue> & Style & Control) {
     handleReset,
   } = props;
   return (
-    <Modal onHide={handleClose} show={show} size="xl">
       <form onSubmit={handleSubmit}>
-        <Modal.Header>
-          <Modal.Title>Search Filter</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
           <TextField
             onChange={handleChange}
             value={values.dormName}
@@ -319,22 +306,22 @@ function SearchList(props: FormikProps<FormValue> & Style & Control) {
               label="ห้องน้ำรวม"
             />
           </FormGroup>
-        </Modal.Body>
+          <Row noGutters={true}>
+            <Col style={{textAlign:"right"}}>
+              <Button style={{marginRight:"10px"}} variant="secondary" onClick={handleReset}>
+                Clear
+              </Button>
+              <Button
+                disabled={isSubmitting}
+                type="submit"
+                variant="danger"
+              >
+                Search
+              </Button>
+            </Col>
 
-        <Modal.Footer>
-          <Button variant="outline-danger" onClick={handleReset}>
-            Clear
-          </Button>
-          <Button
-            disabled={isSubmitting}
-            type="submit"
-            variant="outline-primary"
-          >
-            Search
-          </Button>
-        </Modal.Footer>
+          </Row>
       </form>
-    </Modal>
   );
 }
 const SearchFilter = withFormik<MyFormProps,FormValue>({
@@ -368,9 +355,8 @@ const SearchFilter = withFormik<MyFormProps,FormValue>({
   }),
 
   handleSubmit: (values, { resetForm , props }) => {
-    props.sendBack(JSON.stringify(values));
+    props.handleSubmit(JSON.stringify(values));
     alert(JSON.stringify(values));
-    props.handleClose();
     
     resetForm();
   },

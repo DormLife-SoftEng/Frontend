@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Row, Col, Button, Card } from "react-bootstrap";
+import React  from "react";
+import { Row, Col, Card } from "react-bootstrap";
 
 const path = "http://localhost:5000/api/v1/dorms/images/";
 
@@ -29,18 +29,18 @@ const Room = (props: addRoomFormValue) => {
     image,
   } = props;
 
-  const room: addRoomFormValue = {
-    name,
-    aircond,
-    capacity,
-    description,
-    bedroom,
-    bathroom,
-    kitchen,
-    price,
-    allowedSex,
-    image,
-  };
+  // const room: addRoomFormValue = {
+  //   name,
+  //   aircond,
+  //   capacity,
+  //   description,
+  //   bedroom,
+  //   bathroom,
+  //   kitchen,
+  //   price,
+  //   allowedSex,
+  //   image,
+  // };
   const stringToCapital = (text: any) => text?.charAt(0).toUpperCase() + text?.slice(1);
 
   return (
@@ -49,9 +49,9 @@ const Room = (props: addRoomFormValue) => {
         style={{ width: "100%", margin: "2% 0", borderRadius: "20px", border: "solid 1px #000" }}
         noGutters={true}
       >
-        <div style={{ width: "100%", padding: "2%" }}>
+        <div style={{ width: "100%", padding: "2% 1%" }}>
           <Col lg={12}>
-            <Row noGutters={true}>
+            <Row>
               <Col xs={12} md={6} lg={6}>
                 <Row noGutters={true}>
                   <Col xs={12}>
@@ -60,8 +60,9 @@ const Room = (props: addRoomFormValue) => {
                         width: "90%",
                         overflow: "hidden",
                         flex: "1",
-                        objectFit: "cover",
+                        objectFit: "cover"
                       }}
+                      alt=""
                       src={`${path}${image[0]}`}
                     />
                   </Col>

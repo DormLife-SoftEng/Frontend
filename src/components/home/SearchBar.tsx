@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import { Button } from "@material-ui/core";
+import { Modal, Button} from "react-bootstrap";
 import SearchList from "./SearchList"
-function SearchBar() {
-  const [input, setInput] = useState<string>("");
+
+interface searchProps {
+  setSearch : React.Dispatch<React.SetStateAction<boolean>>,
+  setDorms : React.Dispatch<React.SetStateAction<any[]>>
+}
+
+function SearchBar(props : searchProps ) {
   const [show , setShow] = useState(false)
-  function handleChange(e : React.ChangeEvent<HTMLInputElement>) {
-    const val = e.target.value
-    setInput(val);
-  }
+  const {setSearch , setDorms} = props
   function handleClose() {
     setShow(false)
   }
-  function sendBack(data : string) {
-    setInput(data)
+  const handleSubmit = (searchprop : any) => {
+    setDorms([])
+    setSearch(true)
     setShow(false)
   }
   return (
@@ -24,19 +27,24 @@ function SearchBar() {
       }
       } className="mb-3">
         <FormControl
-          name="input"
-          onChange={handleChange}
-          value={input}
           placeholder="Search"
+          style={{backgroundColor:"white"}}
+          readOnly
         />
         <InputGroup.Append>
-          <Button onClick={()=>{
-            console.log(input)
-            setInput("")
-          }}>Search</Button>
+          <Button variant="danger">Search</Button>
         </InputGroup.Append>
       </InputGroup>
-      <SearchList sendBack={sendBack} show={show} handleClose={handleClose} />
+      <Modal onHide={handleClose} show={show} size="xl">
+        <Modal.Header>
+            <Modal.Title>Search Filter</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+            <SearchList handleSubmit={handleSubmit}  />
+        </Modal.Body>
+      </Modal>
+
     </div>
   );
 }
