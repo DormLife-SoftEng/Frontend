@@ -14,10 +14,9 @@ const Header = (props: any) => {
         paddingBottom: "20px",
         marginBottom: "20px",
       }}
-      noGutters={true}
     >
       <Col xs={3} md={2} style={{ textAlign: "center" }}>
-        <Button onClick={() => history.push("/admin/")} variant="">
+        <Button onClick={() => history.push("/admin/")} style={{boxShadow: "none"}} variant="">
           <ArrowBackIosIcon htmlColor="white" fontSize="large" />
         </Button>
       </Col>

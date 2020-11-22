@@ -7,13 +7,20 @@ const Header = () => {
   const history = useHistory();
 
   return (
-    <Row>
-      <Col xs={3} md={2} style={{ textAlign: "center", marginTop: "20px", marginBottom: "40px" }}>
-        <Button onClick={() => history.push("/admin")} variant="">
+    <Row
+      style={{
+        backgroundColor: "#F55E61",
+        paddingTop: "20px",
+        paddingBottom: "20px",
+        marginBottom: "20px",
+      }}
+    >
+      <Col xs={3} md={2} style={{ textAlign: "center" }}>
+        <Button onClick={() => history.push("/admin")} style={{boxShadow: "none"}} variant="">
           <ArrowBackIosIcon htmlColor="white" fontSize="large" />
         </Button>
       </Col>
-      <Col xs={6} md={8} style={{ textAlign: "center", marginTop: "20px", marginBottom: "40px" }}>
+      <Col xs={6} md={8} style={{ textAlign: "center" }}>
         <h1 style={{ fontWeight: 600, color: "white" }}>Edit Request</h1>
       </Col>
       <Col xs={3} md={2}></Col>
