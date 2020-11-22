@@ -111,7 +111,7 @@ const generateReviewCode = async (dormID : string) => {
             headers: { Authorization : `Bearer ${access_token}` }
         };
         try {
-            const result = await axios.put(`${API_URL}/${dormID}/reviewcode`,{},config)
+            const result = await axios.put(`${API_URL}/${dormID}/reviewCode`,{},config)
             return result.data
         } catch (err) {
             return ""

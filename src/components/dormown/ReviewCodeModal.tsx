@@ -20,7 +20,8 @@ function ReviewCodeModal(props: any) {
   const handleShow = () => setShow(true);
   const handleClick = async () => {
     const result = await dormownerService.generateReviewCode(dorm.id)
-    setCode(result)
+    console.log(result)
+    setCode(result.code)
     handleShow()
 
   }
