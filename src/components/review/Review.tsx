@@ -54,13 +54,9 @@ function ReviewAdd() {
     }
   }
   useEffect(() => {
-<<<<<<< HEAD
     reviewservice.getdormId(reviewID).then((save)=>{setDormId(save);getLastReview(save.id)});
     //getLastReview(dormId);
     
-=======
-    getDormId();
->>>>>>> 1fd91495e44e3607a67a2eb4faf7fb5f0f6d75c4
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   interface review {
