@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import FormControl from "react-bootstrap/FormControl";
 import Navbar from "./Navbar";
 import adminService from "../../services/admin.service";
+import "./styles.css";
 
 function DormViewButton(props: any) {
   const history = useHistory();
@@ -37,6 +38,7 @@ function SearchBar(props: any) {
   return (
     <div style={{ width: "100%" }}>
       <FormControl
+        className="shadow-dormlife-red"
         name="input"
         onChange={handleChange}
         value={query}
