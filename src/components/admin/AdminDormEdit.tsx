@@ -16,7 +16,7 @@ const Header = (props: any) => {
       }}
     >
       <Col xs={3} md={2} style={{ textAlign: "center" }}>
-        <Button onClick={() => history.push("/admin/editrequest")} variant="">
+        <Button onClick={() => history.push("/admin/editrequest")} style={{boxShadow: "none"}} variant="">
           <ArrowBackIosIcon htmlColor="white" fontSize="large" />
         </Button>
       </Col>
