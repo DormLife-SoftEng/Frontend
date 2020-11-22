@@ -35,7 +35,7 @@ function ReviewAdd() {
     setIm(path)
     setUploadImageResult(true)
     setTimeout(() => {
-        setUploadImageResult(false)
+        setUploadImageResult(false);
     },800)
 }
   async function getDormId() {
@@ -90,14 +90,24 @@ function ReviewAdd() {
     })
     setShow(true)
     setTimeout(() => {
-      setShow(false)
+      setShow(false);
+      history.push("/");
     },800)
+    
   }
   async function deleteReview(){
     const last_review2 = await reviewservice.getReview(reviewID);
     console.log(last_review2[0]);
     reviewservice.deleteReview(last_review2[0].id);
-    
+    setPopup({
+      title : "Review Deleted",
+      content :""
+    })
+    setShow(true)
+    setTimeout(() => {
+      setShow(false);
+      history.push("/");
+    },800)
   }
   return (
     <div>
@@ -203,7 +213,7 @@ function ReviewAdd() {
               <Button
                 variant="contained"
                 style={{ backgroundColor: "#989595", color: "white" }}
-                onClick={() => deleteReview()}
+                onClick={() => {deleteReview()}}
               >
                 DELETE
               </Button>
