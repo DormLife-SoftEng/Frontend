@@ -44,6 +44,27 @@
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
 }
 
+.Name-content {
+  position: relative;
+  display: block;
+  float: right;
+  padding: 9px 0px;
+  margin: 0 20px 10px 0;
+  clear: both;
+  color: #F55E61;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #fff;
+}
+
+.Name-content > p:last-child {
+  margin-bottom: 0;
+}
+
+.Name + .chat-content:before {
+  border-color: transparent;
+}
+
 .chat-content:before {
   position: absolute;
   top: 10px;
@@ -62,6 +83,7 @@
 .chat-content + .chat-content:before {
   border-color: transparent;
 }
+
 
 .chat-time {
   display: block;
@@ -95,6 +117,14 @@
 .chat-left .chat-content + .chat-content:before {
   border-color: transparent;
 }
+
+.chat-left .Name-content {
+  float: left;
+  margin: 0 0 10px 20px;
+  color: #F55E61;
+  background-color: #fff;
+}
+
 
 .chat-left .chat-time {
   color: #a3afb7;
