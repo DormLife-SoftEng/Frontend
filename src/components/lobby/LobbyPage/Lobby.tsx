@@ -95,12 +95,13 @@ const LobbyPage = () => {
                     }}>{lobbyInfo.dorm.name} {lobbyInfo.room.name}</h1>
                 </Nav>
             </Navbar>
-            <p>Lobby ID {lobbyID}</p>
+            <p>Lobby Code : {lobbyInfo.code}</p>
+            <p>Expire Date : {lobbyInfo.expireOn} </p>
             {authToken &&             
             <>
             {(lobbyInfo.owner.userId === authToken.userId) ?
                 <>
-                    <Row style={{margin:"7% 0%"}} >
+                    <Row style={{margin:"3% 0%"}} >
                     <Col>
                     <ImageList handleKick={handleKick} isOwner={true} maxMember={lobbyInfo.maxMember} member={lobbyInfo.member} />
                     </Col>
@@ -123,7 +124,7 @@ const LobbyPage = () => {
                 </>
                 :
                 <>
-                    <Row style={{margin:"7% 0%"}} >
+                    <Row style={{margin:"3% 0%"}} >
                     <Col>
                     <ImageList handleKick={handleKick} isOwner={false} maxMember={lobbyInfo.maxMember} member={lobbyInfo.member} />
                     </Col>

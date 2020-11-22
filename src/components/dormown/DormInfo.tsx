@@ -45,7 +45,7 @@ function DormInfo(props: DormDetailProps) {
               {util.type}
               {util.distance != null && util.distance > 0 && (
                 <span>
-                  {' '}({util.distance}m)
+                  {' '}({util.distance}km)
                 </span>
               )}
               {util.description != null && (
