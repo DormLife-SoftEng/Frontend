@@ -7,9 +7,9 @@ import {
   tokenDto,
 } from "../components/type";
 
-const API_URL = "http://localhost:5000/api/v1/users/";
+const API_URL = `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/users/`;
 
-const API_URLSignin = "http://localhost:5000/api/v1/oauth/";
+const API_URLSignin = `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/oauth/`;
 
 async function RegisterDormFinder(form: RegisterDormFinderForm) {
   try {

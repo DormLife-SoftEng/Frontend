@@ -51,7 +51,8 @@ export default function () {
       setApprove(false);
     }
   };
-  const getImgPath = (path: string): string => `http://localhost:5000/api/v1/dorms/images/${path}`;
+  const getImgPath = (path: string): string =>
+    `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms/images/${path}`;
 
   useEffect(() => {
     setState();

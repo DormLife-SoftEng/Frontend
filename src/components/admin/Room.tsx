@@ -1,7 +1,7 @@
-import React  from "react";
+import React from "react";
 import { Row, Col, Card } from "react-bootstrap";
 
-const path = "http://localhost:5000/api/v1/dorms/images/";
+const path = `http:/${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms/images/`;
 
 interface addRoomFormValue {
   name: string;
@@ -60,7 +60,7 @@ const Room = (props: addRoomFormValue) => {
                         width: "90%",
                         overflow: "hidden",
                         flex: "1",
-                        objectFit: "cover"
+                        objectFit: "cover",
                       }}
                       alt=""
                       src={`${path}${image[0]}`}
@@ -83,7 +83,7 @@ const Room = (props: addRoomFormValue) => {
                 <p>No. of Bedroom : {bedroom}</p>
                 <p>Air Condition : {stringToCapital((!!aircond).toString())}</p>
                 <p>Pricing : {price} ฿/month</p>
-                <br/>
+                <br />
                 {!description && (
                   <Card className="des" border="info">
                     <Card.Text>Description : {description}</Card.Text>
