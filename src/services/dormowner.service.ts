@@ -2,7 +2,7 @@ import axios from "axios";
 import { AddDormServiceProps } from "../components/dormown/newType";
 import {tokenDto} from "../components/type"
 const API_URL = "http://localhost:5000/api/v1/dorms";
-
+const API_URLGetMY = "http://localhost:5000/api/v1/dorms/users"
 const getMydorm = async () =>{
     const token = localStorage.getItem("token")
     if (token) {
@@ -12,7 +12,7 @@ const getMydorm = async () =>{
             headers: { Authorization : `Bearer ${access_token}` }
         };
         try {
-            const result = await axios.get(`${API_URL}`,config)
+            const result = await axios.get(`${API_URLGetMY}`,config)
             return result.data
         } catch (err) {
             return []
