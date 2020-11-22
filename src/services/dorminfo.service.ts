@@ -1,24 +1,3 @@
-<<<<<<< Updated upstream
-import axios from "axios";
-const DORM_URL = "http://localhost:5000/api/v1/dorms"
-const REV_URL = "http://localhost:5000/api/v1/reviews"
-
-async function getOneDorm(dormID : string) {
-    const result = await axios.get(`${DORM_URL}/${dormID}`)
-    return result.data
-}
-
-async function getDormReviews(dormID : string) {
-    const result = await axios.get(`${REV_URL}`, {params:{
-        'dormId': dormID
-    }})
-    return result.data
-}
-
-export default {
-    getOneDorm,
-    getDormReviews
-=======
 import axios from "axios";
 import { tokenDto } from "../components/type";
 const DORM_URL = "http://localhost:5000/api/v1/dorms"
@@ -50,5 +29,4 @@ async function getDormReviews(dormID : string) {
 export default {
     getOneDorm,
     getDormReviews
->>>>>>> Stashed changes
 }

@@ -54,14 +54,10 @@ function ReviewAdd() {
     }
   }
   useEffect(() => {
-<<<<<<< Updated upstream
-    getDormId();
-=======
     reviewservice.getdormId(reviewID).then((save)=>{setDormId(save);getLastReview(save.id)});
     //getLastReview(dormId);
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
->>>>>>> Stashed changes
   }, []);
   interface review {
     dorm: any,
