@@ -102,6 +102,24 @@ const deleteDorm = async (props: Ticket) => {
   return false;
 };
 
+const generateReviewCode = async (dormID : string) => {
+    const token = localStorage.getItem("token")
+    if (token) {
+        const tokenObj : tokenDto = JSON.parse(token)
+        const access_token = tokenObj.access_token
+        const config = {
+            headers: { Authorization : `Bearer ${access_token}` }
+        };
+        try {
+            const result = await axios.put(`${API_URL}/${dormID}/reviewcode`,{},config)
+            return result.data
+        } catch (err) {
+            return ""
+        }
+    }
+    return ""
+}
+
 const editDorm = async (props:Ticket)=>{
     const token = localStorage.getItem("token")
     if (token) {
@@ -127,5 +145,6 @@ export default {
     getMydorm,
     deleteDorm,
     getSpecificDorm,
-    editDorm
+    editDorm,
+    generateReviewCode
 }

@@ -41,11 +41,11 @@ function DormInfo(props: DormDetailProps) {
       <p>
         Facilities:{" "}
         {dorm.utility.map((util: Utilities, index: number) => {
-          if (util.type === "Cooking") {
+          if (util.type === "cooking") {
             allowedCooking = true;
             return <></>;
           }
-          if (util.type === "Pet") {
+          if (util.type === "pet") {
             allowedPet = true;
             return <></>;
           }
