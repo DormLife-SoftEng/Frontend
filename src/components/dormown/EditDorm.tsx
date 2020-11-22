@@ -3,7 +3,7 @@ import { useHistory , useParams } from "react-router-dom";
 import { withStyles, createStyles } from "@material-ui/core";
 import { dialogProps, Style } from "../type";
 import { AddDormMyFormProps, AddDormServiceProps, addRoomFormValue } from "./newType";
-import dormownerService from "../../services/dormowner.service";
+import dormownerService, { Ticket } from "../../services/dormowner.service";
 import AddDormPop from "./AddDormPop";
 import Header from "./Header";
 import { AddDormFormik } from "./AddDorm";
@@ -76,6 +76,7 @@ const EditDorm = (props : Style) => {
                 dormType : dormInfo.type,
                 sex : dormInfo.allowedSex,
                 handleSubmit : handleSubmit,
+                dormDes:dormInfo.description,
             
             }
             if (internet) {
@@ -146,10 +147,22 @@ const EditDorm = (props : Style) => {
     }, []);
 
     const  handleSubmit = async (form : AddDormServiceProps) => {
-        const result = await dormownerService.addDorm(form)
+
+
+        const dormInfo = await dormownerService.getSpecificDorm(dormID)
+        console.log(form)
+        console.log(dormInfo)
+        const tickets: Ticket = {
+            target: dormInfo,
+            newdata: form,
+            type: "dorm",
+            request: "edit",
+            status: "pending",
+        };
+        const result = await dormownerService.editDorm(tickets)
         if (result) {
 
-            setModalProps({title:"AddDorm Success",content:""})
+            setModalProps({title:"Edit Request Success",content:""})
             setShow(true)
             setTimeout(() => {
                 history.push("/dormowner/")
@@ -158,7 +171,7 @@ const EditDorm = (props : Style) => {
 
         } else {
 
-            setModalProps({title:"AddDorm Failed",content:""})
+            setModalProps({title:"Edit Request Success Failed",content:""})
             setShow(true)
             setTimeout(() => {
                 setShow(false)

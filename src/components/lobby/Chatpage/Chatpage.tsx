@@ -11,6 +11,8 @@ import { useParams } from "react-router-dom";
 import { propsSendMessage } from "../../type";
 import {useAuth , authContextType} from "../../../contexts/auth.context"
 
+var interval : NodeJS.Timeout;
+
 const Chatpage = () => {
     const {authToken} : authContextType = useAuth()
 
@@ -39,9 +41,9 @@ const Chatpage = () => {
 
     useEffect(() => {
         document.body.style.backgroundColor = "#fff";
-        setInterval(() => {
+        interval = setInterval(() => {
             getAllChat()
-        },1500)
+        },500)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (

@@ -390,7 +390,7 @@ const AddRoomFormik = withFormik<addRoomMyFormProps, addRoomFormValue>({
       image: Yup.string().required("Required"),
       price: Yup.string().required("Required").test("","Please enter positive number",value => {
         if (value) {  
-          return parseInt(value) >= 0
+          return parseFloat(value) >= 0
         } 
         return false
     })

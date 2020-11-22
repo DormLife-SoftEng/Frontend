@@ -65,7 +65,7 @@ export default function () {
           <Col xs={12} md={10}>
             {data?.map((item: any, index) => (
               <DormEditButton
-                dormName={(item.newdata || item.target).name}
+                dormName={(item.newdata.name || item.target.name)}
                 dormLink={item.id}
                 dormRequest={item.request}
               />

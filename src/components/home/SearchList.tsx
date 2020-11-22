@@ -565,6 +565,9 @@ const SearchFilter = withFormik<MyFormProps,FormValue>({
     }
     if (values.internet) {
       form.internet = "internet"
+    } 
+    if (values.distance !== "") {
+      form.distance = values.distance
     }
     if (values.convenienceStore) {
       form.convenienceStore = "convenienceStore"
@@ -586,6 +589,15 @@ const SearchFilter = withFormik<MyFormProps,FormValue>({
     }
     if (values.pool) {
       form.pool = "pool"
+    }
+    if (values.restaurant) {
+      form.restaurant = "restaurant"
+    }
+    if (values.restroom) {
+      form.restroom = "restroom"
+    }
+    if (values.commonroom) {
+      form.commonroom = "commonroom"
     }
     if (values.gender !== "") {
       form.allowedSex = values.gender

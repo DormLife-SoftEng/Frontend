@@ -17,7 +17,10 @@ const Header = (props: any) => {
       noGutters={true}
     >
       <Col xs={3} md={2} style={{ textAlign: "center" }}>
-        <Button onClick={() => history.push("/admin/editrequest")} variant="">
+        <Button onClick={() =>  {
+          console.log("Hee")
+          history.replace("/admin/editrequest")
+          }} variant="">
           <ArrowBackIosIcon htmlColor="white" fontSize="large" />
         </Button>
       </Col>

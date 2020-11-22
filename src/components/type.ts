@@ -164,7 +164,7 @@ export interface propsSendMessage {
 }
 
 export interface propsReceiver {
-    author : string,
+    author : {firstName:string,lastName:string},
     userID : string,
     message : string,
     profilepic : number,
@@ -172,7 +172,7 @@ export interface propsReceiver {
 }
 
 export interface propsSender {
-    author : string,
+    author : {firstName:string,lastName:string},
     userID : string,
     message : string,
     profilepic : number,

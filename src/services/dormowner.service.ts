@@ -2,7 +2,7 @@ import axios from "axios";
 import { AddDormServiceProps } from "../components/dormown/newType";
 import {tokenDto} from "../components/type"
 const API_URL = "http://localhost:5000/api/v1/dorms";
-
+const API_URLGetMY = "http://localhost:5000/api/v1/dorms/users"
 const getMydorm = async () =>{
     const token = localStorage.getItem("token")
     if (token) {
@@ -12,7 +12,7 @@ const getMydorm = async () =>{
             headers: { Authorization : `Bearer ${access_token}` }
         };
         try {
-            const result = await axios.get(`${API_URL}`,config)
+            const result = await axios.get(`${API_URLGetMY}`,config)
             return result.data
         } catch (err) {
             return []
@@ -99,11 +99,30 @@ const deleteDorm = async (props:Ticket)=>{
     return false
 }
 
+const editDorm = async (props:Ticket)=>{
+    const token = localStorage.getItem("token")
+    if (token) {
+        const tokenObj : tokenDto = JSON.parse(token)
+        const access_token = tokenObj.access_token
+        const config = {
+            headers: { Authorization : `Bearer ${access_token}` }
+        };
+        try {
+            const result = await axios.post("http://localhost:5000/api/v1/tickets",props,config)
+            return true
+        } catch (err) {
+            return false
+        }
+    }
+    return false
+}
+
 export default {
     uploadImage1,
     uploadImageMany,
     addDorm,
     getMydorm,
     deleteDorm,
-    getSpecificDorm
+    getSpecificDorm,
+    editDorm
 }

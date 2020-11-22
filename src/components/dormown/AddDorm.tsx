@@ -1270,13 +1270,13 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
       dormPhone : Yup.string().required("Required"),
       dormLat : Yup.string().required("Required").test("is-lat","Please enter between -90 and 90",value => {
         if (value) {
-            return (parseInt(value) <= 90) && (parseInt(value) >= -90)
+            return (parseFloat(value) <= 90) && (parseFloat(value) >= -90)
           }
           return false
       }),
       dormLong : Yup.string().required("Required").test("is-long","Please enter between -180 and 180",value => {
         if (value) {
-            return (parseInt(value) <= 180) && (parseInt(value) >= -180)
+            return (parseFloat(value) <= 180) && (parseFloat(value) >= -180)
         }
         return false
       })
@@ -1288,7 +1288,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps =  {
               type : "commonroom",
               description : values.comDes,
-              distance : parseInt(values.comDis)
+              distance : parseFloat(values.comDis)
           }
           utilities.push(util)
       }
@@ -1296,7 +1296,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps = {
               type : "convenienceStore",
               description : values.conDes,
-              distance : parseInt(values.conDis)
+              distance : parseFloat(values.conDis)
           }
           utilities.push(util)
       }
@@ -1304,7 +1304,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps = {
               type : "fitness",
               description : values.fitDes,
-              distance : parseInt(values.fitDis)
+              distance : parseFloat(values.fitDis)
           }
           utilities.push(util)
       }
@@ -1312,7 +1312,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps = {
               type : "internet",
               description : values.internetDes,
-              distance : parseInt(values.internetDis)
+              distance : parseFloat(values.internetDis)
           }
           utilities.push(util)
       }
@@ -1320,7 +1320,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps = {
             type : "parking",
             description : values.parkDes,
-            distance : parseInt(values.parkDis)             
+            distance : parseFloat(values.parkDis)             
           }
           utilities.push(util)          
       }
@@ -1328,7 +1328,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps = {
               type : "laundry",
               description : values.launDes,
-              distance : parseInt(values.launDis)
+              distance : parseFloat(values.launDis)
           }
           utilities.push(util) 
       }
@@ -1336,7 +1336,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
         const util : UtilitiesProps = {
             type : "pool",
             description : values.swimDes,
-            distance : parseInt(values.swimDis)
+            distance : parseFloat(values.swimDis)
         }
         utilities.push(util) 
       }
@@ -1344,7 +1344,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
         const util : UtilitiesProps = {
             type : "smoking",
             description : values.smokeDes,
-            distance : parseInt(values.smokeDis)
+            distance : parseFloat(values.smokeDis)
         }
         utilities.push(util) 
       }
@@ -1352,7 +1352,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
         const util : UtilitiesProps = {
             type : "restaurant",
             description : values.resDes,
-            distance : parseInt(values.resDis)
+            distance : parseFloat(values.resDis)
         }
         utilities.push(util) 
       }
@@ -1360,7 +1360,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
         const util : UtilitiesProps = {
             type : "restroom",
             description : values.restDes,
-            distance : parseInt(values.restDis)
+            distance : parseFloat(values.restDis)
         }
         utilities.push(util) 
       }
@@ -1383,15 +1383,15 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
       const Rooms : RoomProps[] = values.room.map((r,index) => {
           var aircon = 0;
           const price = {
-              amount : parseInt(r.price),
-              pricePer : parseInt(r.price) / parseInt(r.capacity)
+              amount : parseFloat(r.price),
+              pricePer : parseFloat(r.price) / parseFloat(r.capacity)
           }
           if (r.aircond === "yes") {
               aircon = 1;
           } else {
               aircon = 0;
           }
-          return {...r,bathroom : parseInt(r.bathroom) , bedroom : parseInt(r.bedroom) , kitchen : parseInt(r.kitchen) , capacity : parseInt(r.capacity) , price : price  , aircond : aircon}
+          return {...r,bathroom : parseFloat(r.bathroom) , bedroom : parseFloat(r.bedroom) , kitchen : parseFloat(r.kitchen) , capacity : parseInt(r.capacity) , price : price  , aircond : aircon}
       })
       const addDormForm : AddDormServiceProps = {
           name : values.dormName,
@@ -1400,7 +1400,7 @@ export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           lineID : values.dormLine,
           website : values.dormWeb,
           address : values.dormAddress,
-          coordinate : [parseInt(values.dormLat),parseInt(values.dormLong)],
+          coordinate : [parseFloat(values.dormLat),parseFloat(values.dormLong)],
           utilities : utilities,
           type : values.dormType,
           description : values.dormDes,
