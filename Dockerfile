@@ -12,6 +12,7 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 # install app dependencies
 COPY package.json ./
 COPY package-lock.json ./
+RUN npm ci --silent
 RUN npm install --silent
 # RUN npm install react-scripts@3.4.3 -g --silent
 
@@ -21,6 +22,7 @@ COPY . .
 RUN npm run build
 
 FROM nginx:stable-alpine as production
+
 COPY --from=development /usr/src/app/build /usr/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
