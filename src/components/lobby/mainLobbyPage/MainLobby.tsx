@@ -8,18 +8,23 @@ import SearchBar from "./SearchBar"
 import { Lobby } from "../../type"
 import lobbyService from "../../../services/lobby.service"
 import { Nav, Navbar, Row, Col } from "react-bootstrap";
+var interval : NodeJS.Timeout;
 function MainLobby() {
+
   const history = useHistory();
   const [lobbylist, setLobbyList] = useState<any[]>([])
   const [lobbylistSearch,setlobbylistSearch] = useState<any[]>([])
+
   const handleRouting = (s: string) => {
+    clearInterval(interval)
     history.push(s);
   }
   const handleGoBack = () => {
+    clearInterval(interval)
     history.push("/");
   }
   const handleSubmit = (s: string) => {
-    // search by parameter & set new State 
+    
     const search = lobbylist.filter(lobby =>  {
       const name = lobby.dormName+", "+lobby.room as string
       return name.includes(s)
@@ -35,8 +40,10 @@ function MainLobby() {
   }
   
   useEffect(() => {
-    getAllLobbys()
     document.body.style.backgroundColor = "#F55E61"
+    interval = setInterval(() => {
+      getAllLobbys()
+    },1000)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -69,7 +76,7 @@ function MainLobby() {
       <Row noGutters={true}>
       <Col xs="2"></Col>
       <Col xs="8">
-      <LobbyList lobbylist={lobbylistSearch} />
+      <LobbyList handleRouting={handleRouting} lobbylist={lobbylistSearch} />
       </Col>
       <Col xs="2"></Col>
       </Row>

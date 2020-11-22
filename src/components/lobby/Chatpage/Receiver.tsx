@@ -12,7 +12,6 @@ import { propsReceiver } from "../../type";
 
 const Receiver = (props : propsReceiver) => {
   const {author,message,profilepic} = props
-  console.log(author)
   const AllImage = [dog,cat,mon,dogp,catp,monp]
   return (
     <>

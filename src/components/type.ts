@@ -69,7 +69,10 @@ export interface Lobby {
 export interface LobbyRowProps {
     dormName : any,
     room : any
-    id? : ObjectID
+    id? : ObjectID,
+    member : any,
+    max : any,
+    handleRouting : (s : string) => void
 }
 export interface backButtonProps {
     handleGoBack : () => void
@@ -88,7 +91,8 @@ export interface ModalMainPageProps {
     handleRouting : (s : string) => void
 }
 export interface LobbyListProps {
-    lobbylist : any
+    lobbylist : any,
+    handleRouting : (s : string) => void
 }
 
 export interface SearchLobbyProps {

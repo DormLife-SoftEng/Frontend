@@ -30,7 +30,7 @@ import AdminDormList from "./admin/AdminDormList";
 import AdminEditRequest from "./admin/AdminEditRequest";
 import AdminRoute from "./routes/AdminRoute";
 import AdminDormEdit from "./admin/AdminDormEdit";
-import AdminDormEditNoDelete from "./admin/AdminDormEditNoDelete";
+import AdminDormView from "./admin/AdminDormView";
 import "./style.css"
 import EditDorm from "./dormown/EditDorm";
 
@@ -74,7 +74,7 @@ function App() {
             <DormFinderRoute path="/review/:reviewID" Component={Review} />
             <AdminRoute path="/admin/editrequest/:dormEditId" Component={AdminDormEdit} />
             <AdminRoute path="/admin/editrequest" Component={AdminEditRequest} />
-            <AdminRoute path="/admin/view/:dormEditId" Component={AdminDormEditNoDelete} />
+            <AdminRoute path="/admin/view/:dormEditId" Component={AdminDormView} />
             <AdminRoute path="/admin/" Component={AdminDormList} />
             <Route component={PageNotFound} />
         </Switch>

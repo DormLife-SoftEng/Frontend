@@ -14,13 +14,9 @@ const Header = (props: any) => {
         paddingBottom: "20px",
         marginBottom: "20px",
       }}
-      noGutters={true}
     >
       <Col xs={3} md={2} style={{ textAlign: "center" }}>
-        <Button onClick={() =>  {
-          console.log("Hee")
-          history.replace("/admin/editrequest")
-          }} variant="">
+        <Button onClick={() => history.push("/admin/editrequest")} style={{boxShadow: "none"}} variant="">
           <ArrowBackIosIcon htmlColor="white" fontSize="large" />
         </Button>
       </Col>
@@ -54,7 +50,8 @@ export default function () {
       setApprove(false);
     }
   };
-  const getImgPath = (path: string): string => `http://localhost:5000/api/v1/dorms/images/${path}`;
+  const getImgPath = (path: string): string =>
+    `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms/images/${path}`;
 
   useEffect(() => {
     setState();

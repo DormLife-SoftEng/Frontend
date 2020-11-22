@@ -4,7 +4,7 @@ import StarIcon from '@material-ui/icons/Star';
 import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 import { dorm } from "../newType";
 import { useHistory } from "react-router-dom";
-const path  = "http://localhost:5000/api/v1/dorms/images/"
+const path = `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms/images/`;
 
 const Dorm = (props : dorm) => {
     const history = useHistory()
@@ -54,8 +54,8 @@ const Dorm = (props : dorm) => {
                 </Col>
             </Row>
         </Container>
-        </a>
-        </>
-    )
-}
+      </a>
+    </>
+  );
+};
 export default Dorm;

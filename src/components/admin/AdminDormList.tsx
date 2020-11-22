@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import FormControl from "react-bootstrap/FormControl";
 import Navbar from "./Navbar";
 import adminService from "../../services/admin.service";
+import "./styles.css";
 
 function DormViewButton(props: any) {
   const history = useHistory();
@@ -37,6 +38,7 @@ function SearchBar(props: any) {
   return (
     <div style={{ width: "100%" }}>
       <FormControl
+        className="shadow-dormlife-red"
         name="input"
         onChange={handleChange}
         value={query}
@@ -50,9 +52,12 @@ function SearchBar(props: any) {
 export default function () {
   document.body.style.backgroundColor = "white";
   const [query, setQuery] = useState<string>("");
+  const [chk, setChk] = useState<boolean>(false);
   const history = useHistory();
   const [data, setData] = useState<any[]>([]);
-  !data.length && adminService.adminListGetAllDorm().then((res) => setData(res));
+  useEffect(() => {
+    adminService.adminListGetAllDorm().then((res) => setData(res));
+  },[])
   return (
     <>
       <Container>

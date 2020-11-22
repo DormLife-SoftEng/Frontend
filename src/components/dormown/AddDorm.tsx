@@ -438,7 +438,7 @@ const InnerForm = (props : FormikProps<AddDormFormValue> & Style) => {
                   <FormControlLabel
                     value="apartment"
                     control={<Radio color="primary" />}
-                    label="Aparment"
+                    label="Apartment"
                   />
                   <FormControlLabel
                     value="flat"

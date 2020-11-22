@@ -70,7 +70,7 @@ const LobbyPage = () => {
         document.body.style.backgroundColor = "#F55E61"
         interval = setInterval(() => {
             getLobbyInfo()
-        },500)
+        },1000)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -95,8 +95,8 @@ const LobbyPage = () => {
                     }}>{lobbyInfo.dorm.name} {lobbyInfo.room.name}</h1>
                 </Nav>
             </Navbar>
-            <p>Lobby Code : {lobbyInfo.code}</p>
-            <p>Expire Date : {lobbyInfo.expireOn} </p>
+            <p style={{fontSize:"1rem",color:"#fff"}}>Lobby Code : {lobbyInfo.code}</p>
+            <p style={{fontSize:"1rem",color:"#fff"}}>Expire Date : {lobbyInfo.expireOn.slice(0,10)} </p>
             {authToken &&             
             <>
             {(lobbyInfo.owner.userId === authToken.userId) ?

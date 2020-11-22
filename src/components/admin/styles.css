@@ -1,0 +1,4 @@
+.shadow-dormlife-red:focus {
+    border-color: #F55E61;
+    box-shadow: 0 0 0 0.2rem #F55E6140;
+}

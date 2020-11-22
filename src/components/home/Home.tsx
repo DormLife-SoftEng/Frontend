@@ -10,7 +10,6 @@ import DormList from "./DormList"
 import { dorm } from "../newType"
 
 function Home() {
-
     const [search,setSearch] = useState<boolean>(false)
     const [dorms,setDorms] = useState<dorm[]>([])
     const [carousalDorm,setCarousalDorm] = useState<any[]>([])

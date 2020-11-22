@@ -14,10 +14,9 @@ const Header = (props: any) => {
         paddingBottom: "20px",
         marginBottom: "20px",
       }}
-      noGutters={true}
     >
       <Col xs={3} md={2} style={{ textAlign: "center" }}>
-        <Button onClick={() => history.push("/admin/")} variant="">
+        <Button onClick={() => history.push("/admin/")} style={{boxShadow: "none"}} variant="">
           <ArrowBackIosIcon htmlColor="white" fontSize="large" />
         </Button>
       </Col>
@@ -43,7 +42,8 @@ export default function () {
       history.goBack();
     }
   };
-  const getImgPath = (path: any) => `http://localhost:5000/api/v1/dorms/images/${path}`;
+  const getImgPath = (path: any) =>
+    `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms/images/${path}`;
   document.body.style.backgroundColor = "#FFFFFF";
   !data && getDormData();
   const stringToCapital = (text: any) => text?.charAt(0).toUpperCase() + text?.slice(1);
