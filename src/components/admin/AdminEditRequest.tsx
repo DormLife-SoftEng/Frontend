@@ -60,8 +60,9 @@ function DormEditButton(props: any) {
 
 export default function () {
   const [data, setData] = useState<any[]>([]);
+  const [chk, setChk] = useState<boolean>(false);
   document.body.style.backgroundColor = "#F55E61";
-  !data.length && adminService.adminListGetDormData().then((res) => setData(res));
+  !chk && setChk(true) && adminService.adminListGetDormData().then((res) => setData(res));
   console.log(data);
   return (
     <>

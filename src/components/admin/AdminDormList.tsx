@@ -52,9 +52,10 @@ function SearchBar(props: any) {
 export default function () {
   document.body.style.backgroundColor = "white";
   const [query, setQuery] = useState<string>("");
+  const [chk, setChk] = useState<boolean>(false);
   const history = useHistory();
   const [data, setData] = useState<any[]>([]);
-  !data.length && adminService.adminListGetAllDorm().then((res) => setData(res));
+  !chk && setChk(true) && adminService.adminListGetAllDorm().then((res) => setData(res));
   return (
     <>
       <Container>
