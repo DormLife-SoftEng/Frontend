@@ -20,6 +20,12 @@ const getMydorm = async () =>{
     }
     return []
 }
+const getSpecificDorm = async (dormID : string) => {
+
+    const result = await axios.get(`${API_URL}/${dormID}`)
+    return result.data
+
+}
 
 const uploadImage1 = async (file : any) => {
     const formData = new FormData();
@@ -98,5 +104,6 @@ export default {
     uploadImageMany,
     addDorm,
     getMydorm,
-    deleteDorm
+    deleteDorm,
+    getSpecificDorm
 }

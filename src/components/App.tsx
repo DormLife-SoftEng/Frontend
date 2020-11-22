@@ -32,6 +32,7 @@ import AdminRoute from "./routes/AdminRoute";
 import AdminDormEdit from "./admin/AdminDormEdit";
 import AdminDormEditNoDelete from "./admin/AdminDormEditNoDelete";
 import "./style.css"
+import EditDorm from "./dormown/EditDorm";
 
 const Theme = createMuiTheme({
   palette: {
@@ -62,8 +63,9 @@ function App() {
             <AuthRoute  path="/signin/repassword" Component={Repassword} />
             <AuthRoute  path="/signin/forgetpassword" Component={Forgetpassword} />
             <AuthRoute  path="/signin" Component={Signin} />
-            <DormOwnerRoute path="/dormowner/adddorm" Component={AddDorm}  />
+            <DormOwnerRoute path="/dormowner/contactSupport/editdorm/:dormID" Component={EditDorm} />            
             <DormOwnerRoute path="/dormowner/contactSupport/:dormID" Component={ContactSupport} />
+            <DormOwnerRoute path="/dormowner/adddorm" Component={AddDorm}  />
             <DormOwnerRoute path="/dormowner/" Component={MyDorm} />
             <DormFinderRoute path="/lobby/create" Component={CreatePage} />
             <DormFinderRoute path="/lobby/:lobbyID/chat" Component={Chatpage} />

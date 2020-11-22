@@ -37,6 +37,26 @@ async function getLobbys() {
     }
     return []
 }
+
+async function checkHaveLobby() {
+    const token = localStorage.getItem("token")
+    if (token) {
+        const tokenObj : tokenDto = JSON.parse(token)
+        const access_token = tokenObj.access_token
+        const config = {
+            headers: { Authorization : `Bearer ${access_token}` },
+        };
+        try {
+            const result = await axios.get(`${API_URL}check`,config)
+            console.log(result)
+            return result.data
+        } catch (err) {
+            return ""
+        }
+    }
+    return ""
+}
+
 async function createLobby(form : propsCreateLobby) {
     const token = localStorage.getItem("token")
     if (token) {
@@ -272,5 +292,6 @@ export default {
     leaveLobby,
     deleteLobby,
     closeLobby,
-    joinLobbyCode
+    joinLobbyCode,
+    checkHaveLobby
 }

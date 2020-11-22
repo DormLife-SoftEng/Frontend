@@ -16,6 +16,7 @@ import {
   Select,
   Checkbox
 } from "@material-ui/core";
+import { QueryParams } from "../newType";
 
 const styles = createStyles({
   formControl: {
@@ -29,26 +30,30 @@ const styles = createStyles({
 });
 
 interface FormValue {
-  dormName? : string,
-  price? : string,
-  distance? : string,
-  maxPerson? : string,
-  rating? : string,
-  dormType? : string,
-  gender? : string,
-  convenienceStore? : boolean,
-  kitchen? : string,
-  bedroom? : string,
-  bathroom? : string,
-  laundry? : boolean,
-  parking? : boolean,
-  pet? : boolean,
-  internet? : boolean,
-  smoking? : boolean,
-  fitness? : boolean,
-  pool? : boolean,
-  cooking? : boolean,
-  aircond? : string,
+  dormName : string,
+  price : string,
+  distance : string,
+  maxPerson : string,
+  rating : string,
+  dormType : string,
+  gender : string,
+  convenienceStore : boolean,
+  kitchen : string,
+  bedroom : string,
+  bathroom : string,
+  laundry : boolean,
+  parking : boolean,
+  pet : boolean,
+  internet : boolean,
+  smoking : boolean,
+  fitness : boolean,
+  pool : boolean,
+  cooking : boolean,
+  aircond : string,
+  restaurant : boolean,
+  commonroom : boolean,
+  restroom : boolean
+
 }
 interface MyFormProps {
   dormName? : string,
@@ -71,7 +76,10 @@ interface MyFormProps {
   pool? : boolean,
   cooking? : boolean,
   aircond? : string,
-  handleSubmit : (form : any) => void,
+  restaurant? : boolean,
+  commonroom? : boolean,
+  restroom? : boolean,
+  handleSubmit : (form : QueryParams) => void,
 }
 interface Style {
   classes? : any
@@ -240,12 +248,12 @@ function SearchList(props: FormikProps<FormValue> & Style) {
               id="dormType"
               error={touched.dormType && Boolean(errors.dormType)}
             >
-              <MenuItem value="Dorm">Dorm</MenuItem>
-              <MenuItem value="Condo">Condo</MenuItem>
-              <MenuItem value="ApartMent">Apartment</MenuItem>
-              <MenuItem value="Flat">Flat</MenuItem>
-              <MenuItem value="Hostel">Hostel</MenuItem>
-              <MenuItem value="House">House</MenuItem>
+              <MenuItem value="dorm">Dorm</MenuItem>
+              <MenuItem value="condo">Condo</MenuItem>
+              <MenuItem value="apartment">Apartment</MenuItem>
+              <MenuItem value="flat">Flat</MenuItem>
+              <MenuItem value="hostel">Hostel</MenuItem>
+              <MenuItem value="house">House</MenuItem>
             </Select>
             <FormHelperText error={true}>
               {touched.dormType ? errors.dormType : ""}
@@ -264,7 +272,7 @@ function SearchList(props: FormikProps<FormValue> & Style) {
             >
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
-              <MenuItem value="other">Other</MenuItem>
+              <MenuItem value="any">Any</MenuItem>
             </Select>
             <FormHelperText error={true}>
               {touched.gender ? errors.gender : ""}
@@ -335,61 +343,114 @@ function SearchList(props: FormikProps<FormValue> & Style) {
 
               </Col>
             </Row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.internet}
-                  name="internet"
-                  color="primary"
+            <Row style={{margin:"0 2%"}} noGutters={true}>
+                <Col>
+                  <FormControlLabel
+                  control={
+                    <Checkbox
+                      onChange={handleChange}
+                      value={values.internet}
+                      name="internet"
+                      color="primary"
+                    />
+                    }
+                  label="Internet"
+                  />
+                </Col>
+                <Col>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        onChange={handleChange}
+                        value={values.smoking}
+                        name="smoking"
+                        color="primary"
+                      />
+                    }
+                    label="Smoking Area"
+                  />
+                </Col>
+                <Col>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        onChange={handleChange}
+                        value={values.fitness}
+                        name="fitness"
+                        color="primary"
+                      />
+                    }
+                    label="Fitness"
+                  />
+                </Col>
+                <Col>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        onChange={handleChange}
+                        value={values.pool}
+                        name="pool"
+                        color="primary"
+                      />
+                    }
+                    label="Pool"
+                  />
+                </Col>                
+            </Row>
+            <Row style={{margin:"0 2%"}} noGutters={true}>
+              <Col>
+                <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleChange}
+                    value={values.cooking}
+                    name="cooking"
+                    color="primary"
+                  />
+                }
+                label="Cooking"
                 />
-              }
-              label="Internet"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.smoking}
-                  name="smoking"
-                  color="primary"
+              </Col>
+              <Col>
+                <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleChange}
+                    value={values.restaurant}
+                    name="restaurant"
+                    color="primary"
+                  />
+                }
+                label="Restaurant"
                 />
-              }
-              label="Smoking Area"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.fitness}
-                  name="fitness"
-                  color="primary"
+              </Col>
+              <Col>
+                <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleChange}
+                    value={values.restroom}
+                    name="restroom"
+                    color="primary"
+                  />
+                }
+                label="Restroom"
                 />
-              }
-              label="Fitness"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.pool}
-                  name="pool"
-                  color="primary"
+              </Col>
+              <Col>
+                <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleChange}
+                    value={values.commonroom}
+                    name="commonroom"
+                    color="primary"
+                  />
+                }
+                label="Commonroom"
                 />
-              }
-              label="Pool"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  value={values.cooking}
-                  name="cooking"
-                  color="primary"
-                />
-              }
-              label="Cooking"
-            />
+              </Col>
+            </Row>
           </FormGroup>
           <Row noGutters={true}>
             <Col style={{textAlign:"right"}}>
@@ -431,15 +492,133 @@ const SearchFilter = withFormik<MyFormProps,FormValue>({
       cooking: props.cooking || false,
       aircond: props.aircond || "",
       bedroom: props.bedroom || "",
-      bathroom : props.bathroom || ""
+      bathroom : props.bathroom || "",
+      restroom : props.restroom || false,
+      commonroom : props.commonroom || false,
+      restaurant : props.restaurant || false
     };
   },
   validationSchema: Yup.object().shape({
-
+    bathroom: Yup.string().test("","Please enter positive number",value => {
+      if (value) {
+        return parseInt(value) >= 0
+      } else {
+        return true
+      }
+    }),
+    bedroom: Yup.string().test("","Please enter positive number",value => {
+      if (value) {
+        return parseInt(value) >= 0
+      } else {
+        return true
+      }
+    }),
+    kitchen: Yup.string().test("","Please enter positive number",value => {
+      if (value) {
+        return parseInt(value) >= 0
+      } else {
+        return true
+      }
+    }),
+    aircond: Yup.string().test("","Please enter positive number",value => {
+      if (value) {
+        return parseInt(value) >= 0
+      } else {
+        return true
+      }
+    }),
+    price: Yup.string().test("","Please enter positive number",value => {
+      if (value) {
+        return parseInt(value) >= 0
+      } else {
+        return true
+      }
+    }),  
+    distance: Yup.string().test("","Please enter positive number",value => {
+      if (value) {
+        return parseInt(value) >= 0
+      } else {
+        return true
+      }
+    }),  
+    maxPerson: Yup.string().test("","Please enter positive number",value => {
+      if (value) {
+        return parseInt(value) >= 0
+      } else {
+        return true
+      }
+    }),
+    rating: Yup.string().test("","Please enter positive number",value => {
+      if (value) {
+        return parseInt(value) >= 0
+      } else {
+        return true
+      }
+    }),
   }),
 
   handleSubmit: (values, { resetForm , props }) => {
-    props.handleSubmit({});
+    console.log(values)
+    const form : QueryParams = {}
+    if (values.fitness) {
+      form.fitness = "fitness"
+    }
+    if (values.internet) {
+      form.internet = "internet"
+    }
+    if (values.convenienceStore) {
+      form.convenienceStore = "convenienceStore"
+    }
+    if (values.cooking) {
+      form.cooking = "cooking"
+    }
+    if (values.laundry) {
+      form.laundry = "laundry"
+    }
+    if (values.parking) {
+      form.parking = "parking"
+    }
+    if (values.smoking) {
+      form.smoking = "smoking"
+    }
+    if (values.pet) {
+      form.pet = "pet"
+    }
+    if (values.pool) {
+      form.pool = "pool"
+    }
+    if (values.gender !== "") {
+      form.allowedSex = values.gender
+    }
+    if (values.dormType !== "") {
+      form.type = values.dormType
+    } 
+    if (values.dormName !== "") {
+      form.name = values.dormName
+    }
+    if (values.rating !== "") {
+      form.avgStar = values.rating
+    }
+    if (values.price !== "") {
+      form.price = values.price
+    }
+    if (values.maxPerson !== "") {
+      form.maxperson = values.maxPerson
+    }
+    if (values.aircond !== "") {
+      form.airCond = values.aircond
+    }
+    if (values.bedroom !== "") {
+      form.bedroom = values.bedroom
+    }
+    if (values.kitchen !== "" ) {
+      form.kitchen = values.kitchen
+    }
+    if (values.bathroom !== "" ) {
+      form.bathroom = values.bathroom
+    }
+    console.log(form)
+    props.handleSubmit(form);
     
     resetForm();
   },

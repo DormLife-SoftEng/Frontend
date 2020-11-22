@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect } from "react";
 import DormCarousel from "../dorm/DormCarousel";
 import RoomModal from "../dorm/RoomModal";
 import Googlemap from "../google/google";
@@ -14,6 +14,9 @@ function DormInfo(props: DormDetailProps) {
   const { dorm } = props;
   let allowedPet: boolean = false;
   let allowedCooking: boolean = false;
+  useEffect(() => {
+    console.log(props.dorm.image)
+  },[])
   return (
       <div style={{textTransform: 'capitalize',padding:"0% 2%",width:"100%"}}>
       <h1 style={{textAlign:"center"}}>{dorm.name}</h1>

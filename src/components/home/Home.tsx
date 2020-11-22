@@ -7,16 +7,18 @@ import SearchBar from "./SearchBar"
 import "./style.css"
 import generalService from "../../services/general.service"
 import DormList from "./DormList"
+import { dorm } from "../newType"
 
 function Home() {
 
-    const [search,setSearch] = useState<boolean>(true)
-    const [dorms,setDorms] = useState<any[]>([])
+    const [search,setSearch] = useState<boolean>(false)
+    const [dorms,setDorms] = useState<dorm[]>([])
     const [carousalDorm,setCarousalDorm] = useState<any[]>([])
     const [suggestDorm,setSuggestDorm] = useState<any[]>([])
 
     const getAllDorms = async () => {
-        const result = await generalService.getDorms() as any[]
+        const result = await generalService.getDorms() as dorm[]
+        console.log(result)
         setCarousalDorm(result.slice(0,2))
         setSuggestDorm(result.slice(2,result.length))
     }
@@ -33,7 +35,7 @@ function Home() {
             <SearchBar setDorms={setDorms} setSearch={setSearch} />
             {search ? 
             <>
-                <DormList />
+                <DormList dorms={dorms} />
             </> 
             : 
             <>

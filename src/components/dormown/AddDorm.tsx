@@ -1154,7 +1154,7 @@ const InnerForm = (props : FormikProps<AddDormFormValue> & Style) => {
 
 }
 
-const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
+export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
     mapPropsToValues: (props) => {
       return {
         dormName: props.dormName || "",
@@ -1434,7 +1434,7 @@ const AddDorm = (props : Style) => {
 
     useEffect(() => {
         document.body.style.backgroundColor = "white";
-      }, []);
+    }, []);
 
     const  handleSubmit = async (form : AddDormServiceProps) => {
         const result = await dormownerService.addDorm(form)
@@ -1462,7 +1462,7 @@ const AddDorm = (props : Style) => {
     }
     return (
         <RoomContext.Provider value={{allRoom,setAllRoom}}>
-        <Header />
+        <Header title="Add Dorm" />
         <AddDormPop {...modalProps} open={show}  />
         <AddDormFormik handleSubmit={handleSubmit} classes={classes} />
         </RoomContext.Provider>

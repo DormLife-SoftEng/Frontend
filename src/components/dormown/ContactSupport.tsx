@@ -21,11 +21,12 @@ function Contactsupport() {
     request: "delete",
     status: "pending",
   };
-  function deleteHandle() {}
+  function deleteHandle() {
     console.log(dormID)
     dorminfoService.getOneDorm(dormID).then(res=> res).then(data=>tickets.target=data).then(()=>dormownerService.deleteDorm(tickets))
     console.log(tickets)
     history.goBack()
+  }
   useEffect(() => {
     document.body.style.backgroundColor = "#FFBDBD";
   }, );
@@ -87,8 +88,8 @@ function Contactsupport() {
                     background: "#F55E61",
                     borderRadius: "10px",
                   }}
-                
-               >
+                  onClick={()=> history.push(`/dormowner/contactSupport/editdorm/${dormID}`)}
+                >
                  Edit Dorm Info
                </Button>
               </Grid>

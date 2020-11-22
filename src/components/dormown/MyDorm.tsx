@@ -99,7 +99,7 @@ function MyDorm() {
                     <Button
                       variant="warning"
                       style={{ color: "white" }}
-                      onClick={() => history.push(`/dormowner/contactsupport/${dorms[dorm].id}`)}
+                      onClick={() => history.push(`/dormowner/contactSupport/${dorms[dorm].id}`)}
                     >
                       Contact Support
                     </Button>

@@ -5,10 +5,22 @@ import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import { useAuth, authContextType } from "../../contexts/auth.context";
 import ReviewcodeModal from "../review/ReviewcodeModal";
+import lobbyService from "../../services/lobby.service";
 
 function Navbar2() {
+
   const history = useHistory();
   const { authToken }: authContextType = useAuth();
+
+  const checkHaveLobby = async () => {
+    const result = await lobbyService.checkHaveLobby();
+    if (result === "") {
+      history.push("/lobby")
+    } else {
+      history.push(`/lobby/${result}`)
+    }
+  }
+
   authToken && authToken.role === "admin" && history.push("/admin");
   return (
     <Row noGutters={true}>
@@ -34,7 +46,7 @@ function Navbar2() {
           <Col>
             <Button
               onClick={() => {
-                history.push("/lobby");
+                checkHaveLobby();
               }}
               size="lg"
               variant="light"
