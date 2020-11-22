@@ -21,7 +21,7 @@ function RoomModal(props: any) {
       }}>
         {room.name}
       </a>
-      <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal centered size="lg" show={show} onHide={handleClose}>
         <Modal.Body>
           <Row>
           <Col>

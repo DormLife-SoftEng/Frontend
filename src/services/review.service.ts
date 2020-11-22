@@ -49,7 +49,7 @@ async function getReview(props: string) {
             params: { 'reviewCode': props,'userId': tokenObj.userId}, 
         }
         try {
-            const result = await axios.get(`${API_URL2}`, config)
+            const result = await axios.get(`${API_URL2}/users`, config)
             return result.data
         } catch (err) {
             return {}

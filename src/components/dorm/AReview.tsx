@@ -9,6 +9,7 @@ import DormCarousel from "./DormCarousel";
 
 function AReview(props: any) {
   const { review } = props;
+  const date = new Date(review.createdOn).toLocaleString()
   console.log(review)
   return (
     <div className="p-3">
@@ -33,7 +34,7 @@ function AReview(props: any) {
         <p>
           <DormCarousel images={review.image}/>
         </p>
-        <p>{review.createdOn.toLocaleString('th-TH')}</p>
+        <p>Date : {date}</p>
         </Col>
       </Row>
 

@@ -42,7 +42,7 @@ function UserModal(props : UserModalProps) {
             <Col>
             </Col>
             <Col style={{textAlign:"right"}}>
-                <Button variant="secondary" onClick={() => setEdit(true)} className="mr-2">Edit Profile</Button>
+                {/* <Button variant="secondary" onClick={() => setEdit(true)} className="mr-2">Edit Profile</Button> */}
                 <Button onClick={handleClose} variant="danger">Close</Button>
             </Col>
         </Row> 

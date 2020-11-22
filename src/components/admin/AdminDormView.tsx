@@ -83,7 +83,7 @@ export default function () {
                         Facilities:
                         {data?.utility
                           ?.map((item: any, index: number) => {
-                            return ` ${stringToCapital(item?.type)} [${item?.distance}m]`;
+                            return ` ${stringToCapital(item?.type)} [${item?.distance}km]`;
                           })
                           .join(",")}
                       </p>

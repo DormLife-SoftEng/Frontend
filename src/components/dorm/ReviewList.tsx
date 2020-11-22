@@ -10,7 +10,6 @@ function ReviewList(props: any) {
   const { dorm, avgStar } = props;
   const getDormInfo = async () => {
     const review = await dorminfoService.getDormReviews(dorm)
-    console.log('pussy')
     console.log(review)
     setReviews(review)
   }
