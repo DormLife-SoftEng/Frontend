@@ -2,54 +2,53 @@
 import React, { useState } from "react";
 import "./style.css";
 
-import {
-  Image,
-  Row,
-  Col,
-  Modal,
-  Button,
-  Card,
-  Container,
-} from "react-bootstrap";
-import { Ticket } from "../../services/dormowner.service";
+import { Image, Row, Col, Modal, Button, Card, Container } from "react-bootstrap";
+import dormownerService, { Ticket } from "../../services/dormowner.service";
+import dorminfoService from "../../services/dorminfo.service";
+import { useHistory } from "react-router-dom";
 
 function DeleteModal(props: any) {
-  const { id } = props;
+  const { deleteSubmit } = props;
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  
-  const ticket:Ticket = {
-    target: {},
-    newdata: {},
-    type: "dorm",
-    request: "delete",
-  };
-  function deleteSubmit() {}
+  // const history = useHistory();
+  // const ticket:Ticket = {
+  //   target: {},
+  //   newdata: {},
+  //   type: "dorm",
+  //   request: "delete",
+  // };
+  // function deleteSubmit() {}
+  //   console.log(id)
+  //   const dorm = await dorminfoService.getOneDorm(id)
+  //   console.log(dorm)
+  //   ticket.target={}
+  //   const result = await dormownerService.deleteDorm(ticket)
 
   return (
     <>
-      <Button
-        style={{
-          //fontFamily: "Athiti",
-          fontSize: "40px",
-          height: "91px",
-          width: "963px",
-          background: "#F55E61",
-          borderRadius: "10px",
-        }}
-        onClick={handleShow}
-      >
-        Delete Dorm
-      </Button>
-      <Modal
-        centered={true}
-        show={show}
-        onHide={handleClose}
-        dialogClassName="delete"
-      >
+      <Row className={"mt-4 mb-4"}>
+        <Col xs={1} sm={2}></Col>
+        <Col xs={10} sm={8}>
+          <Button
+            style={{
+              //fontFamily: "Athiti",
+              fontSize: "40px",
+              background: "#F55E61",
+              borderRadius: "10px",
+            }}
+            onClick={handleShow}
+            block
+          >
+            Delete Dorm
+          </Button>
+        </Col>
+        <Col xs={1} sm={2}></Col>
+      </Row>
+
+      <Modal centered={true} show={show} onHide={handleClose} dialogClassName="delete">
         <Modal.Body
           style={{
             fontSize: "1rem",
@@ -57,50 +56,51 @@ function DeleteModal(props: any) {
             background: "#F55E61",
           }}
         >
-          <Container style={{}}>
-            <Row
-              style={{
-                width: "100%",
-              }}
-            >
+          <Row>
+            <Col xs={0}></Col>
+            <Col xs={12}>
               <h1
                 style={{
                   textAlign: "center",
                   fontSize: "40px",
+                  color: "#FFFFFF",
                 }}
               >
                 Are you sure to delete this dorm?
               </h1>
-            </Row>
-            <Row>
-              <Col lg={6} style={{ textAlign: "center" }}>
-                <Button
-                  onClick={() => deleteSubmit()}
-                  style={{
-                    borderRadius: "10px",
-                    background: "white",
-                    color: "#F55E61",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Confirm
-                </Button>
-              </Col>
-              <Col lg={6} style={{ textAlign: "center" }}>
-                <Button
-                  onClick={handleClose}
-                  style={{
-                    borderRadius: "10px",
-                    background: "white",
-                    color: "#F55E61",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Cancel
-                </Button>
-              </Col>
-            </Row>
-          </Container>
+            </Col>
+            <Col xs={0}></Col>
+          </Row>
+          <Row>
+            <Col xs={2}></Col>
+            <Col xs={4} style={{ textAlign: "center" }}>
+              <Button
+                onClick={() => deleteSubmit()}
+                style={{
+                  borderRadius: "10px",
+                  background: "white",
+                  color: "#F55E61",
+                  fontWeight: "bold",
+                }}
+              >
+                Confirm
+              </Button>
+            </Col>
+            <Col xs={4} style={{ textAlign: "center" }}>
+              <Button
+                onClick={handleClose}
+                style={{
+                  borderRadius: "10px",
+                  background: "white",
+                  color: "#F55E61",
+                  fontWeight: "bold",
+                }}
+              >
+                Cancel
+              </Button>
+            </Col>
+            <Col xs={2}></Col>
+          </Row>
         </Modal.Body>
       </Modal>
     </>

@@ -1,25 +1,25 @@
 import axios from "axios";
-import {tokenDto} from "../components/type"
-const API_URL = "http://localhost:5000/api/v1/dorms";
-
+import { QueryParams } from "../components/newType";
+const API_URL = `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms`;
 const getDorms = async () =>{
-    const token = localStorage.getItem("token")
-    if (token) {
-        const tokenObj : tokenDto = JSON.parse(token)
-        const access_token = tokenObj.access_token
-        const config = {
-            headers: { Authorization : `Bearer ${access_token}` }
-        };
-        try {
-            const result = await axios.get(`${API_URL}`,config)
-            return result.data
-        } catch (err) {
-            return []
-        }
-    }
-    return []
+            
+    const result = await axios.get(`${API_URL}`)
+    return result.data
+
 }
 
+const getSearchDorm = async (query : QueryParams) => {
+    const config = {
+        params: query
+    };
+    console.log(query)
+    const result = await axios.post(`${API_URL}`,{},config)
+    console.log(result)
+    return result.data
+}
+
+
 export default {
-    getDorms
+    getDorms,
+    getSearchDorm
 }

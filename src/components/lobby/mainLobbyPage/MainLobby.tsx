@@ -8,31 +8,42 @@ import SearchBar from "./SearchBar"
 import { Lobby } from "../../type"
 import lobbyService from "../../../services/lobby.service"
 import { Nav, Navbar, Row, Col } from "react-bootstrap";
+var interval : NodeJS.Timeout;
 function MainLobby() {
+
   const history = useHistory();
-  const [lobbylist, setLobbyList] = useState<any>([])
+  const [lobbylist, setLobbyList] = useState<any[]>([])
+  const [lobbylistSearch,setlobbylistSearch] = useState<any[]>([])
 
   const handleRouting = (s: string) => {
+    clearInterval(interval)
     history.push(s);
   }
   const handleGoBack = () => {
+    clearInterval(interval)
     history.push("/");
   }
   const handleSubmit = (s: string) => {
-    // search by parameter & set new State 
-    alert(s)
-    setLobbyList([])
+    
+    const search = lobbylist.filter(lobby =>  {
+      const name = lobby.dormName+", "+lobby.room as string
+      return name.includes(s)
+    })
+    setlobbylistSearch(search)
   }
 
   const getAllLobbys = async () => {
     const allLobbys = await lobbyService.getLobbys();
     console.log(allLobbys)
     setLobbyList(allLobbys)
+    setlobbylistSearch(allLobbys)
   }
-
+  
   useEffect(() => {
-    getAllLobbys()
     document.body.style.backgroundColor = "#F55E61"
+    interval = setInterval(() => {
+      getAllLobbys()
+    },1000)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -58,14 +69,14 @@ function MainLobby() {
       <Row noGutters={true} style={{padding:"1%"}}>
       <Col xs="4"></Col>
       <Col xs="4">
-      <SearchBar handleSubmit={handleSubmit} />
+      <SearchBar handleSubmit={handleSubmit}/>
       </Col>
       <Col xs="4"></Col>
       </Row>
       <Row noGutters={true}>
       <Col xs="2"></Col>
       <Col xs="8">
-      <LobbyList lobbylist={lobbylist} />
+      <LobbyList handleRouting={handleRouting} lobbylist={lobbylistSearch} />
       </Col>
       <Col xs="2"></Col>
       </Row>

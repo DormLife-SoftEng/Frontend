@@ -7,9 +7,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import FormLabel from "@material-ui/core/FormLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Dropzonef from "./Dropzonef"
 import { Style } from "../type";
@@ -392,7 +390,7 @@ const AddRoomFormik = withFormik<addRoomMyFormProps, addRoomFormValue>({
       image: Yup.string().required("Required"),
       price: Yup.string().required("Required").test("","Please enter positive number",value => {
         if (value) {  
-          return parseInt(value) >= 0
+          return parseFloat(value) >= 0
         } 
         return false
     })

@@ -1,4 +1,5 @@
 import axios from "axios";
+<<<<<<< HEAD
 import { tokenDto } from "../components/type";
 const DORM_URL = "http://localhost:5000/api/v1/dorms"
 const REV_URL = "http://localhost:5000/api/v1/reviews"
@@ -30,3 +31,27 @@ export default {
     getOneDorm,
     getDormReviews
 }
+=======
+const DORM_URL = `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms`;
+const REV_URL = `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/reviews`;
+
+async function getOneDorm(dormID: string) {
+  const result = await axios.get(`${DORM_URL}/${dormID}`);
+  console.log(result.data);
+  return result.data;
+}
+
+async function getDormReviews(dormID: string) {
+  const result = await axios.get(`${REV_URL}`, {
+    params: {
+      dormId: dormID,
+    },
+  });
+  return result.data;
+}
+
+export default {
+  getOneDorm,
+  getDormReviews,
+};
+>>>>>>> 1fd91495e44e3607a67a2eb4faf7fb5f0f6d75c4

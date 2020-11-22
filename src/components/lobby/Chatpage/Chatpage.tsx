@@ -7,27 +7,39 @@ import Sender from "./Sender";
 import Receiver from "./Receiver";
 import ChatList from "./ChatList";
 import lobbyService from "../../../services/lobby.service";
-import { useParams } from "react-router-dom";
-import { propsSendMessage  , chat} from "../../type";
+import { useHistory, useParams } from "react-router-dom";
+import { propsSendMessage } from "../../type";
 import {useAuth , authContextType} from "../../../contexts/auth.context"
 
-const Chatpage = () => {
-    const {authToken,setAuthToken} : authContextType = useAuth()
+var interval : NodeJS.Timeout;
 
+const Chatpage = () => {
+
+    const {authToken} : authContextType = useAuth()
+    const history = useHistory()
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const [loading,setLoading] = useState<boolean>(true)
     const {lobbyID} : {lobbyID:string} = useParams();
     const [chats,setChats] = useState<any[]>([])
+    var count = 0
+    const handleRouting = () => {
+
+        clearInterval(interval)
+        history.goBack();
+    }
 
     const getAllChat = async () => {
         const allChat = await lobbyService.getAllMessage(lobbyID)
         setChats(allChat)
         setLoading(false)
-        scrollToBottom()
+        scrollToBottom(allChat.length)
     }
-    const scrollToBottom = () => {
+    const scrollToBottom = (co : number) => {
         if (null !== messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+            if (count < co) {
+                count = co
+                messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+            }
         }
     }
 
@@ -39,10 +51,9 @@ const Chatpage = () => {
 
     useEffect(() => {
         document.body.style.backgroundColor = "#fff";
-        setInterval(() => {
+        interval = setInterval(() => {
             getAllChat()
-        },1500)
-        
+        },1000)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
@@ -50,7 +61,7 @@ const Chatpage = () => {
     {authToken && 
     <Container style={{padding:"0"}} fluid>
     {loading && <Spinner className="Absolute-Center" animation="border" variant="danger" />}
-    <Header />
+    <Header  handleRouting={handleRouting} />
     <ChatList>
         {chats.map((chat,index)=> {
             return <div key={index}>

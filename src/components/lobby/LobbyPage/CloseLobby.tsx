@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import { CloseLobbyProps } from "../../type";
 import ModalCheckup from "./ModalCheckup";
 
@@ -13,9 +14,9 @@ const CloseLobby = (props : CloseLobbyProps) => {
     }
     return (
         <>
-            <button disabled={disable}  onClick={()=> {
+            <Button disabled={disable} size="lg" variant="light" style={{color:"#F55E61"}} onClick={()=> {
                 setShow(true)
-            }} >Close Lobby</button>
+            }} >Close Lobby</Button>
             <ModalCheckup handleCancel={handleCancel} handleAction={handleAction} show={show} action="Close"  />
         </>
     )

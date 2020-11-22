@@ -21,13 +21,13 @@ const styles = createStyles({
 });
 
 
-const Header = (props : Style) => {
-    const history = useHistory()
-    const {classes} = props
+const Header = (props : any) => {
+
+    const {classes,handleRouting} = props
     return <>
         <Navbar fixed="top" style={{ padding: "1%" }} className={classes.nav}>
             <Nav className="text-center">
-            <Button variant="" onClick={() => history.goBack()}>
+            <Button variant="" onClick={handleRouting}>
                 <ArrowBackIosIcon htmlColor="white" fontSize="large" />
             </Button>
             <h1 className={classes.navCenter}>Chat</h1>

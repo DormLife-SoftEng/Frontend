@@ -22,7 +22,7 @@ const Image = (props : ImagesProps) =>  {
                 {(attr.user.userId === authToken.userId) ? (
                     <img alt="" style={{margin:"2%",border:"10px solid #8cd3ff",width:"200px" ,height:"200px"}} src={AllImage[attr.user.PictureProfile]} />)
                     : 
-                    (<img alt="" style={{margin:"2%",border:"10px solid #555",width:"200px" ,height:"200px"}} src={AllImage[attr.user.PictureProfile] } /> )  
+                    (<img alt="" style={{margin:"2%",border:"10px solid #FFF",width:"200px" ,height:"200px"}} src={AllImage[attr.user.PictureProfile] } /> )  
         }
             </> 
         : 
@@ -30,7 +30,7 @@ const Image = (props : ImagesProps) =>  {
                 {(attr.user.userId === authToken.userId) ? (
                     <img alt="" style={{margin:"2%",border:"10px solid #8cd3ff",width:"200px" ,height:"200px"}} src={attr.ready ? AllImage[attr.user.PictureProfile + 3] : AllImage[attr.user.PictureProfile]} />)
                     : 
-                    (<img alt="" style={{margin:"2%",border:"10px solid #555",width:"200px" ,height:"200px"}} src={attr.ready ? AllImage[attr.user.PictureProfile+ 3] : AllImage[attr.user.PictureProfile] } /> )  }
+                    (<img alt="" style={{margin:"2%",border:"10px solid #FFF",width:"200px" ,height:"200px"}} src={attr.ready ? AllImage[attr.user.PictureProfile+ 3] : AllImage[attr.user.PictureProfile] } /> )  }
             </>
         }
         </>

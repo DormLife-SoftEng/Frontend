@@ -14,10 +14,9 @@ const Header = (props: any) => {
         paddingBottom: "20px",
         marginBottom: "20px",
       }}
-      noGutters={true}
     >
       <Col xs={3} md={2} style={{ textAlign: "center" }}>
-        <Button onClick={() => history.push("/admin/")} variant="">
+        <Button onClick={() => history.push("/admin/")} style={{boxShadow: "none"}} variant="">
           <ArrowBackIosIcon htmlColor="white" fontSize="large" />
         </Button>
       </Col>
@@ -43,7 +42,8 @@ export default function () {
       history.goBack();
     }
   };
-  const getImgPath = (path: any) => `http://localhost:5000/api/v1/dorms/images/${path}`;
+  const getImgPath = (path: any) =>
+    `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms/images/${path}`;
   document.body.style.backgroundColor = "#FFFFFF";
   !data && getDormData();
   const stringToCapital = (text: any) => text?.charAt(0).toUpperCase() + text?.slice(1);
@@ -73,8 +73,8 @@ export default function () {
                     <Col xs={10} md={10}>
                       <p>Name: {data?.name}</p>
                       <p>Address: {data?.address?.address}</p>
-                      <p>Dorm Longitude: {data?.address?.coordinate[0]}</p>
-                      <p>Dorm Latitude: {data?.address?.coordinate[1]}</p>
+                      <p>Dorm Longitude: {data?.address?.coordinate[1]}</p>
+                      <p>Dorm Latitude: {data?.address?.coordinate[0]}</p>
                       <p>Dorm Phone Number: {data?.contact?.telephone}</p>
                       <p>Dorm LineID: {data?.contact?.lineID}</p>
                       <p>Accommodation Type: {stringToCapital(data?.type)}</p>
@@ -137,8 +137,8 @@ export default function () {
           <Row>
             <Col xs={11} md={11}>
               <div style={{ textAlign: "center" }}>
-                <Button onClick={() => {}} variant="secondary">
-                  {approve ? "Unapprove" : "Approve"}
+                <Button onClick={() => {}} variant="secondary" disabled>
+                  {approve ? "Approved" : "Approve"}
                 </Button>
               </div>
             </Col>

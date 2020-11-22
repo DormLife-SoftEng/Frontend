@@ -31,5 +31,5 @@ export interface propsDorm {
     id : string
 }
 export interface propsCarousel {
-    dorms : propsDorm[]
+    dorms :any[]
 }

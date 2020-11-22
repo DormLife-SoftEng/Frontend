@@ -3,6 +3,7 @@ import React from "react";
 import { Carousel, Row, Col } from "react-bootstrap";
 import { propsCarousel } from "./type";
 import { useHistory } from "react-router-dom";
+const path = `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms/images/`;
 function DormCarousel(props: propsCarousel) {
   const { dorms } = props;
   const history = useHistory();
@@ -18,7 +19,7 @@ function DormCarousel(props: propsCarousel) {
                   <img
                     style={{ height: "350px", overflow: "hidden", flex: "1", objectFit: "cover" }}
                     className="d-block w-100"
-                    src={dorm.src}
+                    src={`${path}${dorm.image[0]}`}
                     alt="First slide"
                   />
                 </a>

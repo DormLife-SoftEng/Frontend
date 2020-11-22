@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Button , Row ,Col } from "react-bootstrap";
+import { Button , Row } from "react-bootstrap";
 import React from "react";
 import FormLabel from "@material-ui/core/FormLabel";
 import TextField from "@material-ui/core/TextField";
@@ -7,12 +7,10 @@ import FormControl from "@material-ui/core/FormControl";
 import { LoginForm , LoginFormProps } from "../type";
 import { FormikProps, withFormik } from "formik";
 import * as Yup from "yup";
-import { useHistory } from "react-router-dom";
 
 function InnerForm(props: FormikProps<LoginForm>) {
 
-  const {values,touched,errors,isSubmitting,handleChange,handleBlur,handleSubmit,handleReset} = props;
-  const history = useHistory();
+  const {values,touched,errors,handleChange,handleBlur,handleSubmit} = props;
 
   return (
     <>

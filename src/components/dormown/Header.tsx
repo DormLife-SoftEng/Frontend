@@ -3,7 +3,7 @@ import { Nav, Navbar, Button } from "react-bootstrap";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { useHistory } from "react-router-dom";
 
-const Header = () => {
+const Header = (props : any) => {
   const history = useHistory();
   return (
     <>
@@ -23,7 +23,7 @@ const Header = () => {
               color: "white",
             }}
           >
-            Add Dorm
+            {props.title}
           </h1>
         </Nav>
       </Navbar>

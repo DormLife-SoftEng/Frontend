@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Button, Row, Col, Card } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import adminService from "../../services/admin.service";
@@ -14,10 +14,9 @@ const Header = (props: any) => {
         paddingBottom: "20px",
         marginBottom: "20px",
       }}
-      noGutters={true}
     >
       <Col xs={3} md={2} style={{ textAlign: "center" }}>
-        <Button onClick={() => history.push("/admin/editrequest")} variant="">
+        <Button onClick={() => history.push("/admin/editrequest")} style={{boxShadow: "none"}} variant="">
           <ArrowBackIosIcon htmlColor="white" fontSize="large" />
         </Button>
       </Col>
@@ -44,12 +43,15 @@ export default function () {
       history.goBack();
     }
   };
-  const setState = () => {
+  const setState = async () => {
     if (data?.status == "approved") {
       setApprove(true);
+    } else {
+      setApprove(false);
     }
   };
-  const getImgPath = (path: string): string => `http://localhost:5000/api/v1/dorms/images/${path}`;
+  const getImgPath = (path: string): string =>
+    `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms/images/${path}`;
 
   useEffect(() => {
     setState();
@@ -57,10 +59,10 @@ export default function () {
   document.body.style.backgroundColor = "#FFFFFF";
   !data && getDormData();
   const stringToCapital = (text: any) => text?.charAt(0).toUpperCase() + text?.slice(1);
-  console.log(data?.newdata);
+  const dataData = data?.newdata || data?.target;
   return (
     <>
-      <Header dormName={data?.newdata?.name} />
+      <Header dormName={dataData?.name} />
       <Row noGutters={true}>
         <Col xs={1} md={1}></Col>
         <Col xs={11} md={5}>
@@ -81,17 +83,17 @@ export default function () {
                   <Row>
                     <Col xs={1} md={1}></Col>
                     <Col xs={10} md={10}>
-                      <p>Name: {data?.newdata?.name}</p>
-                      <p>Address: {data?.newdata?.address?.address}</p>
-                      <p>Dorm Longitude: {data?.newdata?.address?.coordinate[0]}</p>
-                      <p>Dorm Latitude: {data?.newdata?.address?.coordinate[1]}</p>
-                      <p>Dorm Phone Number: {data?.newdata?.contact?.telephone}</p>
-                      <p>Dorm LineID: {data?.newdata?.contact?.lineID}</p>
+                      <p>Name: {dataData?.name}</p>
+                      <p>Address: {dataData?.address?.address}</p>
+                      <p>Dorm Longitude: {dataData?.address?.coordinate[1]}</p>
+                      <p>Dorm Latitude: {dataData?.address?.coordinate[0]}</p>
+                      <p>Dorm Phone Number: {dataData?.contact?.telephone}</p>
+                      <p>Dorm LineID: {dataData?.contact?.lineID}</p>
                       <p>Accommodation Type: {stringToCapital(data?.type)}</p>
-                      <p>Allowed Sex: {stringToCapital(data?.newdata?.allowedSex)}</p>
+                      <p>Allowed Sex: {stringToCapital(dataData?.allowedSex)}</p>
                       <p>
                         Facilities:
-                        {data?.newdata?.utility
+                        {dataData?.utility
                           ?.map((item: any, index: number) => {
                             return ` ${stringToCapital(item?.type)} [${item?.distance}m]`;
                           })
@@ -99,7 +101,7 @@ export default function () {
                       </p>
                       <p>Room Type:</p>
 
-                      {data?.newdata?.room?.map((item: any, index: number) => {
+                      {dataData?.room?.map((item: any, index: number) => {
                         return (
                           <Dorm
                             name={item?.name}
@@ -129,7 +131,7 @@ export default function () {
                           flex: "1",
                           objectFit: "cover",
                         }}
-                        src={`${getImgPath(data?.newdata?.image[0])}`}
+                        src={`${getImgPath(dataData?.image[0])}`}
                       />
                     </Col>
                     <Col xs={1} md={1}></Col>
@@ -148,13 +150,19 @@ export default function () {
             <Col xs={11} md={11}>
               <div style={{ textAlign: "center" }}>
                 <Button
-                  onClick={() => {
-                    adminService.adminChangeDormData(dormID);
-                    setState();
-                  }}
-                  variant="danger"
+                  onClick={
+                    approve
+                      ? () => {}
+                      : async () => {
+                          await adminService.adminChangeDormData(dormID);
+                          await getDormData();
+                          setState();
+                        }
+                  }
+                  variant={approve ? "secondary" : "danger"}
+                  disabled={approve}
                 >
-                  {approve ? "Unapprove" : "Approve"}
+                  {approve ? "Approved" : "Approve"}
                 </Button>
                 {showDelete ? (
                   <>
@@ -191,7 +199,7 @@ export default function () {
                       flex: "1",
                       objectFit: "cover",
                     }}
-                    src={`${getImgPath(data?.newdata?.license[0])}`}
+                    src={`${getImgPath(dataData?.license[0])}`}
                   />
                 </Card.Body>
               </Card>

@@ -13,8 +13,7 @@ import ContactSupport from "./dormown/ContactSupport";
 import AddDorm from "./dormown/AddDorm"
 import Lobby from "./lobby/LobbyPage/Lobby";
 import MainLobby from "./lobby/mainLobbyPage/MainLobby";
-import CreatePage from "./lobby/CreateLobbyPage/CreatePage";
-import CreatePage1 from "./lobby/CreateLobbyPage/CreatePageSuggest";
+import CreatePage from "./lobby/CreateLobbyPage/CreatePageSuggest";
 import Chatpage from "./lobby/Chatpage/Chatpage";
 import PageNotFound from "./pagenotfound/PageNotFound";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
@@ -31,8 +30,9 @@ import AdminDormList from "./admin/AdminDormList";
 import AdminEditRequest from "./admin/AdminEditRequest";
 import AdminRoute from "./routes/AdminRoute";
 import AdminDormEdit from "./admin/AdminDormEdit";
-import AdminDormEditNoDelete from "./admin/AdminDormEditNoDelete";
+import AdminDormView from "./admin/AdminDormView";
 import "./style.css"
+import EditDorm from "./dormown/EditDorm";
 
 const Theme = createMuiTheme({
   palette: {
@@ -63,8 +63,9 @@ function App() {
             <AuthRoute  path="/signin/repassword" Component={Repassword} />
             <AuthRoute  path="/signin/forgetpassword" Component={Forgetpassword} />
             <AuthRoute  path="/signin" Component={Signin} />
-            <DormOwnerRoute path="/dormowner/adddorm" Component={AddDorm}  />
+            <DormOwnerRoute path="/dormowner/contactSupport/editdorm/:dormID" Component={EditDorm} />            
             <DormOwnerRoute path="/dormowner/contactSupport/:dormID" Component={ContactSupport} />
+            <DormOwnerRoute path="/dormowner/adddorm" Component={AddDorm}  />
             <DormOwnerRoute path="/dormowner/" Component={MyDorm} />
             <DormFinderRoute path="/lobby/create" Component={CreatePage} />
             <DormFinderRoute path="/lobby/:lobbyID/chat" Component={Chatpage} />
@@ -73,7 +74,7 @@ function App() {
             <DormFinderRoute path="/review/:reviewID" Component={Review} />
             <AdminRoute path="/admin/editrequest/:dormEditId" Component={AdminDormEdit} />
             <AdminRoute path="/admin/editrequest" Component={AdminEditRequest} />
-            <AdminRoute path="/admin/view/:dormEditId" Component={AdminDormEditNoDelete} />
+            <AdminRoute path="/admin/view/:dormEditId" Component={AdminDormView} />
             <AdminRoute path="/admin/" Component={AdminDormList} />
             <Route component={PageNotFound} />
         </Switch>

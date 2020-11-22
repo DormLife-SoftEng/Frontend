@@ -19,17 +19,19 @@ const Receiver = (props : propsReceiver) => {
         <div className="chat-avatar">
           <a
             className="avatar"
-            href="#"
             data-placement="left"
           >
             <img
               src={AllImage[profilepic]}
               alt=""
-              title={author}
+              title={author.firstName}
             />
           </a>
         </div>
         <div className="chat-body">
+        <div className="Name-content">
+            <p>{author.firstName}</p>
+          </div>
           <div className="chat-content">
             <p>{message}</p>
           </div>

@@ -1,18 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Carousel } from "react-bootstrap";
-import {propsCarousel} from "./type";
+import { propsCarousel } from "./type";
 function DormCarousel(props: propsCarousel) {
-  const path  = "http://localhost:5000/api/v1/dorms/images/"
+  const path = `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms/images/`;
   var { images, height } = props;
-  if(height == null)height = '275px';
+  if (height == null) height = "275px";
   return (
     <Carousel style={{ padding: "1% 2%" }}>
       {images.map((img, index) => {
         return (
           <Carousel.Item key={index}>
             <img
-              style={{ height: height, objectFit: "cover"}}
+              style={{ height: height, objectFit: "cover" }}
               className="d-block w-100"
               src={`${path}${img}`}
               alt="First slide"
@@ -20,7 +20,7 @@ function DormCarousel(props: propsCarousel) {
           </Carousel.Item>
         );
       })}
-{/* 
+      {/* 
       <Carousel.Item>
         <a href="#">
           <img

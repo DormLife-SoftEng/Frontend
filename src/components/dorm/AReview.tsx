@@ -21,11 +21,11 @@ function AReview(props: any) {
         <Col>
         <h6 style={{marginBottom:'-5px'}}>{review.user.firstName} {review.user.lastName}</h6>
         <p style={{color:'gold'}}>
-          {review.star >= 1 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
-          {review.star >= 2 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
-          {review.star >= 3 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
-          {review.star >= 4 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
-          {review.star >= 5 && (<StarIcon fontSize="small"/>) || (<StarBorderOutlinedIcon fontSize="small"/>)}
+          {review.star >= 1 ? (<StarIcon fontSize="small"/>) : (<StarBorderOutlinedIcon fontSize="small"/>)}
+          {review.star >= 2 ? (<StarIcon fontSize="small"/>) : (<StarBorderOutlinedIcon fontSize="small"/>)}
+          {review.star >= 3 ? (<StarIcon fontSize="small"/>) : (<StarBorderOutlinedIcon fontSize="small"/>)}
+          {review.star >= 4 ? (<StarIcon fontSize="small"/>) : (<StarBorderOutlinedIcon fontSize="small"/>)}
+          {review.star >= 5 ? (<StarIcon fontSize="small"/>) : (<StarBorderOutlinedIcon fontSize="small"/>)}
         </p>
         <p>
           {review.comment}

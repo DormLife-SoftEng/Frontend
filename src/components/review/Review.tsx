@@ -1,6 +1,6 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { Navbar, Nav, Row, Button, Col, Container } from "react-bootstrap";
+import { Navbar, Nav, Row, Button, Col  } from "react-bootstrap";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
@@ -54,9 +54,13 @@ function ReviewAdd() {
     }
   }
   useEffect(() => {
+<<<<<<< HEAD
     reviewservice.getdormId(reviewID).then((save)=>{setDormId(save);getLastReview(save.id)});
     //getLastReview(dormId);
     
+=======
+    getDormId();
+>>>>>>> 1fd91495e44e3607a67a2eb4faf7fb5f0f6d75c4
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   interface review {

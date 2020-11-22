@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URLAdmin = "http://localhost:5000/api/v1/tickets/";
+const API_URLAdmin = `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/tickets/`;
 
 async function adminListGetDormData() {
   try {
@@ -29,7 +29,7 @@ async function adminChangeDormData(urlPath: string) {
   }
 }
 async function adminDeleteDormData(urlPath: string) {
-  const result = axios
+  axios
     .delete(`${API_URLAdmin}${urlPath}`)
     .then((res) => res.data)
     .catch((err) => {
@@ -38,7 +38,9 @@ async function adminDeleteDormData(urlPath: string) {
 }
 async function adminListGetAllDorm() {
   const result = axios
-    .get(`http://localhost:5000/api/v1/dorms`)
+    .get(
+      `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms`
+    )
     .then((res) => res.data)
     .catch((err) => console.error(err));
   return result;
@@ -46,7 +48,9 @@ async function adminListGetAllDorm() {
 
 async function adminGetApprovedDormData(dormID: string) {
   const result = axios
-    .get(`http://localhost:5000/api/v1/dorms/${dormID}`)
+    .get(
+      `http://${process.env.REACT_APP_BACKEND_BASE_URL}:${process.env.REACT_APP_BACKEND_URL_PORT}/api/v1/dorms/${dormID}`
+    )
     .then((res) => res.data)
     .catch((err) => console.error(err));
   return result;
@@ -58,5 +62,5 @@ export default {
   adminGetDormData,
   adminChangeDormData,
   adminDeleteDormData,
-  adminGetApprovedDormData
+  adminGetApprovedDormData,
 };

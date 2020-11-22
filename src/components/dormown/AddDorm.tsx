@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { withFormik ,FormikProps } from "formik";
@@ -100,6 +101,7 @@ const InnerForm = (props : FormikProps<AddDormFormValue> & Style) => {
 
     useEffect(() => {
         values.room = allRoom
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[allRoom])
 
     const handleCloseAddRoom = () => {
@@ -436,7 +438,7 @@ const InnerForm = (props : FormikProps<AddDormFormValue> & Style) => {
                   <FormControlLabel
                     value="apartment"
                     control={<Radio color="primary" />}
-                    label="Aparment"
+                    label="Apartment"
                   />
                   <FormControlLabel
                     value="flat"
@@ -1152,7 +1154,7 @@ const InnerForm = (props : FormikProps<AddDormFormValue> & Style) => {
 
 }
 
-const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
+export const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
     mapPropsToValues: (props) => {
       return {
         dormName: props.dormName || "",
@@ -1268,13 +1270,13 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
       dormPhone : Yup.string().required("Required"),
       dormLat : Yup.string().required("Required").test("is-lat","Please enter between -90 and 90",value => {
         if (value) {
-            return (parseInt(value) <= 90) && (parseInt(value) >= -90)
+            return (parseFloat(value) <= 90) && (parseFloat(value) >= -90)
           }
           return false
       }),
       dormLong : Yup.string().required("Required").test("is-long","Please enter between -180 and 180",value => {
         if (value) {
-            return (parseInt(value) <= 180) && (parseInt(value) >= -180)
+            return (parseFloat(value) <= 180) && (parseFloat(value) >= -180)
         }
         return false
       })
@@ -1286,7 +1288,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps =  {
               type : "commonroom",
               description : values.comDes,
-              distance : parseInt(values.comDis)
+              distance : parseFloat(values.comDis)
           }
           utilities.push(util)
       }
@@ -1294,7 +1296,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps = {
               type : "convenienceStore",
               description : values.conDes,
-              distance : parseInt(values.conDis)
+              distance : parseFloat(values.conDis)
           }
           utilities.push(util)
       }
@@ -1302,7 +1304,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps = {
               type : "fitness",
               description : values.fitDes,
-              distance : parseInt(values.fitDis)
+              distance : parseFloat(values.fitDis)
           }
           utilities.push(util)
       }
@@ -1310,7 +1312,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps = {
               type : "internet",
               description : values.internetDes,
-              distance : parseInt(values.internetDis)
+              distance : parseFloat(values.internetDis)
           }
           utilities.push(util)
       }
@@ -1318,7 +1320,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps = {
             type : "parking",
             description : values.parkDes,
-            distance : parseInt(values.parkDis)             
+            distance : parseFloat(values.parkDis)             
           }
           utilities.push(util)          
       }
@@ -1326,7 +1328,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           const util : UtilitiesProps = {
               type : "laundry",
               description : values.launDes,
-              distance : parseInt(values.launDis)
+              distance : parseFloat(values.launDis)
           }
           utilities.push(util) 
       }
@@ -1334,7 +1336,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
         const util : UtilitiesProps = {
             type : "pool",
             description : values.swimDes,
-            distance : parseInt(values.swimDis)
+            distance : parseFloat(values.swimDis)
         }
         utilities.push(util) 
       }
@@ -1342,7 +1344,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
         const util : UtilitiesProps = {
             type : "smoking",
             description : values.smokeDes,
-            distance : parseInt(values.smokeDis)
+            distance : parseFloat(values.smokeDis)
         }
         utilities.push(util) 
       }
@@ -1350,7 +1352,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
         const util : UtilitiesProps = {
             type : "restaurant",
             description : values.resDes,
-            distance : parseInt(values.resDis)
+            distance : parseFloat(values.resDis)
         }
         utilities.push(util) 
       }
@@ -1358,7 +1360,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
         const util : UtilitiesProps = {
             type : "restroom",
             description : values.restDes,
-            distance : parseInt(values.restDis)
+            distance : parseFloat(values.restDis)
         }
         utilities.push(util) 
       }
@@ -1381,15 +1383,15 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
       const Rooms : RoomProps[] = values.room.map((r,index) => {
           var aircon = 0;
           const price = {
-              amount : parseInt(r.price),
-              pricePer : parseInt(r.price) / parseInt(r.capacity)
+              amount : parseFloat(r.price),
+              pricePer : parseFloat(r.price) / parseFloat(r.capacity)
           }
           if (r.aircond === "yes") {
               aircon = 1;
           } else {
               aircon = 0;
           }
-          return {...r,bathroom : parseInt(r.bathroom) , bedroom : parseInt(r.bedroom) , kitchen : parseInt(r.kitchen) , capacity : parseInt(r.capacity) , price : price  , aircond : aircon}
+          return {...r,bathroom : parseFloat(r.bathroom) , bedroom : parseFloat(r.bedroom) , kitchen : parseFloat(r.kitchen) , capacity : parseInt(r.capacity) , price : price  , aircond : aircon}
       })
       const addDormForm : AddDormServiceProps = {
           name : values.dormName,
@@ -1398,7 +1400,7 @@ const AddDormFormik = withFormik<AddDormMyFormProps, AddDormFormValue>({
           lineID : values.dormLine,
           website : values.dormWeb,
           address : values.dormAddress,
-          coordinate : [parseInt(values.dormLat),parseInt(values.dormLong)],
+          coordinate : [parseFloat(values.dormLat),parseFloat(values.dormLong)],
           utilities : utilities,
           type : values.dormType,
           description : values.dormDes,
@@ -1432,7 +1434,7 @@ const AddDorm = (props : Style) => {
 
     useEffect(() => {
         document.body.style.backgroundColor = "white";
-      }, []);
+    }, []);
 
     const  handleSubmit = async (form : AddDormServiceProps) => {
         const result = await dormownerService.addDorm(form)
@@ -1460,7 +1462,7 @@ const AddDorm = (props : Style) => {
     }
     return (
         <RoomContext.Provider value={{allRoom,setAllRoom}}>
-        <Header />
+        <Header title="Add Dorm" />
         <AddDormPop {...modalProps} open={show}  />
         <AddDormFormik handleSubmit={handleSubmit} classes={classes} />
         </RoomContext.Provider>

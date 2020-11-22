@@ -69,7 +69,10 @@ export interface Lobby {
 export interface LobbyRowProps {
     dormName : any,
     room : any
-    id? : ObjectID
+    id? : ObjectID,
+    member : any,
+    max : any,
+    handleRouting : (s : string) => void
 }
 export interface backButtonProps {
     handleGoBack : () => void
@@ -88,7 +91,8 @@ export interface ModalMainPageProps {
     handleRouting : (s : string) => void
 }
 export interface LobbyListProps {
-    lobbylist : any
+    lobbylist : any,
+    handleRouting : (s : string) => void
 }
 
 export interface SearchLobbyProps {
@@ -164,7 +168,7 @@ export interface propsSendMessage {
 }
 
 export interface propsReceiver {
-    author : string,
+    author : {firstName:string,lastName:string},
     userID : string,
     message : string,
     profilepic : number,
@@ -172,7 +176,7 @@ export interface propsReceiver {
 }
 
 export interface propsSender {
-    author : string,
+    author : {firstName:string,lastName:string},
     userID : string,
     message : string,
     profilepic : number,
